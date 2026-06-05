@@ -1,13 +1,13 @@
 export const learningModules = [
-        {
-                id: 'plan',
-                title: 'Lernplan und Pruefungshinweise',
-                description: 'Ueberblick ueber den AI4RE-Lehrplan, Pruefungsformat und optimale Lernstrategie.',
-                domain: 'Overview',
-                summary: `## Ueberblick
+    {
+        id: 'plan',
+        title: 'Lernplan und Pruefungshinweise',
+        description: 'Ueberblick ueber den AI4RE-Lehrplan, Pruefungsformat und optimale Lernstrategie.',
+        domain: 'Overview',
+        summary: `## Ueberblick
 
 Der AI4RE-Lehrplan umfasst **5 Kapitel** mit insgesamt **6 Stunden** Lernzeit. Die Pruefung besteht aus **22 zufaellig ausgewaehlten Fragen**, die in **30 Minuten** bearbeitet werden muessen. Zum Bestehen sind **80 %** der Punkte erforderlich. Open-Book, aber keine KI-Hilfsmittel erlaubt.`,
-                content: `# Lernplan und Pruefungsstrategie
+        content: `# Lernplan und Pruefungsstrategie
 
 ## Syllabus-Ueberblick
 
@@ -75,15 +75,15 @@ flowchart LR
 4. Bei Unsicherheit: Welche Antwort betont menschliche Verantwortung?
 5. P-Fragen: Lieber eine richtige weglassen als eine falsche markieren
 `,
-                keywords: ['Lernplan', 'Syllabus', '22 Fragen', '30 Minuten', '80 Prozent', 'Pruefungstaktik'],
-                difficulty: 'beginner' as const,
-        },
-        {
-                id: 'chapter1',
-                title: 'Kapitel 1: KI-Grundlagen',
-                description: 'KI-Schluesseltechnologien, Chatbot-Pipeline und RAG versus Fine-Tuning (K2, 0,5 Stunden).',
-                domain: 'AI Fundamentals',
-                summary: `## Wichtige Erkenntnisse (offizielle Zusammenfassung)
+        keywords: ['Lernplan', 'Syllabus', '22 Fragen', '30 Minuten', '80 Prozent', 'Pruefungstaktik'],
+        difficulty: 'beginner' as const,
+    },
+    {
+        id: 'chapter1',
+        title: 'Kapitel 1: KI-Grundlagen',
+        description: 'KI-Schluesseltechnologien, Chatbot-Pipeline und RAG versus Fine-Tuning (K2, 0,5 Stunden).',
+        domain: 'AI Fundamentals',
+        summary: `## Wichtige Erkenntnisse (offizielle Zusammenfassung)
 
 - KI hat viel mehr zu bieten als Chatbots. Fuer manche Aufgaben sind LLMs nicht das richtige Werkzeug.
 - Die richtige KI-Technologie fuer die Aufgabe auszuwaehlen ist der Schluessel zum bestmoeglichen Ergebnis.
@@ -91,7 +91,7 @@ flowchart LR
 - RAG haelt Inhalte frisch und nachvollziehbar; Fine-Tuning eignet sich fuer stabiles, wiederkehrendes Wissen.
 - Requirements Engineers muessen die Pipeline verstehen, um Ergebnisse richtig einschaetzen zu koennen.
 `,
-                content: `# Kapitel 1: KI-Grundlagen (K2)
+        content: `# Kapitel 1: KI-Grundlagen (K2)
 
 ## Lernziele
 
@@ -236,22 +236,22 @@ flowchart LR
 - **Fine-Tuning** = statisch, guenstiger, aber veraltungsgefaehrdet
 - Kombination moeglich und haeufig
 `,
-                keywords: ['KI-Technologien', 'Chatbot-Pipeline', 'RAG', 'Fine-Tuning', 'Token', 'Kontextfenster', 'LLM'],
-                difficulty: 'intermediate' as const,
-        },
-        {
-                id: 'chapter2',
-                title: 'Kapitel 2: Ausgabequalitaet steuern',
-                description: 'Wie man LLM-Ergebnisse durch Prompting und Kontext optimiert (K2, 1 Stunde).',
-                domain: 'Output Quality',
-                summary: `## Wichtige Erkenntnisse
+        keywords: ['KI-Technologien', 'Chatbot-Pipeline', 'RAG', 'Fine-Tuning', 'Token', 'Kontextfenster', 'LLM'],
+        difficulty: 'intermediate' as const,
+    },
+    {
+        id: 'chapter2',
+        title: 'Kapitel 2: Ausgabequalitaet steuern',
+        description: 'Wie man LLM-Ergebnisse durch Prompting und Kontext optimiert (K2, 1 Stunde).',
+        domain: 'Output Quality',
+        summary: `## Wichtige Erkenntnisse
 
 - Die Qualitaet der KI-Ausgabe haengt primaer von der Qualitaet des Inputs ab (Prompt + Kontext).
 - Halluzinationen sind systembedingt und koennen nie vollstaendig eliminiert werden.
 - Drei Hebel zur Qualitaetssteigerung: besserer Kontext, praezisere Prompts, systematische Validierung.
 - Das RTF-Pattern (Rolle-Task-Format) ist eine bewaehrte Prompting-Strategie.
 `,
-                content: `# Kapitel 2: Ausgabequalitaet steuern (K2)
+        content: `# Kapitel 2: Ausgabequalitaet steuern (K2)
 
 ## Lernziele
 
@@ -376,22 +376,22 @@ flowchart TB
 - Chain-of-Thought reduziert logische Fehler
 - **Kein Prompting ersetzt menschliche Validierung!**
 `,
-                keywords: ['Halluzination', 'Prompt-Engineering', 'RTF', 'Few-Shot', 'Chain-of-Thought', 'Kontext', 'Qualitaet'],
-                difficulty: 'intermediate' as const,
-        },
-        {
-                id: 'chapter3',
-                title: 'Kapitel 3: Risiken und Ethik',
-                description: 'Risiken beim KI-Einsatz im RE, ethische Aspekte und EU AI Act (K2, 1 Stunde).',
-                domain: 'Risks & Ethics',
-                summary: `## Wichtige Erkenntnisse
+        keywords: ['Halluzination', 'Prompt-Engineering', 'RTF', 'Few-Shot', 'Chain-of-Thought', 'Kontext', 'Qualitaet'],
+        difficulty: 'intermediate' as const,
+    },
+    {
+        id: 'chapter3',
+        title: 'Kapitel 3: Risiken und Ethik',
+        description: 'Risiken beim KI-Einsatz im RE, ethische Aspekte und EU AI Act (K2, 1 Stunde).',
+        domain: 'Risks & Ethics',
+        summary: `## Wichtige Erkenntnisse
 
 - Es gibt **10 zentrale Risiken** beim KI-Einsatz im RE (pruefungsrelevant!).
 - Der EU AI Act klassifiziert KI-Systeme nach Risikostufen.
 - Menschliche Verantwortung bleibt IMMER bestehen - KI ist Werkzeug, nicht Entscheider.
 - Bias in Trainingsdaten fuehrt zu Bias in Ergebnissen - Requirements Engineers muessen dies erkennen.
 `,
-                content: `# Kapitel 3: Risiken und Ethik (K2)
+        content: `# Kapitel 3: Risiken und Ethik (K2)
 
 ## Lernziele
 
@@ -508,22 +508,22 @@ flowchart LR
     style Ergebnis fill:#10b981,color:#fff
 \`\`\`
 `,
-                keywords: ['Risiken', 'Ethik', 'EU AI Act', 'Halluzination', 'Bias', 'Datenschutz', 'Verantwortung', 'Overreliance'],
-                difficulty: 'intermediate' as const,
-        },
-        {
-                id: 'chapter4',
-                title: 'Kapitel 4: RE-Aktivitaeten mit KI',
-                description: 'KI-Unterstuetzung in den vier RE-Kernaktivitaeten: Ermittlung, Dokumentation, Validierung, Verwaltung (K2, 2,5 Stunden).',
-                domain: 'RE Activities',
-                summary: `## Wichtige Erkenntnisse
+        keywords: ['Risiken', 'Ethik', 'EU AI Act', 'Halluzination', 'Bias', 'Datenschutz', 'Verantwortung', 'Overreliance'],
+        difficulty: 'intermediate' as const,
+    },
+    {
+        id: 'chapter4',
+        title: 'Kapitel 4: RE-Aktivitaeten mit KI',
+        description: 'KI-Unterstuetzung in den vier RE-Kernaktivitaeten: Ermittlung, Dokumentation, Validierung, Verwaltung (K2, 2,5 Stunden).',
+        domain: 'RE Activities',
+        summary: `## Wichtige Erkenntnisse
 
 - KI kann alle **4 RE-Kernaktivitaeten** unterstuetzen, aber nie ersetzen.
 - Der RE prueft, bewertet und finalisiert - KI liefert Entwuerfe und Vorschlaege.
 - Besonders wertvoll: Konsistenzpruefung, Stakeholder-Analyse, Template-Generierung.
 - Die Rolle des RE erweitert sich um "KI-Kompetenz" als Querschnittsfaehigkeit.
 `,
-                content: `# Kapitel 4: RE-Aktivitaeten mit KI (K2)
+        content: `# Kapitel 4: RE-Aktivitaeten mit KI (K2)
 
 ## Lernziele
 
@@ -601,7 +601,7 @@ flowchart LR
 
 ## 4.2 Dokumentation
 
-### KI-Unterstuetzung bei der Dokumentation
+### KI-Unterstützung bei der Dokumentation
 
 \`\`\`mermaid
 flowchart TB
@@ -613,13 +613,13 @@ flowchart TB
     subgraph KI2[KI-Unterstuetzung]
         DK1[User Stories formulieren]
         DK2[Akzeptanzkriterien ableiten]
-        DK3[Glossar-Eintraege erstellen]
+        DK3[Glossar-Einträge erstellen]
         DK4[Modelle skizzieren]
-        DK5[Qualitaet pruefen<br/>INVEST, Sprachregeln]
+        DK5[Qualität prüfen<br/>INVEST, Sprachregeln]
     end
     
     subgraph Output2[RE-Aufgabe]
-        DO1[Inhaltlich pruefen]
+        DO1[Inhaltlich prüfen]
         DO2[Stakeholder-Feedback einholen]
         DO3[Freigabe erteilen]
     end
@@ -630,20 +630,29 @@ flowchart TB
     style Output2 fill:#fef3c7
 \`\`\`
 
-### Qualitaetskriterien fuer Requirements (KI-unterstuetzte Pruefung)
+### Qualitätskriterien für Requirements (KI-unterstützte Prüfung)
 
-| Kriterium | KI kann pruefen | Mensch muss pruefen |
-|-----------|----------------|---------------------|
-| Eindeutigkeit | Mehrdeutige Woerter erkennen | Fachliche Korrektheit |
-| Testbarkeit | Messbare Kriterien vorhanden? | Sinnhaftigkeit der Metrik |
-| Vollstaendigkeit | Fehlende Standardabschnitte | Fachliche Luecken |
-| Konsistenz | Widersprueche zu anderen Req. | Prioritaetskonflikte |
+**Kriterium: Eindeutigkeit**
+- KI kann prüfen: Mehrdeutige Wörter erkennen
+- Mensch muss prüfen: Fachliche Korrektheit
+
+**Kriterium: Testbarkeit**
+- KI kann prüfen: Sind messbare Kriterien vorhanden?
+- Mensch muss prüfen: Sinnhaftigkeit der Metrik
+
+**Kriterium: Vollständigkeit**
+- KI kann prüfen: Fehlende Standardabschnitte identifizieren
+- Mensch muss prüfen: Fachliche Lücken erkennen
+
+**Kriterium: Konsistenz**
+- KI kann prüfen: Widersprüche zu anderen Requirements erkennen
+- Mensch muss prüfen: Prioritätskonflikte bewerten
 
 ---
 
 ## 4.3 Validierung und Verhandlung
 
-### KI-Unterstuetzung bei der Validierung
+### KI-Unterstützung bei der Validierung
 
 \`\`\`mermaid
 flowchart LR
@@ -656,14 +665,14 @@ flowchart LR
     
     subgraph Mit[Mit KI]
         direction TB
-        M1[Automatische<br/>Konsistenzpruefung]
-        M2[Widersprueche<br/>aufzeigen]
-        M3[Testfaelle<br/>generieren]
-        M4[Luecken<br/>identifizieren]
+        M1[Automatische<br/>Konsistenzprüfung]
+        M2[Widersprüche<br/>aufzeigen]
+        M3[Testfälle<br/>generieren]
+        M4[Lücken<br/>identifizieren]
     end
     
-    Ohne --> |KI ergaenzt| Mit
-    Mit --> Ergebnis2[RE entscheidet<br/>ueber Aenderungen]
+    Ohne --> |KI ergänzt| Mit
+    Mit --> Ergebnis2[RE entscheidet<br/>über Änderungen]
     
     style Mit fill:#d1fae5
     style Ergebnis2 fill:#fef3c7
@@ -671,24 +680,29 @@ flowchart LR
 
 ### Validierungs-Checkliste mit KI
 
-1. **Konsistenz**: KI vergleicht alle Requirements auf Widersprueche
-2. **Vollstaendigkeit**: KI prueft gegen Checkliste/Template
-3. **Testbarkeit**: KI schlaegt Testfaelle vor
-4. **Verstaendlichkeit**: KI identifiziert Fachjargon und Mehrdeutigkeiten
-5. **Machbarkeit**: RE bewertet (KI kann hier nur eingeschraenkt helfen)
+1. **Konsistenz**: KI vergleicht alle Requirements auf Widersprüche.
+2. **Vollständigkeit**: KI prüft gegen Checkliste und Template.
+3. **Testbarkeit**: KI schlägt Testfälle vor.
+4. **Verständlichkeit**: KI identifiziert Fachjargon und Mehrdeutigkeiten.
+5. **Machbarkeit**: RE bewertet; KI kann hier nur eingeschränkt helfen.
 
 ---
 
 ## 4.4 Verwaltung (Management)
 
-### KI-Unterstuetzung bei der Verwaltung
+### KI-Unterstützung bei der Verwaltung
 
-| Aufgabe | KI-Unterstuetzung |
-|---------|-------------------|
-| Traceability | Automatische Verlinkung von Requirements zu Tests/Code |
-| Impact-Analyse | "Welche Req. sind betroffen, wenn X sich aendert?" |
-| Priorisierung | Vorschlaege basierend auf Abhaengigkeiten |
-| Statusverfolgung | Zusammenfassung von Aenderungshistorien |
+**Aufgabe: Traceability**
+- KI-Unterstützung: Automatische Verlinkung von Requirements zu Tests und Code
+
+**Aufgabe: Impact-Analyse**
+- KI-Unterstützung: "Welche Requirements sind betroffen, wenn sich X ändert?"
+
+**Aufgabe: Priorisierung**
+- KI-Unterstützung: Vorschläge basierend auf Abhängigkeiten
+
+**Aufgabe: Statusverfolgung**
+- KI-Unterstützung: Zusammenfassung von Änderungshistorien
 
 ---
 
@@ -706,7 +720,7 @@ flowchart TB
     subgraph Erweitert[RE + KI-Kompetenz]
         E1R[Ermitteln<br/>+ KI als Brainstorming-Partner]
         E2R[Dokumentieren<br/>+ KI als Schreibassistent]
-        E3R[Validieren<br/>+ KI als Pruef-Tool]
+        E3R[Validieren<br/>+ KI als Prüf-Tool]
         E4R[Verwalten<br/>+ KI als Analyse-Helfer]
         E5R[NEU: KI-Ergebnisse<br/>kritisch bewerten]
         E6R[NEU: Prompts<br/>effektiv formulieren]
@@ -720,30 +734,30 @@ flowchart TB
     style E6R fill:#fef3c7
 \`\`\`
 
-### Pruefungsrelevanz
+### Prüfungsrelevanz
 
-> **Kernaussage**: Die Rolle des RE wird ERWEITERT, nicht ersetzt. Der RE bekommt zusaetzliche Kompetenzen:
+> **Kernaussage**: Die Rolle des RE wird erweitert, nicht ersetzt. Der RE bekommt zusätzliche Kompetenzen:
 > - KI-Output kritisch bewerten
 > - Effektive Prompts formulieren
 > - Wissen, wann KI hilft und wann nicht
 > - Ethische und rechtliche Grenzen kennen
 `,
-                keywords: ['Ermittlung', 'Dokumentation', 'Validierung', 'Verwaltung', 'RE-Rolle', 'KI-Unterstuetzung', 'Review'],
-                difficulty: 'advanced' as const,
-        },
-        {
-                id: 'chapter5',
-                title: 'Kapitel 5: Praktische Nutzung',
-                description: 'Einfuehrungsstrategien, Toolauswahl und organisatorische Aspekte (K2, 1 Stunde).',
-                domain: 'Practical Use',
-                summary: `## Wichtige Erkenntnisse
+        keywords: ['Ermittlung', 'Dokumentation', 'Validierung', 'Verwaltung', 'RE-Rolle', 'KI-Unterstuetzung', 'Review'],
+        difficulty: 'advanced' as const,
+    },
+    {
+        id: 'chapter5',
+        title: 'Kapitel 5: Praktische Nutzung',
+        description: 'Einfuehrungsstrategien, Toolauswahl und organisatorische Aspekte (K2, 1 Stunde).',
+        domain: 'Practical Use',
+        summary: `## Wichtige Erkenntnisse
 
 - KI-Einfuehrung erfordert eine durchdachte Strategie (nicht einfach "Tool kaufen und nutzen").
 - Pilotprojekte mit klarem Scope und Erfolgskriterien starten.
 - Change Management und Schulung sind erfolgskritisch.
 - Toolauswahl: Datenschutz, Integration, Kosten und Vendor-Lock-in beachten.
 `,
-                content: `# Kapitel 5: Praktische Nutzung (K2)
+        content: `# Kapitel 5: Praktische Nutzung (K2)
 
 ## Lernziele
 
@@ -882,21 +896,21 @@ flowchart LR
     style DONT fill:#fee2e2
 \`\`\`
 `,
-                keywords: ['Einfuehrung', 'Toolauswahl', 'Datenschutz', 'Change Management', 'Pilot', 'Governance', 'Strategie'],
-                difficulty: 'intermediate' as const,
-        },
-        {
-                id: 'terminology',
-                title: 'Glossar und Begriffe',
-                description: 'Alle pruefungsrelevanten Fachbegriffe mit Definitionen und Abgrenzungen.',
-                domain: 'Terminology',
-                summary: `## Wichtige Erkenntnisse
+        keywords: ['Einfuehrung', 'Toolauswahl', 'Datenschutz', 'Change Management', 'Pilot', 'Governance', 'Strategie'],
+        difficulty: 'intermediate' as const,
+    },
+    {
+        id: 'terminology',
+        title: 'Glossar und Begriffe',
+        description: 'Alle pruefungsrelevanten Fachbegriffe mit Definitionen und Abgrenzungen.',
+        domain: 'Terminology',
+        summary: `## Wichtige Erkenntnisse
 
 - Praezise Begriffskenntnisse sind fuer K1-Fragen entscheidend.
 - Verwechslungsgefahr besteht besonders bei: RAG vs. Fine-Tuning, Prompt vs. System-Prompt, Halluzination vs. Bias.
 - Der offizielle Syllabus definiert die Begriffe - eigene Interpretationen zaehlen nicht.
 `,
-                content: `# Glossar und Begriffe
+        content: `# Glossar und Begriffe
 
 ## Kern-Terminologie
 
@@ -986,22 +1000,22 @@ flowchart LR
 - **Halluzination** = "Jemand der ueberzeugend luegt ohne es zu wissen"
 - **Bias** = "Schiefe Waage - misst immer in eine Richtung falsch"
 `,
-                keywords: ['Glossar', 'RAG', 'Fine-Tuning', 'Halluzination', 'Bias', 'Token', 'LLM', 'Prompt', 'Embedding'],
-                difficulty: 'beginner' as const,
-        },
-        {
-                id: 'exam-rules',
-                title: 'Pruefungsregeln und Taktik',
-                description: 'Detaillierte Pruefungsregeln, Punktevergabe und taktische Tipps fuer den Pruefungstag.',
-                domain: 'Exam Preparation',
-                summary: `## Wichtige Erkenntnisse
+        keywords: ['Glossar', 'RAG', 'Fine-Tuning', 'Halluzination', 'Bias', 'Token', 'LLM', 'Prompt', 'Embedding'],
+        difficulty: 'beginner' as const,
+    },
+    {
+        id: 'exam-rules',
+        title: 'Pruefungsregeln und Taktik',
+        description: 'Detaillierte Pruefungsregeln, Punktevergabe und taktische Tipps fuer den Pruefungstag.',
+        domain: 'Exam Preparation',
+        summary: `## Wichtige Erkenntnisse
 
 - 22 Fragen, 30 Minuten, 80% Bestehensgrenze - Open Book, kein KI-Tool.
 - P-Fragen (Picking): Punkte pro richtige Auswahl, ABZUG pro falsche Auswahl.
 - K-Fragen (Kreuzworttabelle): Punkte pro korrekte Zelle in der Matrix.
 - Zeitmanagement ist kritisch: ca. 80 Sekunden pro Frage.
 `,
-                content: `# Pruefungsregeln und Taktik
+        content: `# Pruefungsregeln und Taktik
 
 ## Formale Rahmenbedingungen
 
@@ -1080,7 +1094,7 @@ flowchart LR
 4. **Kontext ist Koenig** - Besserer Input = Besserer Output
 5. **Keine Perfektion** - Halluzinationen sind nie vollstaendig vermeidbar
 `,
-                keywords: ['Pruefung', 'Punktevergabe', 'Zeitmanagement', 'Taktik', 'P-Frage', 'K-Frage', 'A-Frage', 'Negativpunkte'],
-                difficulty: 'beginner' as const,
-        },
+        keywords: ['Pruefung', 'Punktevergabe', 'Zeitmanagement', 'Taktik', 'P-Frage', 'K-Frage', 'A-Frage', 'Negativpunkte'],
+        difficulty: 'beginner' as const,
+    },
 ]
