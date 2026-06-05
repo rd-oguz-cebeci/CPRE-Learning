@@ -106,13 +106,15 @@ KI umfasst alle Methoden, die es Computern ermöglichen, auf eine Weise wahrzune
 
 ### Die fünf Kerntechnologien
 
-| Technologie | Was sie tut | RE-Bezug |
-|---|---|---|
-| ML / Deep Learning | Lernt Muster direkt aus Daten | Klassifikation, Priorisierung |
-| Computer Vision | Verwandelt Pixel in strukturierte Fakten | UI-Analyse, Mockup-Erkennung |
-| NLP / LLMs | Wandelt Sprache in Bedeutung und umgekehrt | Textgenerierung, Zusammenfassung |
-| Robotik | Navigiert + manipuliert physische Welt | Sensorik, Steuerung |
-| Expertensysteme | Regelbasiert, deterministisch, nachprüfbar | Konsistenzprüfung, Validierung |
+- **Machine Learning / Deep Learning** – lernt Muster und Regeln direkt aus großen Datenmengen, ohne explizite Programmierung. Im RE relevant für automatische Klassifikation von Anforderungen, Priorisierungsvorschläge und Erkennung von Duplikaten.
+
+- **Computer Vision** – wandelt Bilder und Pixel in strukturierte, maschinenlesbare Informationen um. Im RE einsetzbar für UI-Analyse, automatische Mockup-Erkennung oder die Auswertung von handschriftlichen Skizzen.
+
+- **Natural Language Processing (NLP) / Large Language Models (LLMs)** – verstehen und erzeugen natürliche Sprache. Im RE besonders stark bei Textgenerierung, Zusammenfassungen, User-Story-Formulierung und Widerspruchserkennung.
+
+- **Robotik** – ermöglicht physische Navigation und Manipulation in der realen Welt. Im RE eher ein Randthema; relevant bei der Anforderungserfassung für robotische Systeme (Sensorik, Steuerung, Sicherheitsanforderungen).
+
+- **Expertensysteme** – regelbasierte, deterministische KI-Systeme, die auf explizit kodiertem Fachwissen aufbauen. Im RE nützlich für formale Konsistenzprüfung und Validierung, da ihre Entscheidungen nachvollziehbar und reproduzierbar sind.
 
 \`\`\`mermaid
 mindmap
@@ -170,12 +172,13 @@ flowchart TD
 
 ### Schlüsselkonzepte
 
-| Begriff | Erklärung |
-|---------|------------|
-| Token | Kleinste Verarbeitungseinheit (ca. 3/4 eines Wortes) |
-| Kontextfenster | Maximale Eingabelänge (z.B. 128k Token bei GPT-4) |
-| Temperatur | 0 = deterministisch, 1 = kreativ/variabel |
-| System-Prompt | Unsichtbare Anweisung, die Verhalten steuert |
+- **Token** – die kleinste Einheit, die ein Sprachmodell verarbeitet. Ein Token entspricht ungefähr drei Vierteln eines Wortes. Kurze Wörter wie "und" oder "die" sind je ein Token; längere Fachbegriffe können aus mehreren Token bestehen. Die Kosten und Kapazitäten von LLMs werden in Token gemessen.
+
+- **Kontextfenster** – die maximale Menge an Text (in Token), die das Modell gleichzeitig "sehen" und verarbeiten kann. Neuere Modelle wie GPT-4 erlauben bis zu 128.000 Token. Wird das Kontextfenster überschritten, verliert das Modell ältere Gesprächsteile.
+
+- **Temperatur** – ein Parameter, der die Kreativität bzw. Zufälligkeit der Ausgabe steuert. Bei Temperatur 0 antwortet das Modell deterministisch und reproduzierbar – sinnvoll für Faktenabfragen und konsistente RE-Artefakte. Bei hohen Werten (nahe 1) wird die Ausgabe variabler und kreativer – nützlich für Brainstorming.
+
+- **System-Prompt** – eine versteckte Vorab-Anweisung, die vom Entwickler gesetzt wird und die Grundausrichtung des Modells bestimmt. Benutzer sehen diesen Prompt normalerweise nicht. Im RE-Kontext kann ein System-Prompt z. B. die Rolle als RE-Assistent oder spezifische Qualitätsregeln vordefinieren.
 
 ### Token-Vorhersage (Autoregressive Generierung)
 
@@ -222,13 +225,21 @@ flowchart LR
     style FT fill:#fef2f2
 \`\`\`
 
-| Kriterium | RAG | Fine-Tuning |
-|-----------|-----|-------------|
-| Aktualität | Immer aktuell (live-Daten) | Snapshot zum Trainingszeitpunkt |
-| Nachvollziehbarkeit | Hoch (Quellen zitierbar) | Gering (im Modell "vergraben") |
-| Aufwand | Mittel (Retrieval-Pipeline) | Hoch (GPU, Daten, Training) |
-| Kosten pro Anfrage | Höher (mehr Token im Prompt) | Niedriger (kompaktes Modell) |
-| Anwendungsfall | Firmen-Wikis, sich ändernde Daten | Stabiler Stil, festes Domänenwissen |
+**RAG (Retrieval Augmented Generation)**
+- *Aktualität*: Immer aktuell, da externe Dokumente zur Laufzeit eingebunden werden.
+- *Nachvollziehbarkeit*: Hoch – das Modell kann Quellen zitieren und Antworten sind prüfbar.
+- *Aufwand*: Mittelhoch – eine Retrieval-Pipeline (Indexierung, Vektordatenbank, Suche) muss aufgebaut werden.
+- *Kosten pro Anfrage*: Höher, da relevante Dokumente bei jeder Anfrage im Prompt mitgesendet werden (mehr Token).
+- *Typischer Einsatz*: Firmen-Wikis, sich häufig ändernde Informationen, Compliance-Daten, Projekt-Dokumentation.
+
+**Fine-Tuning**
+- *Aktualität*: Statischer Snapshot zum Zeitpunkt des Trainings – neue Informationen erfordern ein Nachtraining.
+- *Nachvollziehbarkeit*: Gering – das Wissen ist im Modell „eingebrannt“ und nicht direkt auf Quellen zurückführbar.
+- *Aufwand*: Hoch – benötigt sorgfältig aufbereitete Trainingsdaten, Rechenkapazität (GPU) und Expertise.
+- *Kosten pro Anfrage*: Niedriger, da das Modell kompakter ist und kein zusätzlicher Kontext eingefügt wird.
+- *Typischer Einsatz*: Stabiler Domänenstil (z. B. Schreibweise, Fachvokabular), wiederkehrendes Wissen das sich selten ändert.
+
+**Kombination**: Beide Ansätze können kombiniert werden – ein fine-getuntes Modell, das zusätzlich per RAG mit aktuellen Daten angereichert wird, ist in der Praxis häufig.
 
 ### Prüfungsrelevanz
 
@@ -286,12 +297,13 @@ flowchart LR
 
 ### Weitere Fehlerquellen
 
-| Fehlerquelle | Beschreibung | Gegenmaßnahme |
-|---|---|---|
-| Bias | Verzerrungen aus Trainingsdaten | Diverse Quellen, kritische Prüfung |
-| Veraltetes Wissen | Trainings-Cutoff | RAG mit aktuellen Quellen |
-| Kontextverlust | Zu lange Gespräche | Zusammenfassungen, Reset |
-| Overfit auf Prompt | Modell "gefällt" statt informiert | Neutrale Formulierungen |
+- **Bias** – Systematische Verzerrungen entstehen, wenn Trainingsdaten bestimmte Gruppen, Meinungen oder Perspektiven überrepräsentieren. Im RE-Kontext bedeutet das: Anforderungen können unbewusst bestimmte Nutzergruppen bevorzugen oder ausschließen. *Gegenmaßnahme*: Diverse Quellen nutzen, KI-Output aktiv auf Fairness prüfen, verschiedene Stakeholder einbeziehen.
+
+- **Veraltetes Wissen** – LLMs werden zu einem bestimmten Zeitpunkt trainiert (sog. „Trainings-Cutoff“). Neuere Gesetze, Normen oder Technologien sind dem Modell danach unbekannt. *Gegenmaßnahme*: RAG mit aktuellen Dokumenten einsetzen; nie blind auf Aktualität vertrauen.
+
+- **Kontextverlust** – In sehr langen Gesprächen kann das Modell frühere Aussagen „vergessen“, sobald diese das Kontextfenster verlassen. Die Kohärenz der Ausgabe nimmt ab. *Gegenmaßnahme*: Regelmäßige Zusammenfassungen erstellen, Gespräch periodisch zurücksetzen.
+
+- **Overfit auf den Prompt** – Formuliert man eine Frage suggestiv, tendiert das Modell dazu, die implizit erwartete Antwort zu geben, anstatt neutral zu informieren. *Gegenmaßnahme*: Neutrale, offene Formulierungen wählen; keine Antwort vorwegnehmen.
 
 ---
 
@@ -323,12 +335,15 @@ flowchart TB
 
 ### Kontext-Hierarchie
 
-| Kontext-Typ | Priorität | Beispiel |
-|---|---|---|
-| System-Prompt | Höchste | "Du bist ein RE-Experte..." |
-| RAG-Dokumente | Hoch | Firmen-Glossar, Templates |
-| Few-Shot-Beispiele | Mittel | Beispiel-Requirements |
-| Chat-Historie | Niedrig | Vorherige Nachrichten |
+Das Modell gewichtet verschiedene Kontext-Arten unterschiedlich stark. Von höchster bis niedrigster Priorität:
+
+1. **System-Prompt (höchste Priorität)** – Die grundlegende Verhaltensvorgabe des Entwicklers, z. B. „Du bist ein erfahrener RE-Experte. Antworte stets präzise und zitiere Quellen.“ Diese Anweisung übersteuert alle anderen Eingaben.
+
+2. **RAG-Dokumente (hohe Priorität)** – Zur Laufzeit eingefügte externe Inhalte, z. B. Firmen-Glossar, projektspezifische Templates oder aktuelle Normen. Sie geben dem Modell spezifisches, aktuelles Wissen, das über das Training hinausgeht.
+
+3. **Few-Shot-Beispiele (mittlere Priorität)** – Zwei bis drei Beispiele für gewünschte Ausgaben, die direkt im Prompt stehen. Sie zeigen dem Modell das gewünschte Format und die gewünschte Qualität, z. B. musterhaft formulierte Requirements.
+
+4. **Chat-Historie (niedrigste Priorität)** – Der bisherige Gesprächsverlauf. Das Modell nutzt ihn für Kohärenz, aber ältere Nachrichten verlieren Relevanz, sobald das Kontextfenster voll wird.
 
 ---
 
@@ -428,13 +443,25 @@ flowchart TB
 
 ### Detailbetrachtung der Top-Risiken
 
-| Risiko | Auswirkung im RE | Gegenmaßnahme |
-|--------|-----------------|----------------|
-| Halluzinationen | Falsche Requirements werden übernommen | Review, Traceability, Quellencheck |
-| Bias | Bestimmte Nutzergruppen werden ausgeschlossen | Diverse Stakeholder, Bias-Audit |
-| Datenschutz | Kundendaten landen bei KI-Anbieter | On-Premise, Anonymisierung, DPA |
-| Overreliance | Kritisches Denken nimmt ab | Pflicht-Reviews, Checklisten |
-| Verantwortungsdiffusion | Niemand fühlt sich zuständig | Klare Rollen, RACI, Governance |
+**1. Halluzinationen**
+- *Auswirkung im RE*: Das Modell erfindet plausibel klingende, aber faktisch falsche Anforderungen, Normbezüge oder technische Details. Werden diese unreflektiert übernommen, entstehen fehlerhafte Spezifikationen.
+- *Gegenmaßnahmen*: Verpflichtende Reviews durch RE-Experten, lückenloses Tracing jeder KI-generierten Aussage zu ihrer Quelle (Traceability), systematischer Quellencheck – insbesondere bei Fakten, Standards und Zahlen.
+
+**2. Bias (systematische Verzerrung)**
+- *Auswirkung im RE*: Bestimmte Nutzergruppen (z. B. ältere Menschen, nicht-westliche Kulturen, Menschen mit Behinderungen) werden in KI-generierten Anforderungen systematisch berücksichtigt oder ausgeschlossen, weil die Trainingsdaten nicht repräsentativ sind.
+- *Gegenmaßnahmen*: Breites Spektrum diverser Stakeholder aktiv einbeziehen, regelmäßige Bias-Audits der KI-Ausgaben durchführen, bei kritischen Systemen spezialisierte Fairness-Prüfungen einplanen.
+
+**3. Datenschutz**
+- *Auswirkung im RE*: Wenn Anforderungs-Workshops oder Kundendokumente direkt in Cloud-LLMs eingespeist werden, können sensible Informationen (Personendaten, Geschäftsgeheimnisse) beim Anbieter landen und für Trainings genutzt werden.
+- *Gegenmaßnahmen*: Nur anonymisierte oder synthetische Daten in Cloud-Tools eingeben; bei sensiblen Daten auf On-Premise-Modelle oder air-gapped Systeme ausweichen; Data Processing Agreements (DPA) mit Anbietern abschließen.
+
+**4. Overreliance (blinder Verlass)**
+- *Auswirkung im RE*: Requirements Engineers verlassen sich zunehmend unkritisch auf KI-Vorschläge und hinterfragen Ergebnisse nicht mehr ausreichend. Kritisches Denken und fachliches Urteilsvermögen nehmen ab.
+- *Gegenmaßnahmen*: Pflicht-Reviews für alle KI-generierten Artefakte institutionalisieren; Checklisten einführen, die aktives Nachdenken erzwingen; KI-Unterstützung transparent kommunizieren.
+
+**5. Verantwortungsdiffusion**
+- *Auswirkung im RE*: Wenn KI ein Requirement generiert und drei Personen es „geprüft“ haben, fühlt sich am Ende niemand wirklich zuständig für Fehler. Verantwortung löst sich auf.
+- *Gegenmaßnahmen*: Klare Rollenzuweisung dokumentieren (wer trägt die fachliche Verantwortung?); RACI-Matrix für KI-unterstützte Prozesse definieren; Governance-Framework etablieren, das menschliche Accountability sicherstellt.
 
 ---
 
@@ -469,13 +496,15 @@ flowchart TB
 
 ## 3.3 Ethische Prinzipien
 
-| Prinzip | Bedeutung für RE |
-|---------|-------------------|
-| Transparenz | Stakeholder wissen, dass KI eingesetzt wird |
-| Fairness | Keine Gruppe wird durch KI-Bias benachteiligt |
-| Verantwortlichkeit | Mensch bleibt verantwortlich für Ergebnisse |
-| Datenschutz | Personenbezogene Daten werden geschützt |
-| Erklärbarkeit | Entscheidungswege sind nachvollziehbar |
+- **Transparenz** – Alle beteiligten Stakeholder müssen wissen, dass und wie KI im Projekt eingesetzt wird. KI-generierte Artefakte müssen als solche kenntlich gemacht werden – sowohl intern als auch, wo erforderlich, gegenüber Kunden und Auftraggebern.
+
+- **Fairness** – Keine Stakeholder-Gruppe darf durch KI-Bias systematisch benachteiligt werden. Das bedeutet aktive Prüfung: Decken die generierten Anforderungen alle relevanten Nutzergruppen ab? Werden vulnerable Gruppen ausreichend berücksichtigt?
+
+- **Verantwortlichkeit** – Der Mensch bleibt immer die letzte Entscheidungsinstanz und trägt die Verantwortung für die Ergebnisse – unabhängig davon, ob KI sie unterstützt hat. „KI hat das gemacht" ist keine akzeptable Entschuldigung.
+
+- **Datenschutz** – Personenbezogene und geschäftskritische Daten müssen geschützt werden. Im RE-Kontext bedeutet das: Analyse welche Daten in KI-Systeme fließen dürfen, Anonymisierung wo nötig, Einhaltung der DSGVO.
+
+- **Erklärbarkeit** – Entscheidungswege sollten nachvollziehbar sein. Bei KI-unterstützten Requirements: Warum wurde dieses Requirement vorgeschlagen? Auf welcher Grundlage? Das ist besonders wichtig bei sicherheitskritischen Systemen.
 
 ### Die goldene Regel
 
@@ -590,12 +619,21 @@ flowchart LR
 
 ### Konkrete Anwendungsbeispiele
 
-| Aufgabe | KI-Beitrag | RE-Verantwortung |
-|---------|------------|------------------|
-| Stakeholder-Identifikation | Vorschläge basierend auf Projekttyp | Validierung, Priorisierung |
-| Interview-Vorbereitung | Fragenkatalog generieren | Anpassung an Kontext |
-| Dokumenten-Analyse | Extraktion aus Altdokumenten | Relevanz bewerten |
-| Kreativität | Brainstorming-Ideen | Machbarkeit prüfen |
+**Stakeholder-Identifikation**
+- *KI-Beitrag*: Das Modell analysiert den Projekttyp und schlägt anhand ähnlicher Projekte eine erste Liste potenzieller Stakeholder vor – inklusive oft übersehener Gruppen wie Regulierungsbehörden, Wartungsteams oder externe Dienstleister.
+- *RE-Verantwortung*: Validierung der Vollständigkeit, fachliche Priorisierung nach Einfluss und Interesse, Entscheid ob jemand tatsächlich relevant ist.
+
+**Interview-Vorbereitung**
+- *KI-Beitrag*: Generiert einen strukturierten Fragenkatalog basierend auf der Rolle des Gesprächspartners und den bekannten Projektzielen. Berücksichtigt typische blinde Flecken und Standardfragen für die jeweilige Domäne.
+- *RE-Verantwortung*: Anpassung der Fragen an den konkreten Gesprächskontext, Persönlichkeit des Stakeholders, offene politische Themen im Projekt und fachliche Besonderheiten, die KI nicht kennt.
+
+**Dokumenten-Analyse (Altdokumente, Legacysysteme)**
+- *KI-Beitrag*: Extrahiert strukturiert Informationen aus großen Mengen unstrukturierter Dokumente – z.B. aus alten Lasten- und Pflichtenheften, E-Mail-Verläufen oder Protokollen. Fasst zusammen und identifiziert wiederkehrende Themen.
+- *RE-Verantwortung*: Bewertung der Relevanz und Aktualität der extrahierten Informationen, Entscheidung was übernommen werden soll und was veraltet ist.
+
+**Kreativitätsunterstützung (Brainstorming)**
+- *KI-Beitrag*: Liefert schnell eine breite Palette an Ideen, alternativen Formulierungen oder Szenarien – besonders nützlich um Denkmuster aufzubrechen und neue Perspektiven einzubringen.
+- *RE-Verantwortung*: Prüfung der Machbarkeit, Konsistenz mit bestehenden Anforderungen und technischen Constraints; Selektion der wirklich relevanten Ideen.
 
 ---
 
@@ -787,13 +825,15 @@ flowchart LR
 
 ### Pilot-Projekt Erfolgsfaktoren
 
-| Faktor | Beschreibung |
-|--------|-------------|
-| Klarer Scope | Abgegrenztes Thema, überschaubare Komplexität |
-| Messbare Ziele | z.B. "30% weniger Zeit für Erstdokumentation" |
-| Motiviertes Team | Early Adopters als Piloten |
-| Management-Support | Budget und Rückendeckung gesichert |
-| Feedback-Schleifen | Regelmäßige Retrospektiven |
+- **Klarer Scope** – Das Pilotprojekt sollte ein abgegrenztes, überschaubares Thema abdecken. Zu breite Piloten scheitern häufig, weil zu viele Variablen auf einmal eingeführt werden. Ein konkretes Ziel, z. B. „User Stories automatisch aus Interview-Transkripten generieren“, ist besser als ein vager Auftrag.
+
+- **Messbare Ziele** – Ohne klare Erfolgskriterien kann kein fairer Vergleich stattfinden. Beispiele: „30 % weniger Zeit für Erstdokumentation“, „Fehlerrate bei Requirements-Formulierungen halbiert“, „Team-Zufriedenheit bleibt konstant“.
+
+- **Motiviertes Team** – Frühe Anwender (Early Adopters) als Piloten einsetzen – Menschen, die Lust haben das Tool auszuprobieren und bereit sind, Feedback zu geben. Widerstrebende Teilnehmer sabotieren den Piloten und liefern keine belastbaren Erkenntnisse.
+
+- **Management-Support** – Budget, Zeitbudget und Rückendeckung durch Führungskräfte müssen vor dem Start gesichert sein. Projekte, die während des Piloten unter Ressourcendruck geraten, liefern keine verwertbaren Ergebnisse.
+
+- **Feedback-Schleifen** – Regelmäßige Retrospektiven (z. B. nach jeder Woche oder nach jedem Meilenstein) sorgen dafür, dass Erkenntnisse sofort einfließen und der Pilot nicht in eine falsche Richtung läuft.
 
 ---
 
@@ -816,12 +856,15 @@ flowchart TB
 
 ### Datenschutz-Entscheidungsbaum
 
-| Datentyp | Cloud-LLM ok? | Empfehlung |
-|----------|---------------|------------|
-| Öffentliche Infos | Ja | Beliebiges Tool |
-| Interne Prozesse | Bedingt | DPA prüfen, EU-Server |
-| Personenbezogene Daten | Nein | On-Premise / lokales Modell |
-| Geschäftsgeheimnisse | Nein | On-Premise / Air-Gapped |
+### Datenschutz nach Datenkategorie
+
+- **Öffentliche Informationen** (z. B. Marktdaten, öffentliche Normen, allgemeine Domänenbeschreibungen) – Darf problemlos in beliebige Cloud-LLMs eingegeben werden. Kein Risiko.
+
+- **Interne Prozesse und Projektbeschreibungen** (z. B. Prozessdiagramme, Anforderungsrahmen ohne Personenbezug) – Grauzone: nur wenn ein Data Processing Agreement (DPA) mit dem Anbieter vorliegt und Server in der EU betrieben werden. Immer mit Datenschutzbeauftragtem klären.
+
+- **Personenbezogene Daten** (z. B. Stakeholder-Namen, Nutzerfeedback, Interview-Aufzeichnungen) – Darf in der Regel NICHT in Cloud-LLMs eingegeben werden. Stattdessen: Anonymisierung, Pseudonymisierung oder On-Premise-Modell nutzen.
+
+- **Geschäftsgeheimnisse** (z. B. proprietäre Algorithmen, strategische Pläne, Kundendaten) – Klares Nein für externe Cloud-Tools. Hier sind nur lokale Modelle (On-Premise) oder vollständig isolierte Systeme (Air-Gapped) akzeptabel.
 
 ---
 
@@ -863,12 +906,13 @@ flowchart TB
 
 Häufige Widerstände und Strategien:
 
-| Widerstand | Strategie |
-|-----------|-----------|
-| "KI ersetzt mich" | Aufzeigen: KI erweitert, ersetzt nicht |
-| "Ich vertraue dem nicht" | Transparenz über Grenzen, Piloten zeigen |
-| "Zu kompliziert" | Niedrigschwelliger Einstieg, Buddies |
-| "Datenschutz-Bedenken" | Governance vorab klären, kommunizieren |
+- **„KI ersetzt mich"** – Diese Angst ist weit verbreitet und verständlich. Strategie: Konkret und glaubwürdig aufzeigen, wie KI Routinearbeiten abnimmt und den RE für anspruchsvollere, schöpferische Aufgaben freistellt. Kein abstraktes Versprechen, sondern echte Beispiele aus dem eigenen Projekt.
+
+- **„Ich vertraue dem nicht"** – Skeptizismus ist gesund und sollte nicht bekämpft, sondern kanalisiert werden. Strategie: Offen über die Grenzen von KI sprechen (Halluzinationen, Bias), Piloten mit überprüfbaren Ergebnissen zeigen, die Kontrollmöglichkeiten betonen.
+
+- **„Zu kompliziert"** – Oft ist die Lösung ein niedrigschwelliger Einstieg: Ein einfaches Use Case, ein gutes Tutorial, ein „Buddy" aus dem Team der bereits Erfahrung hat. Niemand muss alles auf einmal lernen.
+
+- **„Ich habe Datenschutz-Bedenken"** – Diese Bedenken sind legitim und müssen ernst genommen werden. Strategie: Governance und Datenschutzregeln proaktiv klären, bevor das Tool eingesetzt wird – nicht nachher. Klare Richtlinien welche Daten eingegeben werden dürfen, kommunizieren.
 
 ---
 
@@ -951,24 +995,37 @@ flowchart TB
 
 ## Begriffsdefinitionen (alphabetisch)
 
-| Begriff | Definition | Prüfungsrelevanz |
-|---------|-----------|-------------------|
-| **Bias** | Systematische Verzerrung in Daten oder Modell-Output | K1 - Definition kennen |
-| **Chain-of-Thought** | Prompting-Technik: Modell soll Schritt-für-Schritt denken | K2 - Anwenden erklären |
-| **Embedding** | Numerische Vektor-Darstellung von Text für semantische Suche | K1 - Wissen was es ist |
-| **Few-Shot** | Prompting mit 2-3 Beispielen im Prompt | K2 - Unterschied zu Zero-Shot |
-| **Fine-Tuning** | Nachtraining eines Modells mit eigenen Daten | K2 - Vergleich mit RAG |
-| **Guardrails** | Technische Sicherheitsschranken gegen unerwünschte Outputs | K1 - Begriff kennen |
-| **Halluzination** | Statistisch plausible aber faktisch falsche Modell-Ausgabe | K2 - Ursachen erklären |
-| **Kontextfenster** | Maximale Token-Anzahl die ein Modell gleichzeitig verarbeiten kann | K1 - Definition |
-| **LLM** | Large Language Model - grosses Sprachmodell | K1 - Definition |
-| **Prompt** | Die Eingabe/Anweisung an ein KI-Modell | K1 - Definition |
-| **RAG** | Retrieval Augmented Generation - externe Dokumente in Prompt einbinden | K2 - Erklären und vergleichen |
-| **RTF** | Rolle-Task-Format - Prompting-Pattern | K2 - Anwenden |
-| **System-Prompt** | Vorangestellte, für Benutzer unsichtbare Anweisung | K1 - Unterschied zu Prompt |
-| **Temperatur** | Parameter: 0=deterministisch, 1=kreativ | K1 - Auswirkung kennen |
-| **Token** | Kleinste Verarbeitungseinheit (ca. 3/4 Wort) | K1 - Definition |
-| **Zero-Shot** | Prompting ohne Beispiele | K2 - Unterschied zu Few-Shot |
+- **Bias** – Systematische Verzerrung in den Trainingsdaten oder im Modell-Output, die dazu führt, dass bestimmte Gruppen oder Perspektiven bevorzugt oder benachteiligt werden. Anders als zufällige Fehler tritt Bias konsistent und vorhersehbar auf. *(Prüfungsrelevanz: K1 – Definition kennen)*
+
+- **Chain-of-Thought** – Eine Prompting-Technik, bei der das Modell aufgefordert wird, seinen Lösungsweg Schritt für Schritt zu erläutern, bevor es zur Antwort kommt. Dies reduziert logische Fehler, da das Modell gezwungen wird, strukturiert zu denken. *(Prüfungsrelevanz: K2 – Anwendung erklären)*
+
+- **Embedding** – Eine numerische Vektordarstellung von Text, die semantische Ähnlichkeiten erfasst. Zwei ähnliche Sätze haben ähnliche Vektoren. Embeddings sind die Grundlage für die semantische Suche in RAG-Systemen. *(Prüfungsrelevanz: K1 – Wissen was es ist)*
+
+- **Few-Shot** – Eine Prompting-Strategie, bei der 2–3 konkrete Beispiele für die gewünschte Ausgabe direkt in den Prompt integriert werden. Dies verbessert die Konsistenz und Qualität der Ausgabe erheblich im Vergleich zu Zero-Shot. *(Prüfungsrelevanz: K2 – Unterschied zu Zero-Shot)*
+
+- **Fine-Tuning** – Das Nachtraining eines vortrainierten Sprachmodells mit domänenspezifischen Daten, um es auf einen bestimmten Stil, eine bestimmte Sprache oder ein Fachgebiet zu spezialisieren. Das Wissen wird dauerhaft ins Modell eingebettet. *(Prüfungsrelevanz: K2 – Vergleich mit RAG)*
+
+- **Guardrails** – Technische Sicherheitsschranken, die in ein KI-System integriert werden, um unerwünschte Ausgaben zu filtern (z.B. Gewalt, Fehlinformationen, Off-Topic-Antworten). Guardrails können regelbasiert oder KI-gestützt sein. *(Prüfungsrelevanz: K1 – Begriff kennen)*
+
+- **Halluzination** – Eine statistisch plausibel klingende, aber faktisch falsche Aussage eines Sprachmodells. Das Modell „weiß" nicht, dass es lügt – es berechnet wahrscheinliche Fortsetzungen, ohne Fakten zu prüfen. Halluzinationen sind eine Systemeigenschaft, die reduziert aber nie vollständig eliminiert werden kann. *(Prüfungsrelevanz: K2 – Ursachen erklären)*
+
+- **Kontextfenster** – Die maximale Menge an Text (in Token), die ein Modell gleichzeitig verarbeiten und „sehen" kann. Inhalte außerhalb des Kontextfensters sind für das Modell nicht sichtbar. Moderne Modelle haben Kontextfenster von 128.000 Token und mehr. *(Prüfungsrelevanz: K1 – Definition)*
+
+- **LLM (Large Language Model)** – Ein großes Sprachmodell, das auf enormen Textmengen vortrainiert wurde und natürlichsprachliche Texte verstehen und generieren kann. Beispiele: GPT-4, Claude, Gemini, Llama. *(Prüfungsrelevanz: K1 – Definition)*
+
+- **Prompt** – Die Texteingabe, die ein Benutzer an ein KI-Modell sendet. Qualität und Struktur des Prompts haben direkten Einfluss auf die Qualität der Ausgabe. *(Prüfungsrelevanz: K1 – Definition)*
+
+- **RAG (Retrieval Augmented Generation)** – Eine Architektur, bei der externe Dokumente zur Laufzeit gesucht und in den Prompt eingefügt werden, bevor das Modell antwortet. Ermöglicht aktuelles, nachvollziehbares Wissen ohne Nachtraining. *(Prüfungsrelevanz: K2 – Erklären und vergleichen)*
+
+- **RTF (Rolle-Task-Format)** – Ein bewährtes Prompting-Pattern: Zuerst die Rolle des Modells definieren, dann die Aufgabe beschreiben, schließlich das gewünschte Ausgabeformat vorgeben. Verbessert Konsistenz und Relevanz der Antworten. *(Prüfungsrelevanz: K2 – Anwenden)*
+
+- **System-Prompt** – Eine vorangestellte, für Endbenutzer unsichtbare Anweisung, die vom Entwickler gesetzt wird und die Grundausrichtung des Modells festlegt. Er hat die höchste Priorität im Kontextfenster und übersteuert Benutzeranweisungen. *(Prüfungsrelevanz: K1 – Unterschied zu Prompt)*
+
+- **Temperatur** – Ein Modell-Parameter der die Zufälligkeit der Ausgabe steuert. Bei 0 ist die Ausgabe deterministisch und reproduzierbar (gut für Faktenabfragen). Bei höheren Werten (nahe 1) wird sie variabler und kreativer (gut für Brainstorming). *(Prüfungsrelevanz: K1 – Auswirkung kennen)*
+
+- **Token** – Die kleinste Verarbeitungseinheit eines Sprachmodells. Ein Token entspricht ungefähr drei Vierteln eines Wortes. Kosten, Kapazitäten und Limits von LLMs werden in Token gemessen. *(Prüfungsrelevanz: K1 – Definition)*
+
+- **Zero-Shot** – Prompting ohne jegliche Beispiele für die gewünschte Ausgabe. Das Modell muss allein aus der Aufgabenbeschreibung verstehen, was erwartet wird. Funktioniert bei klaren Aufgaben gut, bei komplexen besser Few-Shot verwenden. *(Prüfungsrelevanz: K2 – Unterschied zu Few-Shot)*
 
 ---
 
