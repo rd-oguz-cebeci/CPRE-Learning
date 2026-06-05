@@ -12,8 +12,8 @@ export default function Dashboard() {
                     CPRE <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">AI4RE</span> Lern-Portal
                 </h1>
                 <p className="mt-4 text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
-                    Bereite dich strukturiert auf die CPRE AI4RE Pruefung vor. Nutze redaktionell aufbereitete
-                    Lernmodule, kompakte Zusammenfassungen und realistische Pruefungssimulationen.
+                    Bereite dich strukturiert auf die CPRE AI4RE Prüfung vor. Nutze redaktionell aufbereitete
+                    Lernmodule, kompakte Zusammenfassungen und realistische Prüfungssimulationen.
                 </p>
             </div>
 
@@ -34,7 +34,7 @@ export default function Dashboard() {
                             Lernmaterial
                         </h3>
                         <p className="mt-2 text-slate-500 text-sm leading-relaxed">
-                            Interaktive AI4RE Themenbereiche mit Lernplan, Pruefungsfokus und kompakten Zusammenfassungen.
+                            Interaktive AI4RE Themenbereiche mit Lernplan, Prüfungsfokus und kompakten Zusammenfassungen.
                         </p>
                     </div>
                     <div className="mt-6 flex items-center text-indigo-600 text-sm font-semibold opacity-0 group-hover:opacity-100 transition-all transform translate-x-[-10px] group-hover:translate-x-0">
@@ -56,7 +56,7 @@ export default function Dashboard() {
                             Prüfungssimulation
                         </h3>
                         <p className="mt-2 text-slate-500 text-sm leading-relaxed">
-                            Teste dein Wissen unter Realbedingungen: 22 Fragen in 30 Minuten, zufaellig aus 100 Fragen.
+                            Teste dein Wissen unter Realbedingungen: 22 Fragen in 30 Minuten, zufällig aus 120 Fragen.
                         </p>
                     </div>
                     <div className="mt-6 flex items-center text-emerald-600 text-sm font-semibold opacity-0 group-hover:opacity-100 transition-all transform translate-x-[-10px] group-hover:translate-x-0">
@@ -125,11 +125,11 @@ export default function Dashboard() {
                             <ul className="space-y-3 text-slate-700">
                                 <li className="flex items-center">
                                     <div className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mr-3 text-xs font-bold">✓</div>
-                                    Redaktionell gepflegte Zusammenfassungen mit klarem Pruefungsfokus
+                                    Redaktionell gepflegte Zusammenfassungen mit klarem Prüfungsfokus
                                 </li>
                                 <li className="flex items-center">
                                     <div className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mr-3 text-xs font-bold">✓</div>
-                                    Strukturierte Lernmodule fuer Wiederholung und Vertiefung
+                                    Strukturierte Lernmodule für Wiederholung und Vertiefung
                                 </li>
                                 <li className="flex items-center">
                                     <div className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mr-3 text-xs font-bold">✓</div>
@@ -137,7 +137,7 @@ export default function Dashboard() {
                                 </li>
                                 <li className="flex items-center">
                                     <div className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mr-3 text-xs font-bold">✓</div>
-                                    100 randomisierte Fragen mit detaillierten Erklaerungen
+                                    120 randomisierte Fragen mit detaillierten Erklärungen
                                 </li>
                             </ul>
                         </div>

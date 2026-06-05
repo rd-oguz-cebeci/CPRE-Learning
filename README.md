@@ -1,86 +1,72 @@
-# CPRE AI4RE Lern-Anwendung
+# CPRE AI4RE Lern-App
 
-Eine lokale Web-Anwendung zum Lernen fuer die CPRE AI4RE Pruefung.
+Statische Web-Anwendung zur Vorbereitung auf die **CPRE AI4RE** Prüfung (IREB Advanced Level Badge).
+
+🌐 **Live**: [rd-oguz-cebeci.github.io/CPRE-Learning](https://rd-oguz-cebeci.github.io/CPRE-Learning/)
 
 ## Features
 
-- Redaktionell gepflegte Lernmodule mit klarer Struktur
-- Lernplan fuer die Pruefungsvorbereitung
-- Kompakte Pruefungszusammenfassungen je Modul
-- Pruefungssimulation mit Timer und Auswertung
-- 100 hinterlegte Pruefungsfragen, aus denen zufaellig gezogen wird
+- 📚 8 redaktionell gepflegte Lernmodule mit Mermaid-Diagrammen
+- 🎯 120 Prüfungsfragen aus 6 Themenbereichen
+- ⏱️ Realistische Prüfungssimulation (22 Fragen, 30 Min, 80% Bestehensgrenze)
+- 📊 Detaillierte Auswertung nach Themenbereich mit Lernempfehlungen
+- 🚀 Rein statisch — kein Backend nötig, gehostet via GitHub Pages
 
-## Voraussetzungen
+## Techstack
 
-### 1. Node.js installieren
+| Layer | Technologie |
+|-------|-------------|
+| Frontend | React 18, TypeScript, Vite, Tailwind CSS |
+| State | Zustand |
+| Diagramme | Mermaid.js (SVG-Rendering) |
+| Markdown | react-markdown |
+| Hosting | GitHub Pages (via GitHub Actions) |
 
-```powershell
-node --version
-npm --version
-```
+## Lokale Entwicklung
 
-Falls Node.js noch nicht installiert ist:
-
-```powershell
-winget install OpenJS.NodeJS.LTS
-```
-
-## Installation
-
-```powershell
+```bash
+# Voraussetzung: Node.js >= 20
 npm install
-Copy-Item .env.example .env
-npm run db:migrate
+npm run build:data   # Generiert statische JSON aus TypeScript-Quellen
+npm run dev          # Startet Frontend auf http://localhost:5173
 ```
 
-## Entwicklung starten
+## Build & Deployment
 
-```powershell
-npm run dev
+Der Build läuft automatisch via GitHub Actions bei Push auf `main`:
+
+1. `npm ci` — Dependencies installieren
+2. `npx tsx scripts/build-static.mjs` — Module + Fragen als JSON generieren
+3. `npm run build --workspace=apps/web` — Vite Production Build
+4. Deploy nach GitHub Pages
+
+Manuell testen:
+
+```bash
+npm run build        # Baut Daten + Web
+npx serve apps/web/dist  # Lokaler Preview
 ```
-
-Danach laufen:
-- Frontend: http://localhost:5173
-- Backend: http://localhost:3001
-
-Optional einzeln:
-
-```powershell
-npm run dev:web
-npm run dev:api
-```
-
-## Projektidee
-
-Die Anwendung konzentriert sich auf drei Lernbausteine:
-
-1. Lernmodule mit fachlich strukturiertem Inhalt
-2. Pruefungszusammenfassungen fuer schnelle Wiederholung
-3. Simulationen, die zufaellig Fragen aus einem 100er-Pool ziehen
 
 ## Projektstruktur
 
-```text
+```
 CPRE-Learning/
+├── .github/workflows/    # GitHub Actions (Pages Deploy)
 ├── apps/
-│   ├── web/              # React Frontend (Vite)
-│   └── api/              # Express API mit Modulen und Fragenpool
-├── packages/
-│   └── shared/           # Gemeinsame TypeScript-Typen
-└── docs/                 # Projektdokumentation
+│   ├── web/              # React Frontend (Vite + Tailwind)
+│   └── api/src/data/     # Statische Datenquellen (Module, Fragen)
+├── packages/shared/      # Gemeinsame TypeScript-Typen
+├── scripts/              # Build-Skripte (JSON-Generierung)
+└── docs/                 # Offizielle IREB PDFs + Architektur-Docs
 ```
 
-## Troubleshooting
+## Prüfungsformat (AI4RE)
 
-**Problem: node oder npm nicht gefunden**
-- Node.js neu installieren und neues Terminal oeffnen
-
-**Problem: Port bereits belegt**
-- `API_PORT` oder `VITE_PORT` in `.env` aendern
-
-**Problem: Module werden nicht geladen**
-- Backend pruefen: http://localhost:3001/api/health
-
-## Lizenz
-
-Dieses Projekt dient Lernzwecken.
+| Merkmal | Detail |
+|---------|--------|
+| Fragen | 22 (zufällig aus Pool) |
+| Zeit | 30 Minuten |
+| Bestehen | 80% |
+| Fragetypen | A (Auswahl), P (Picking), K (Kreuzworttabelle) |
+| Hilfsmittel | Open-Book (kein KI-Tool) |
+| Gültigkeit | 3 Jahre |

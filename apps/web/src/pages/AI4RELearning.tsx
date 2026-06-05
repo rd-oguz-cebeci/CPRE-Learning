@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useLearningStore } from '../store/learningStore'
-import { BookOpen, Sparkles, Search } from 'lucide-react'
+import { BookOpen, Sparkles, Search, AlertCircle } from 'lucide-react'
 import ReactMarkdown, { Components } from 'react-markdown'
 import MermaidDiagram from '../components/MermaidDiagram'
 
@@ -18,13 +18,16 @@ export default function AI4RELearning() {
     const { modules, selectedModule, setModules, selectModule } =
         useLearningStore()
     const [searchTerm, setSearchTerm] = useState('')
+    const [loadError, setLoadError] = useState(false)
 
     useEffect(() => {
-        // Lade Module aus statischer JSON-Datei
         fetch(import.meta.env.BASE_URL + 'data/modules.json')
-            .then((res) => res.json())
+            .then((res) => {
+                if (!res.ok) throw new Error('HTTP ' + res.status)
+                return res.json()
+            })
             .then((data) => setModules(data))
-            .catch((err) => console.error('Fehler beim Laden der Module:', err))
+            .catch(() => setLoadError(true))
     }, [setModules])
 
     const filteredModules = modules.filter(
@@ -33,6 +36,24 @@ export default function AI4RELearning() {
             m.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
             m.keywords.some((k) => k.toLowerCase().includes(searchTerm.toLowerCase()))
     )
+
+    if (loadError) {
+        return (
+            <div className="glass-panel rounded-2xl p-16 text-center max-w-2xl mx-auto mt-12">
+                <div className="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <AlertCircle className="w-10 h-10 text-red-500" />
+                </div>
+                <h3 className="text-2xl font-bold text-slate-800 mb-3">Fehler beim Laden</h3>
+                <p className="text-slate-500 text-lg mb-6">Die Lernmodule konnten nicht geladen werden.</p>
+                <button
+                    onClick={() => { setLoadError(false) }}
+                    className="px-6 py-3 bg-indigo-600 text-white rounded-xl font-semibold hover:bg-indigo-700"
+                >
+                    Erneut versuchen
+                </button>
+            </div>
+        )
+    }
 
     return (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">

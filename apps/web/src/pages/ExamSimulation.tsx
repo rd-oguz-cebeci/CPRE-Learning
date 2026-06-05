@@ -9,20 +9,21 @@ export default function ExamSimulation() {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
     const [timeRemaining, setTimeRemaining] = useState(0)
     const [showSubmitDialog, setShowSubmitDialog] = useState(false)
+    const [loadError, setLoadError] = useState(false)
 
-    // Timer
+    // Timer (in Sekunden)
     useEffect(() => {
         if (!currentSession?.isActive) return
 
         const interval = setInterval(() => {
-            const elapsed = Math.floor((Date.now() - currentSession.startTime.getTime()) / 1000 / 60)
-            const remaining = currentSession.timeLimit - elapsed
+            const elapsedSeconds = Math.floor((Date.now() - currentSession.startTime.getTime()) / 1000)
+            const remainingSeconds = currentSession.timeLimit * 60 - elapsedSeconds
 
-            if (remaining <= 0) {
+            if (remainingSeconds <= 0) {
                 submitExam()
                 navigate('/ergebnisse')
             } else {
-                setTimeRemaining(remaining)
+                setTimeRemaining(remainingSeconds)
             }
         }, 1000)
 
@@ -33,16 +34,36 @@ export default function ExamSimulation() {
     useEffect(() => {
         if (!currentSession) {
             fetch(import.meta.env.BASE_URL + 'data/questions.json')
-                .then((res) => res.json())
+                .then((res) => {
+                    if (!res.ok) throw new Error('HTTP ' + res.status)
+                    return res.json()
+                })
                 .then((allQuestions) => {
-                    // Fragen mischen und 22 auswaehlen (wie der API-Server es tat)
                     const shuffled = [...allQuestions].sort(() => Math.random() - 0.5)
                     const selected = shuffled.slice(0, 22)
-                    startExam(selected, 30) // 30 Minuten laut Pruefungsordnung
+                    startExam(selected, 30)
                 })
-                .catch((err) => console.error('Fehler beim Laden der Fragen:', err))
+                .catch(() => setLoadError(true))
         }
     }, [currentSession, startExam])
+
+    if (loadError) {
+        return (
+            <div className="glass-panel rounded-2xl p-16 text-center max-w-2xl mx-auto mt-12">
+                <div className="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <AlertCircle className="w-10 h-10 text-red-500" />
+                </div>
+                <h3 className="text-2xl font-bold text-slate-800 mb-3">Fehler beim Laden</h3>
+                <p className="text-slate-500 text-lg mb-6">Die Prüfungsfragen konnten nicht geladen werden.</p>
+                <button
+                    onClick={() => { setLoadError(false) }}
+                    className="px-6 py-3 bg-indigo-600 text-white rounded-xl font-semibold hover:bg-indigo-700"
+                >
+                    Erneut versuchen
+                </button>
+            </div>
+        )
+    }
 
     if (!currentSession) {
         return (
@@ -51,7 +72,7 @@ export default function ExamSimulation() {
                     <ClipboardCheck className="w-10 h-10 text-indigo-500 animate-bounce" />
                 </div>
                 <h3 className="text-2xl font-bold text-slate-800 mb-3">Prüfung wird vorbereitet...</h3>
-                <p className="text-slate-500 text-lg">Bitte habe einen Moment Geduld. Wir laden 22 zufaellige Fragen aus dem 100er-Pool.</p>
+                <p className="text-slate-500 text-lg">22 zufällige Fragen aus dem Fragenpool werden geladen.</p>
             </div>
         )
     }
@@ -77,10 +98,10 @@ export default function ExamSimulation() {
                         </p>
                     </div>
                     <div className="flex items-center bg-white/60 px-5 py-3 rounded-xl border border-white">
-                        <Clock className={`w-6 h-6 mr-3 ${timeRemaining <= 5 ? 'text-red-500 animate-pulse' : 'text-indigo-600'}`} />
+                        <Clock className={`w-6 h-6 mr-3 ${timeRemaining <= 300 ? 'text-red-500 animate-pulse' : 'text-indigo-600'}`} />
                         <div>
-                            <div className={`text-xl font-bold leading-none ${timeRemaining <= 5 ? 'text-red-600' : 'text-slate-800'}`}>
-                                {Math.floor(timeRemaining)} <span className="text-sm font-normal">Minuten</span>
+                            <div className={`text-xl font-bold leading-none font-mono ${timeRemaining <= 300 ? 'text-red-600' : 'text-slate-800'}`}>
+                                {String(Math.floor(timeRemaining / 60)).padStart(2, '0')}:{String(timeRemaining % 60).padStart(2, '0')}
                             </div>
                         </div>
                     </div>

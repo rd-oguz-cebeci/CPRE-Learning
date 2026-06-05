@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useExamStore } from '../store/examStore'
 import { CheckCircle2, XCircle, TrendingUp, Home, RotateCcw } from 'lucide-react'
@@ -6,8 +7,13 @@ export default function ExamResults() {
     const navigate = useNavigate()
     const { results, currentSession, resetExam } = useExamStore()
 
+    useEffect(() => {
+        if (!results || !currentSession) {
+            navigate('/')
+        }
+    }, [results, currentSession, navigate])
+
     if (!results || !currentSession) {
-        navigate('/')
         return null
     }
 
@@ -21,16 +27,16 @@ export default function ExamResults() {
         navigate('/')
     }
 
-    // Bestanden wenn >= 70%
-    const passed = results.score >= 70
+    // Bestanden wenn >= 80% (AI4RE Pruefungsordnung)
+    const passed = results.score >= 80
 
     return (
         <div className="max-w-4xl mx-auto space-y-6">
             {/* Result Header */}
             <div
                 className={`rounded-lg shadow-sm border-2 p-8 text-center ${passed
-                        ? 'bg-green-50 border-green-500'
-                        : 'bg-red-50 border-red-500'
+                    ? 'bg-green-50 border-green-500'
+                    : 'bg-red-50 border-red-500'
                     }`}
             >
                 {passed ? (
@@ -94,11 +100,11 @@ export default function ExamResults() {
                                 </div>
                                 <div className="w-full bg-gray-200 rounded-full h-3">
                                     <div
-                                        className={`h-3 rounded-full ${percentage >= 70
-                                                ? 'bg-green-500'
-                                                : percentage >= 50
-                                                    ? 'bg-yellow-500'
-                                                    : 'bg-red-500'
+                                        className={`h-3 rounded-full ${percentage >= 80
+                                            ? 'bg-green-500'
+                                            : percentage >= 50
+                                                ? 'bg-yellow-500'
+                                                : 'bg-red-500'
                                             }`}
                                         style={{ width: `${percentage}%` }}
                                     />
@@ -114,7 +120,7 @@ export default function ExamResults() {
                 <h3 className="text-lg font-semibold text-primary-900 mb-3">📚 Lernempfehlungen</h3>
                 <div className="space-y-2 text-primary-800">
                     {Object.entries(results.domainBreakdown)
-                        .filter(([_, stats]) => (stats.correct / stats.total) < 0.7)
+                        .filter(([_, stats]) => (stats.correct / stats.total) < 0.8)
                         .map(([domain, stats]) => {
                             const percentage = Math.round((stats.correct / stats.total) * 100)
                             return (
@@ -128,7 +134,7 @@ export default function ExamResults() {
                             )
                         })}
                     {Object.values(results.domainBreakdown).every(
-                        (stats) => stats.correct / stats.total >= 0.7
+                        (stats) => stats.correct / stats.total >= 0.8
                     ) && (
                             <p>
                                 ✅ Exzellente Leistung in allen Themenbereichen! Du bist gut vorbereitet für die echte
