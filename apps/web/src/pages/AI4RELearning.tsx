@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useLearningStore } from '../store/learningStore'
 import { BookOpen, Sparkles, Search, AlertCircle } from 'lucide-react'
 import ReactMarkdown, { Components } from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 import MermaidDiagram from '../components/MermaidDiagram'
 
 const markdownComponents: Components = {
@@ -62,7 +63,7 @@ export default function AI4RELearning() {
                 <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
                     <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
                         <BookOpen className="w-5 h-5 mr-2 text-primary-600" />
-                        AI4RE Module
+                        AI4RE Lernmodule
                     </h2>
 
                     {/* Search */}
@@ -155,7 +156,7 @@ export default function AI4RELearning() {
                             <div className="flex items-center justify-between mb-4">
                                 <h2 className="text-lg font-semibold text-gray-900 flex items-center">
                                     <Sparkles className="w-5 h-5 mr-2 text-primary-600" />
-                                    Pruefungszusammenfassung
+                                    Prüfungszusammenfassung
                                 </h2>
                                 <span className="text-xs font-medium text-primary-700 bg-primary-50 border border-primary-100 rounded-full px-3 py-1">
                                     Redaktionell gepflegt
@@ -163,12 +164,12 @@ export default function AI4RELearning() {
                             </div>
 
                             {selectedModule.summary ? (
-                                <div className="prose max-w-none bg-primary-50 border border-primary-200 rounded-md p-4">
-                                    <ReactMarkdown components={markdownComponents}>{selectedModule.summary}</ReactMarkdown>
+                                <div className="prose prose-slate max-w-none bg-primary-50 border border-primary-200 rounded-md p-4">
+                                    <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>{selectedModule.summary}</ReactMarkdown>
                                 </div>
                             ) : (
                                 <div className="text-gray-500 text-sm bg-gray-50 border border-gray-200 rounded-md p-4 text-center">
-                                    Fuer dieses Modul ist noch keine Kurz-Zusammenfassung hinterlegt.
+                                    Für dieses Modul ist noch keine Kurz-Zusammenfassung hinterlegt.
                                 </div>
                             )}
                         </div>
@@ -176,8 +177,8 @@ export default function AI4RELearning() {
                         {/* Module Content */}
                         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                             <h2 className="text-lg font-semibold text-gray-900 mb-4">Lerninhalt</h2>
-                            <div className="prose max-w-none">
-                                <ReactMarkdown components={markdownComponents}>{selectedModule.content}</ReactMarkdown>
+                            <div className="prose prose-slate max-w-none prose-table:w-full prose-th:text-left prose-td:align-top">
+                                <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>{selectedModule.content}</ReactMarkdown>
                             </div>
                         </div>
                     </div>

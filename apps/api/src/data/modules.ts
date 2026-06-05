@@ -1,23 +1,23 @@
 export const learningModules = [
     {
         id: 'plan',
-        title: 'Lernplan und Pruefungshinweise',
-        description: 'Ueberblick ueber den AI4RE-Lehrplan, Pruefungsformat und optimale Lernstrategie.',
+        title: 'Lernplan und Prüfungshinweise',
+        description: 'Überblick über den AI4RE-Lehrplan, Prüfungsformat und optimale Lernstrategie.',
         domain: 'Overview',
-        summary: `## Ueberblick
+        summary: `## Überblick
 
-Der AI4RE-Lehrplan umfasst **5 Kapitel** mit insgesamt **6 Stunden** Lernzeit. Die Pruefung besteht aus **22 zufaellig ausgewaehlten Fragen**, die in **30 Minuten** bearbeitet werden muessen. Zum Bestehen sind **80 %** der Punkte erforderlich. Open-Book, aber keine KI-Hilfsmittel erlaubt.`,
-        content: `# Lernplan und Pruefungsstrategie
+Der AI4RE-Lehrplan umfasst **5 Kapitel** mit insgesamt **6 Stunden** Lernzeit. Die Prüfung besteht aus **22 zufällig ausgewählten Fragen**, die in **30 Minuten** bearbeitet werden müssen. Zum Bestehen sind **80 %** der Punkte erforderlich. Open-Book, aber keine KI-Hilfsmittel erlaubt.`,
+        content: `# Lernplan und Prüfungsstrategie
 
-## Syllabus-Ueberblick
+## Syllabus-Überblick
 
 Der AI4RE Advanced-Level-Lehrplan ist in **5 Kapitel** gegliedert:
 
 \`\`\`mermaid
 graph LR
-    K1[Kapitel 1<br/>KI-Grundlagen<br/>0,5h] --> K2[Kapitel 2<br/>Ausgabequalitaet<br/>1h]
+    K1[Kapitel 1<br/>KI-Grundlagen<br/>0,5h] --> K2[Kapitel 2<br/>Ausgabequalität<br/>1h]
     K2 --> K3[Kapitel 3<br/>Risiken & Ethik<br/>1h]
-    K3 --> K4[Kapitel 4<br/>RE-Aktivitaeten<br/>2,5h]
+    K3 --> K4[Kapitel 4<br/>RE-Aktivitäten<br/>2,5h]
     K4 --> K5[Kapitel 5<br/>Praktische Nutzung<br/>1h]
     style K1 fill:#e0f2fe
     style K2 fill:#dbeafe
@@ -26,11 +26,11 @@ graph LR
     style K5 fill:#818cf8
 \`\`\`
 
-## Pruefungsformat
+## Prüfungsformat
 
 | Merkmal | Detail |
 |---------|--------|
-| Anzahl Fragen | 22 (zufaellig aus Pool) |
+| Anzahl Fragen | 22 (zufällig aus Pool) |
 | Zeit | 30 Minuten |
 | Bestehensgrenze | 80 % |
 | Hilfsmittel | Open-Book (kein KI-Tool erlaubt) |
@@ -58,16 +58,16 @@ flowchart TB
 \`\`\`mermaid
 flowchart LR
     K1L[K1 - Kennen] --> K2L[K2 - Verstehen]
-    K1L --> B1[Fakten wiedergeben<br/>Begriffe benennen<br/>Listen aufzaehlen]
-    K2L --> B2[Konzepte erklaeren<br/>Unterschiede beschreiben<br/>Zusammenhaenge darstellen]
+    K1L --> B1[Fakten wiedergeben<br/>Begriffe benennen<br/>Listen aufzählen]
+    K2L --> B2[Konzepte erklären<br/>Unterschiede beschreiben<br/>Zusammenhänge darstellen]
     style K1L fill:#10b981,color:#fff
     style K2L fill:#3b82f6,color:#fff
 \`\`\`
 
 - **K1 (Kennen)**: Reine Wissenswiedergabe - "Was ist X?", "Nenne die Schritte von Y"
-- **K2 (Verstehen)**: Zusammenhaenge erklaeren - "Warum ist X besser als Y?", "Beschreibe den Unterschied"
+- **K2 (Verstehen)**: Zusammenhänge erklären - "Warum ist X besser als Y?", "Beschreibe den Unterschied"
 
-## Pruefungstaktik
+## Prüfungstaktik
 
 1. **Zeitmanagement**: 30 Min / 22 Fragen = ca. 80 Sek. pro Frage
 2. Absolute Aussagen ("immer", "nie", "vollautomatisch") hinterfragen
@@ -75,36 +75,36 @@ flowchart LR
 4. Bei Unsicherheit: Welche Antwort betont menschliche Verantwortung?
 5. P-Fragen: Lieber eine richtige weglassen als eine falsche markieren
 `,
-        keywords: ['Lernplan', 'Syllabus', '22 Fragen', '30 Minuten', '80 Prozent', 'Pruefungstaktik'],
+        keywords: ['Lernplan', 'Syllabus', '22 Fragen', '30 Minuten', '80 Prozent', 'Prüfungstaktik'],
         difficulty: 'beginner' as const,
     },
     {
         id: 'chapter1',
         title: 'Kapitel 1: KI-Grundlagen',
-        description: 'KI-Schluesseltechnologien, Chatbot-Pipeline und RAG versus Fine-Tuning (K2, 0,5 Stunden).',
+        description: 'KI-Schlüsseltechnologien, Chatbot-Pipeline und RAG versus Fine-Tuning (K2, 0,5 Stunden).',
         domain: 'AI Fundamentals',
         summary: `## Wichtige Erkenntnisse (offizielle Zusammenfassung)
 
-- KI hat viel mehr zu bieten als Chatbots. Fuer manche Aufgaben sind LLMs nicht das richtige Werkzeug.
-- Die richtige KI-Technologie fuer die Aufgabe auszuwaehlen ist der Schluessel zum bestmoeglichen Ergebnis.
-- Das Hinzufuegen von Wissen kann durch **Fine-Tuning** (ins Modell einbetten) oder **RAG** (externe Quellen dynamisch anbinden) erfolgen.
-- RAG haelt Inhalte frisch und nachvollziehbar; Fine-Tuning eignet sich fuer stabiles, wiederkehrendes Wissen.
-- Requirements Engineers muessen die Pipeline verstehen, um Ergebnisse richtig einschaetzen zu koennen.
+- KI hat viel mehr zu bieten als Chatbots. Für manche Aufgaben sind LLMs nicht das richtige Werkzeug.
+- Die richtige KI-Technologie für die Aufgabe auszuwählen ist der Schlüssel zum bestmöglichen Ergebnis.
+- Das Hinzufügen von Wissen kann durch **Fine-Tuning** (ins Modell einbetten) oder **RAG** (externe Quellen dynamisch anbinden) erfolgen.
+- RAG hält Inhalte frisch und nachvollziehbar; Fine-Tuning eignet sich für stabiles, wiederkehrendes Wissen.
+- Requirements Engineers müssen die Pipeline verstehen, um Ergebnisse richtig einschätzen zu können.
 `,
         content: `# Kapitel 1: KI-Grundlagen (K2)
 
 ## Lernziele
 
 - **LZ 1.1** (K1): Kennen der Vielfalt der KI-Technologien und ihrer Anwendungsbereiche - nicht jede KI ist ein Chatbot.
-- **LZ 1.2** (K2): Erklaeren, was bei der Interaktion mit einem Chatbot hinter den Kulissen passiert, RAG beschreiben und mit Fine-Tuning vergleichen.
+- **LZ 1.2** (K2): Erklären, was bei der Interaktion mit einem Chatbot hinter den Kulissen passiert, RAG beschreiben und mit Fine-Tuning vergleichen.
 
 ---
 
-## 1.1 KI-Schluesseltechnologien
+## 1.1 KI-Schlüsseltechnologien
 
-KI umfasst alle Methoden, die es Computern ermoeglichen, auf eine Weise wahrzunehmen, zu schlussfolgern oder zu handeln, die wir als intelligent bezeichnen.
+KI umfasst alle Methoden, die es Computern ermöglichen, auf eine Weise wahrzunehmen, zu schlussfolgern oder zu handeln, die wir als intelligent bezeichnen.
 
-### Die fuenf Kerntechnologien
+### Die fünf Kerntechnologien
 
 | Technologie | Was sie tut | RE-Bezug |
 |---|---|---|
@@ -112,7 +112,7 @@ KI umfasst alle Methoden, die es Computern ermoeglichen, auf eine Weise wahrzune
 | Computer Vision | Verwandelt Pixel in strukturierte Fakten | UI-Analyse, Mockup-Erkennung |
 | NLP / LLMs | Wandelt Sprache in Bedeutung und umgekehrt | Textgenerierung, Zusammenfassung |
 | Robotik | Navigiert + manipuliert physische Welt | Sensorik, Steuerung |
-| Expertensysteme | Regelbasiert, deterministisch, nachpruefbar | Konsistenzpruefung, Validierung |
+| Expertensysteme | Regelbasiert, deterministisch, nachprüfbar | Konsistenzprüfung, Validierung |
 
 \`\`\`mermaid
 mindmap
@@ -136,13 +136,13 @@ mindmap
     Expertensysteme
       Regelbasiert
       Deterministisch
-      Nachpruefbar
+      Nachprüfbar
 \`\`\`
 
-### Pruefungsrelevanz
+### Prüfungsrelevanz
 
 - Chatbots sind nur *ein* KI-Tool; Transkription (Speech-to-Text) und UI-Analyse (Computer Vision) sind oft in einer Schnittstelle integriert.
-- Multimodale Modelle kombinieren mehrere Faehigkeiten in einem System.
+- Multimodale Modelle kombinieren mehrere Fähigkeiten in einem System.
 
 ---
 
@@ -154,7 +154,7 @@ mindmap
 flowchart TD
     A[Benutzer-Eingabe<br/>Prompt + Dateien + Historie] --> B[Tokenisierung<br/>Text wird in Token zerlegt]
     B --> C[Kontextfenster<br/>System-Prompt + RAG-Daten + Chat-Verlauf]
-    C --> D[LLM-Inferenz<br/>Token-fuer-Token Vorhersage]
+    C --> D[LLM-Inferenz<br/>Token-für-Token Vorhersage]
     D --> E[Ausgabefilter<br/>Guardrails, Safety, Format]
     E --> F[Antwort an Benutzer]
     
@@ -168,12 +168,12 @@ flowchart TD
     style H fill:#fce7f3
 \`\`\`
 
-### Schluesselkonzepte
+### Schlüsselkonzepte
 
-| Begriff | Erklaerung |
+| Begriff | Erklärung |
 |---------|------------|
 | Token | Kleinste Verarbeitungseinheit (ca. 3/4 eines Wortes) |
-| Kontextfenster | Maximale Eingabelaenge (z.B. 128k Token bei GPT-4) |
+| Kontextfenster | Maximale Eingabelänge (z.B. 128k Token bei GPT-4) |
 | Temperatur | 0 = deterministisch, 1 = kreativ/variabel |
 | System-Prompt | Unsichtbare Anweisung, die Verhalten steuert |
 
@@ -196,7 +196,7 @@ flowchart LR
     style T4c fill:#94a3b8
 \`\`\`
 
-> **Wichtig**: Das Modell "weiss" nichts - es berechnet statistische Wahrscheinlichkeiten fuer das naechste Token. Deshalb sind Halluzinationen moeglich.
+> **Wichtig**: Das Modell "weiß" nichts - es berechnet statistische Wahrscheinlichkeiten für das nächste Token. Deshalb sind Halluzinationen möglich.
 
 ---
 
@@ -207,7 +207,7 @@ flowchart LR
     subgraph RAG[RAG - Retrieval Augmented Generation]
         direction TB
         R1[Dokumente indexieren] --> R2[Relevante Abschnitte suchen]
-        R2 --> R3[In Prompt einfuegen]
+        R2 --> R3[In Prompt einfügen]
         R3 --> R4[LLM generiert Antwort]
     end
     
@@ -224,44 +224,44 @@ flowchart LR
 
 | Kriterium | RAG | Fine-Tuning |
 |-----------|-----|-------------|
-| Aktualitaet | Immer aktuell (live-Daten) | Snapshot zum Trainingszeitpunkt |
+| Aktualität | Immer aktuell (live-Daten) | Snapshot zum Trainingszeitpunkt |
 | Nachvollziehbarkeit | Hoch (Quellen zitierbar) | Gering (im Modell "vergraben") |
 | Aufwand | Mittel (Retrieval-Pipeline) | Hoch (GPU, Daten, Training) |
-| Kosten pro Anfrage | Hoeher (mehr Token im Prompt) | Niedriger (kompaktes Modell) |
-| Anwendungsfall | Firmen-Wikis, sich aendernde Daten | Stabiler Stil, festes Domaenenwissen |
+| Kosten pro Anfrage | Höher (mehr Token im Prompt) | Niedriger (kompaktes Modell) |
+| Anwendungsfall | Firmen-Wikis, sich ändernde Daten | Stabiler Stil, festes Domänenwissen |
 
-### Pruefungsrelevanz
+### Prüfungsrelevanz
 
 - **RAG** = dynamisch, nachvollziehbar, teurer pro Anfrage
-- **Fine-Tuning** = statisch, guenstiger, aber veraltungsgefaehrdet
-- Kombination moeglich und haeufig
+- **Fine-Tuning** = statisch, günstiger, aber veralterungsgefährdet
+- Kombination möglich und häufig
 `,
         keywords: ['KI-Technologien', 'Chatbot-Pipeline', 'RAG', 'Fine-Tuning', 'Token', 'Kontextfenster', 'LLM'],
         difficulty: 'intermediate' as const,
     },
     {
         id: 'chapter2',
-        title: 'Kapitel 2: Ausgabequalitaet steuern',
+        title: 'Kapitel 2: Ausgabequalität steuern',
         description: 'Wie man LLM-Ergebnisse durch Prompting und Kontext optimiert (K2, 1 Stunde).',
         domain: 'Output Quality',
         summary: `## Wichtige Erkenntnisse
 
-- Die Qualitaet der KI-Ausgabe haengt primaer von der Qualitaet des Inputs ab (Prompt + Kontext).
-- Halluzinationen sind systembedingt und koennen nie vollstaendig eliminiert werden.
-- Drei Hebel zur Qualitaetssteigerung: besserer Kontext, praezisere Prompts, systematische Validierung.
-- Das RTF-Pattern (Rolle-Task-Format) ist eine bewaehrte Prompting-Strategie.
+- Die Qualität der KI-Ausgabe hängt primär von der Qualität des Inputs ab (Prompt + Kontext).
+- Halluzinationen sind systembedingt und können nie vollständig eliminiert werden.
+- Drei Hebel zur Qualitätssteigerung: besserer Kontext, präzisere Prompts, systematische Validierung.
+- Das RTF-Pattern (Rolle-Task-Format) ist eine bewährte Prompting-Strategie.
 `,
-        content: `# Kapitel 2: Ausgabequalitaet steuern (K2)
+        content: `# Kapitel 2: Ausgabequalität steuern (K2)
 
 ## Lernziele
 
-- **LZ 2.1** (K1): Grunde kennen, warum KI-Ausgaben fehlerhaft sein koennen (Halluzinationen, Bias, veraltetes Wissen).
-- **LZ 2.2** (K2): Erklaeren, wie Kontext und Prompt-Design die Ausgabequalitaet beeinflussen.
-- **LZ 2.3** (K2): Techniken zur Qualitaetssteigerung beschreiben (Few-Shot, Chain-of-Thought, RTF).
+- **LZ 2.1** (K1): Grunde kennen, warum KI-Ausgaben fehlerhaft sein können (Halluzinationen, Bias, veraltetes Wissen).
+- **LZ 2.2** (K2): Erklären, wie Kontext und Prompt-Design die Ausgabequalität beeinflussen.
+- **LZ 2.3** (K2): Techniken zur Qualitätssteigerung beschreiben (Few-Shot, Chain-of-Thought, RTF).
 
 ---
 
-## 2.1 Warum KI-Ausgaben fehlerhaft sein koennen
+## 2.1 Warum KI-Ausgaben fehlerhaft sein können
 
 ### Halluzinationen
 
@@ -282,20 +282,20 @@ flowchart LR
     style E fill:#fef3c7
 \`\`\`
 
-> **Merksatz**: Halluzinationen sind KEIN Bug - sie sind eine Systemeigenschaft statistischer Sprachmodelle. Sie koennen reduziert, aber nie eliminiert werden.
+> **Merksatz**: Halluzinationen sind KEIN Bug - sie sind eine Systemeigenschaft statistischer Sprachmodelle. Sie können reduziert, aber nie eliminiert werden.
 
 ### Weitere Fehlerquellen
 
-| Fehlerquelle | Beschreibung | Gegenmassnahme |
+| Fehlerquelle | Beschreibung | Gegenmaßnahme |
 |---|---|---|
-| Bias | Verzerrungen aus Trainingsdaten | Diverse Quellen, kritische Pruefung |
+| Bias | Verzerrungen aus Trainingsdaten | Diverse Quellen, kritische Prüfung |
 | Veraltetes Wissen | Trainings-Cutoff | RAG mit aktuellen Quellen |
-| Kontextverlust | Zu lange Gespraeche | Zusammenfassungen, Reset |
-| Overfit auf Prompt | Modell "gefaellt" statt informiert | Neutrale Formulierungen |
+| Kontextverlust | Zu lange Gespräche | Zusammenfassungen, Reset |
+| Overfit auf Prompt | Modell "gefällt" statt informiert | Neutrale Formulierungen |
 
 ---
 
-## 2.2 Die drei Qualitaetsebenen
+## 2.2 Die drei Qualitätsebenen
 
 \`\`\`mermaid
 flowchart TB
@@ -304,9 +304,9 @@ flowchart TB
         K1[System-Prompt] --- K2[RAG-Dokumente] --- K3[Chat-Historie]
     end
     
-    subgraph Ebene2[Ebene 2: Prompt-Qualitaet]
+    subgraph Ebene2[Ebene 2: Prompt-Qualität]
         direction LR
-        P1[Klarheit] --- P2[Spezifitaet] --- P3[Struktur]
+        P1[Klarheit] --- P2[Spezifität] --- P3[Struktur]
     end
     
     subgraph Ebene3[Ebene 3: Validierung]
@@ -323,9 +323,9 @@ flowchart TB
 
 ### Kontext-Hierarchie
 
-| Kontext-Typ | Prioritaet | Beispiel |
+| Kontext-Typ | Priorität | Beispiel |
 |---|---|---|
-| System-Prompt | Hoechste | "Du bist ein RE-Experte..." |
+| System-Prompt | Höchste | "Du bist ein RE-Experte..." |
 | RAG-Dokumente | Hoch | Firmen-Glossar, Templates |
 | Few-Shot-Beispiele | Mittel | Beispiel-Requirements |
 | Chat-Historie | Niedrig | Vorherige Nachrichten |
@@ -357,26 +357,26 @@ flowchart TB
     PS[Prompting-Strategien]
     PS --> ZS[Zero-Shot<br/>Direkte Frage ohne Beispiel]
     PS --> FS[Few-Shot<br/>2-3 Beispiele voranstellen]
-    PS --> CoT[Chain-of-Thought<br/>Schritt-fuer-Schritt denken lassen]
+    PS --> CoT[Chain-of-Thought<br/>Schritt-für-Schritt denken lassen]
     PS --> SC[Self-Consistency<br/>Mehrfach generieren und vergleichen]
     PS --> RR[Role-Playing<br/>Persona zuweisen]
     
-    FS --> FSE[Beispiel: Hier sind 2 gute User Stories...<br/>Schreibe nun eine fuer...]
-    CoT --> CoTE[Beispiel: Denke Schritt fuer Schritt...<br/>1. Identifiziere... 2. Analysiere...]
+    FS --> FSE[Beispiel: Hier sind 2 gute User Stories...<br/>Schreibe nun eine für...]
+    CoT --> CoTE[Beispiel: Denke Schritt für Schritt...<br/>1. Identifiziere... 2. Analysiere...]
     
     style PS fill:#4f46e5,color:#fff
     style FS fill:#e0e7ff
     style CoT fill:#e0e7ff
 \`\`\`
 
-### Pruefungsrelevanz
+### Prüfungsrelevanz
 
-- RTF ist die Mindeststruktur fuer einen guten Prompt
+- RTF ist die Mindeststruktur für einen guten Prompt
 - Few-Shot-Beispiele verbessern Konsistenz erheblich
 - Chain-of-Thought reduziert logische Fehler
 - **Kein Prompting ersetzt menschliche Validierung!**
 `,
-        keywords: ['Halluzination', 'Prompt-Engineering', 'RTF', 'Few-Shot', 'Chain-of-Thought', 'Kontext', 'Qualitaet'],
+        keywords: ['Halluzination', 'Prompt-Engineering', 'RTF', 'Few-Shot', 'Chain-of-Thought', 'Kontext', 'Qualität'],
         difficulty: 'intermediate' as const,
     },
     {
@@ -386,17 +386,17 @@ flowchart TB
         domain: 'Risks & Ethics',
         summary: `## Wichtige Erkenntnisse
 
-- Es gibt **10 zentrale Risiken** beim KI-Einsatz im RE (pruefungsrelevant!).
+- Es gibt **10 zentrale Risiken** beim KI-Einsatz im RE (prüfungsrelevant!).
 - Der EU AI Act klassifiziert KI-Systeme nach Risikostufen.
 - Menschliche Verantwortung bleibt IMMER bestehen - KI ist Werkzeug, nicht Entscheider.
-- Bias in Trainingsdaten fuehrt zu Bias in Ergebnissen - Requirements Engineers muessen dies erkennen.
+- Bias in Trainingsdaten führt zu Bias in Ergebnissen - Requirements Engineers müssen dies erkennen.
 `,
         content: `# Kapitel 3: Risiken und Ethik (K2)
 
 ## Lernziele
 
 - **LZ 3.1** (K1): Die wichtigsten Risiken beim Einsatz von KI im RE kennen.
-- **LZ 3.2** (K2): Ethische Implikationen und regulatorische Rahmenbedingungen erklaeren.
+- **LZ 3.2** (K2): Ethische Implikationen und regulatorische Rahmenbedingungen erklären.
 - **LZ 3.3** (K2): Strategien zur Risikominimierung beschreiben.
 
 ---
@@ -409,11 +409,11 @@ flowchart TB
     R --> R1[1. Halluzinationen<br/>Falsche aber plausible Fakten]
     R --> R2[2. Bias & Diskriminierung<br/>Verzerrte Trainingsdaten]
     R --> R3[3. Datenschutz<br/>Sensitive Daten im Prompt]
-    R --> R4[4. IP / Urheberrecht<br/>Wem gehoert der Output?]
+    R --> R4[4. IP / Urheberrecht<br/>Wem gehört der Output?]
     R --> R5[5. Overreliance<br/>Blindes Vertrauen in KI]
-    R --> R6[6. Deskilling<br/>Faehigkeitsverlust bei Menschen]
+    R --> R6[6. Deskilling<br/>Fähigkeitsverlust bei Menschen]
     R --> R7[7. Intransparenz<br/>Black-Box-Entscheidungen]
-    R --> R8[8. Vendor Lock-in<br/>Abhaengigkeit von Anbieter]
+    R --> R8[8. Vendor Lock-in<br/>Abhängigkeit von Anbieter]
     R --> R9[9. Sicherheit<br/>Prompt Injection, Manipulation]
     R --> R10[10. Verantwortungsdiffusion<br/>Wer haftet bei Fehlern?]
     
@@ -428,17 +428,17 @@ flowchart TB
 
 ### Detailbetrachtung der Top-Risiken
 
-| Risiko | Auswirkung im RE | Gegenmassnahme |
+| Risiko | Auswirkung im RE | Gegenmaßnahme |
 |--------|-----------------|----------------|
-| Halluzinationen | Falsche Requirements werden uebernommen | Review, Traceability, Quellencheck |
+| Halluzinationen | Falsche Requirements werden übernommen | Review, Traceability, Quellencheck |
 | Bias | Bestimmte Nutzergruppen werden ausgeschlossen | Diverse Stakeholder, Bias-Audit |
 | Datenschutz | Kundendaten landen bei KI-Anbieter | On-Premise, Anonymisierung, DPA |
 | Overreliance | Kritisches Denken nimmt ab | Pflicht-Reviews, Checklisten |
-| Verantwortungsdiffusion | Niemand fuehlt sich zustaendig | Klare Rollen, RACI, Governance |
+| Verantwortungsdiffusion | Niemand fühlt sich zuständig | Klare Rollen, RACI, Governance |
 
 ---
 
-## 3.2 Der EU AI Act (Ueberblick)
+## 3.2 Der EU AI Act (Überblick)
 
 \`\`\`mermaid
 flowchart TB
@@ -448,9 +448,9 @@ flowchart TB
     EU --> L[Limited Risk<br/>Transparenzpflichten]
     EU --> M[Minimal Risk<br/>Keine Auflagen]
     
-    U --> U1[Social Scoring<br/>Biometrische Massenueberwachung]
+    U --> U1[Social Scoring<br/>Biometrische Massenüberwachung]
     H --> H1[Kritische Infrastruktur<br/>Personalauswahl<br/>Kreditvergabe]
-    L --> L1[Chatbots muessen sich<br/>als KI kennzeichnen]
+    L --> L1[Chatbots müssen sich<br/>als KI kennzeichnen]
     M --> M1[Spam-Filter<br/>Spiele-KI]
     
     style U fill:#dc2626,color:#fff
@@ -459,29 +459,29 @@ flowchart TB
     style M fill:#22c55e,color:#fff
 \`\`\`
 
-### Pruefungsrelevanz EU AI Act
+### Prüfungsrelevanz EU AI Act
 
 - RE-Werkzeuge mit KI fallen meist unter **Limited Risk** oder **Minimal Risk**
-- Wenn KI-generierte Requirements in sicherheitskritische Systeme fliessen: **High Risk** moeglich
-- Kennzeichnungspflicht: KI-generierte Artefakte muessen als solche erkennbar sein
+- Wenn KI-generierte Requirements in sicherheitskritische Systeme fließen: **High Risk** möglich
+- Kennzeichnungspflicht: KI-generierte Artefakte müssen als solche erkennbar sein
 
 ---
 
 ## 3.3 Ethische Prinzipien
 
-| Prinzip | Bedeutung fuer RE |
+| Prinzip | Bedeutung für RE |
 |---------|-------------------|
 | Transparenz | Stakeholder wissen, dass KI eingesetzt wird |
 | Fairness | Keine Gruppe wird durch KI-Bias benachteiligt |
-| Verantwortlichkeit | Mensch bleibt verantwortlich fuer Ergebnisse |
-| Datenschutz | Personenbezogene Daten werden geschuetzt |
-| Erklaerbarkeit | Entscheidungswege sind nachvollziehbar |
+| Verantwortlichkeit | Mensch bleibt verantwortlich für Ergebnisse |
+| Datenschutz | Personenbezogene Daten werden geschützt |
+| Erklärbarkeit | Entscheidungswege sind nachvollziehbar |
 
 ### Die goldene Regel
 
-> **KI unterstuetzt - der Mensch entscheidet und verantwortet.**
+> **KI unterstützt - der Mensch entscheidet und verantwortet.**
 > 
-> In der Pruefung ist jede Antwort falsch, die suggeriert, KI koenne autonom und ohne menschliche Pruefung Requirements finalisieren.
+> In der Prüfung ist jede Antwort falsch, die suggeriert, KI könne autonom und ohne menschliche Prüfung Requirements finalisieren.
 
 ---
 
@@ -513,27 +513,27 @@ flowchart LR
     },
     {
         id: 'chapter4',
-        title: 'Kapitel 4: RE-Aktivitaeten mit KI',
-        description: 'KI-Unterstuetzung in den vier RE-Kernaktivitaeten: Ermittlung, Dokumentation, Validierung, Verwaltung (K2, 2,5 Stunden).',
+        title: 'Kapitel 4: RE-Aktivitäten mit KI',
+        description: 'KI-Unterstützung in den vier RE-Kernaktivitäten: Ermittlung, Dokumentation, Validierung, Verwaltung (K2, 2,5 Stunden).',
         domain: 'RE Activities',
         summary: `## Wichtige Erkenntnisse
 
-- KI kann alle **4 RE-Kernaktivitaeten** unterstuetzen, aber nie ersetzen.
-- Der RE prueft, bewertet und finalisiert - KI liefert Entwuerfe und Vorschlaege.
-- Besonders wertvoll: Konsistenzpruefung, Stakeholder-Analyse, Template-Generierung.
-- Die Rolle des RE erweitert sich um "KI-Kompetenz" als Querschnittsfaehigkeit.
+- KI kann alle **4 RE-Kernaktivitäten** unterstützen, aber nie ersetzen.
+- Der RE prüft, bewertet und finalisiert - KI liefert Entwürfe und Vorschläge.
+- Besonders wertvoll: Konsistenzprüfung, Stakeholder-Analyse, Template-Generierung.
+- Die Rolle des RE erweitert sich um "KI-Kompetenz" als Querschnittsfähigkeit.
 `,
-        content: `# Kapitel 4: RE-Aktivitaeten mit KI (K2)
+        content: `# Kapitel 4: RE-Aktivitäten mit KI (K2)
 
 ## Lernziele
 
-- **LZ 4.1** (K1): Die vier RE-Kernaktivitaeten und ihre KI-Unterstuetzungsmoeglichkeiten kennen.
-- **LZ 4.2** (K2): Fuer jede Aktivitaet erklaeren, wie KI konkret unterstuetzen kann.
+- **LZ 4.1** (K1): Die vier RE-Kernaktivitäten und ihre KI-Unterstützungsmöglichkeiten kennen.
+- **LZ 4.2** (K2): Für jede Aktivität erklären, wie KI konkret unterstützen kann.
 - **LZ 4.3** (K2): Die erweiterte Rolle des RE im KI-Kontext beschreiben.
 
 ---
 
-## Die vier RE-Kernaktivitaeten im Ueberblick
+## Die vier RE-Kernaktivitäten im Überblick
 
 \`\`\`mermaid
 flowchart TB
@@ -543,10 +543,10 @@ flowchart TB
     RE --> V[Validierung<br/>Validation & Negotiation]
     RE --> VW[Verwaltung<br/>Management]
     
-    E --> E1[Stakeholder identifizieren<br/>Anforderungen erheben<br/>Interviews fuehren]
+    E --> E1[Stakeholder identifizieren<br/>Anforderungen erheben<br/>Interviews führen]
     D --> D1[Requirements schreiben<br/>Modelle erstellen<br/>Spezifikationen pflegen]
-    V --> V1[Konsistenz pruefen<br/>Konflikte loesen<br/>Abnahme organisieren]
-    VW --> VW1[Aenderungen verfolgen<br/>Traceability sichern<br/>Versionen verwalten]
+    V --> V1[Konsistenz prüfen<br/>Konflikte lösen<br/>Abnahme organisieren]
+    VW --> VW1[Änderungen verfolgen<br/>Traceability sichern<br/>Versionen verwalten]
     
     style RE fill:#4f46e5,color:#fff
     style E fill:#dbeafe
@@ -559,27 +559,27 @@ flowchart TB
 
 ## 4.1 Ermittlung (Elicitation)
 
-### KI-Unterstuetzung bei der Ermittlung
+### KI-Unterstützung bei der Ermittlung
 
 \`\`\`mermaid
 flowchart LR
-    subgraph Input[Eingaben fuer KI]
+    subgraph Input[Eingaben für KI]
         I1[Bestehendes System] 
         I2[Stakeholder-Liste]
-        I3[Domaenenwissen]
+        I3[Domänenwissen]
     end
     
-    subgraph KI[KI-Unterstuetzung]
+    subgraph KI[KI-Unterstützung]
         K1[Stakeholder-Analyse<br/>Wer fehlt noch?]
         K2[Interview-Fragen<br/>generieren]
-        K3[Luecken-Analyse<br/>Was wurde uebersehen?]
+        K3[Lücken-Analyse<br/>Was wurde übersehen?]
         K4[Personas erstellen]
     end
     
-    subgraph Output[RE prueft & ergaenzt]
+    subgraph Output[RE prüft & ergänzt]
         O1[Validierte<br/>Stakeholder-Map]
         O2[Interview-Leitfaden]
-        O3[Vollstaendigkeits-Check]
+        O3[Vollständigkeits-Check]
     end
     
     Input --> KI --> Output
@@ -592,10 +592,10 @@ flowchart LR
 
 | Aufgabe | KI-Beitrag | RE-Verantwortung |
 |---------|------------|------------------|
-| Stakeholder-Identifikation | Vorschlaege basierend auf Projekttyp | Validierung, Priorisierung |
+| Stakeholder-Identifikation | Vorschläge basierend auf Projekttyp | Validierung, Priorisierung |
 | Interview-Vorbereitung | Fragenkatalog generieren | Anpassung an Kontext |
 | Dokumenten-Analyse | Extraktion aus Altdokumenten | Relevanz bewerten |
-| Kreativitaet | Brainstorming-Ideen | Machbarkeit pruefen |
+| Kreativität | Brainstorming-Ideen | Machbarkeit prüfen |
 
 ---
 
@@ -610,7 +610,7 @@ flowchart TB
         DI2[Template-Vorgaben<br/>Firmenstandards]
     end
     
-    subgraph KI2[KI-Unterstuetzung]
+    subgraph KI2[KI-Unterstützung]
         DK1[User Stories formulieren]
         DK2[Akzeptanzkriterien ableiten]
         DK3[Glossar-Einträge erstellen]
@@ -742,17 +742,17 @@ flowchart TB
 > - Wissen, wann KI hilft und wann nicht
 > - Ethische und rechtliche Grenzen kennen
 `,
-        keywords: ['Ermittlung', 'Dokumentation', 'Validierung', 'Verwaltung', 'RE-Rolle', 'KI-Unterstuetzung', 'Review'],
+        keywords: ['Ermittlung', 'Dokumentation', 'Validierung', 'Verwaltung', 'RE-Rolle', 'KI-Unterstützung', 'Review'],
         difficulty: 'advanced' as const,
     },
     {
         id: 'chapter5',
         title: 'Kapitel 5: Praktische Nutzung',
-        description: 'Einfuehrungsstrategien, Toolauswahl und organisatorische Aspekte (K2, 1 Stunde).',
+        description: 'Einführungsstrategien, Toolauswahl und organisatorische Aspekte (K2, 1 Stunde).',
         domain: 'Practical Use',
         summary: `## Wichtige Erkenntnisse
 
-- KI-Einfuehrung erfordert eine durchdachte Strategie (nicht einfach "Tool kaufen und nutzen").
+- KI-Einführung erfordert eine durchdachte Strategie (nicht einfach "Tool kaufen und nutzen").
 - Pilotprojekte mit klarem Scope und Erfolgskriterien starten.
 - Change Management und Schulung sind erfolgskritisch.
 - Toolauswahl: Datenschutz, Integration, Kosten und Vendor-Lock-in beachten.
@@ -761,13 +761,13 @@ flowchart TB
 
 ## Lernziele
 
-- **LZ 5.1** (K1): Schritte zur Einfuehrung von KI-Werkzeugen im RE kennen.
-- **LZ 5.2** (K2): Kriterien fuer die Toolauswahl und Einfuehrungsstrategie erklaeren.
+- **LZ 5.1** (K1): Schritte zur Einführung von KI-Werkzeugen im RE kennen.
+- **LZ 5.2** (K2): Kriterien für die Toolauswahl und Einführungsstrategie erklären.
 - **LZ 5.3** (K2): Organisatorische Voraussetzungen und Change Management beschreiben.
 
 ---
 
-## 5.1 Einfuehrungsstrategie
+## 5.1 Einführungsstrategie
 
 \`\`\`mermaid
 flowchart LR
@@ -789,11 +789,11 @@ flowchart LR
 
 | Faktor | Beschreibung |
 |--------|-------------|
-| Klarer Scope | Abgegrenztes Thema, ueberschaubare Komplexitaet |
-| Messbare Ziele | z.B. "30% weniger Zeit fuer Erstdokumentation" |
+| Klarer Scope | Abgegrenztes Thema, überschaubare Komplexität |
+| Messbare Ziele | z.B. "30% weniger Zeit für Erstdokumentation" |
 | Motiviertes Team | Early Adopters als Piloten |
-| Management-Support | Budget und Rueckendeckung gesichert |
-| Feedback-Schleifen | Regelmaessige Retrospektiven |
+| Management-Support | Budget und Rückendeckung gesichert |
+| Feedback-Schleifen | Regelmäßige Retrospektiven |
 
 ---
 
@@ -802,11 +802,11 @@ flowchart LR
 \`\`\`mermaid
 flowchart TB
     TA[Tool-Auswahl Kriterien]
-    TA --> DS[Datenschutz<br/>Wo werden Daten verarbeitet?<br/>DSGVO-Konformitaet?]
-    TA --> IN[Integration<br/>Passt ins bestehende<br/>Tool-Oekosystem?]
+    TA --> DS[Datenschutz<br/>Wo werden Daten verarbeitet?<br/>DSGVO-Konformität?]
+    TA --> IN[Integration<br/>Passt ins bestehende<br/>Tool-Ökosystem?]
     TA --> KO[Kosten<br/>Lizenz, Training,<br/>Betrieb, Wartung]
-    TA --> VL[Vendor Lock-in<br/>Wie abhaengig werden wir?<br/>Exit-Strategie?]
-    TA --> QU[Qualitaet<br/>Wie gut sind Ergebnisse<br/>in unserer Domaene?]
+    TA --> VL[Vendor Lock-in<br/>Wie abhängig werden wir?<br/>Exit-Strategie?]
+    TA --> QU[Qualität<br/>Wie gut sind Ergebnisse<br/>in unserer Domäne?]
     TA --> US[Usability<br/>Wie steil ist die<br/>Lernkurve?]
     
     style TA fill:#4f46e5,color:#fff
@@ -818,10 +818,10 @@ flowchart TB
 
 | Datentyp | Cloud-LLM ok? | Empfehlung |
 |----------|---------------|------------|
-| Oeffentliche Infos | Ja | Beliebiges Tool |
-| Interne Prozesse | Bedingt | DPA pruefen, EU-Server |
+| Öffentliche Infos | Ja | Beliebiges Tool |
+| Interne Prozesse | Bedingt | DPA prüfen, EU-Server |
 | Personenbezogene Daten | Nein | On-Premise / lokales Modell |
-| Geschaeftsgeheimnisse | Nein | On-Premise / Air-Gapped |
+| Geschäftsgeheimnisse | Nein | On-Premise / Air-Gapped |
 
 ---
 
@@ -838,7 +838,7 @@ flowchart TB
     subgraph Prozesse[Prozesse]
         P1[KI-Governance definieren]
         P2[Review-Prozesse anpassen]
-        P3[Qualitaetsmetriken festlegen]
+        P3[Qualitätsmetriken festlegen]
     end
     
     subgraph Technik[Technik]
@@ -859,16 +859,16 @@ flowchart TB
 
 ### Change Management
 
-> **Merksatz**: Technologie einzufuehren ist 20% des Aufwands. Die Menschen mitzunehmen sind die anderen 80%.
+> **Merksatz**: Technologie einzuführen ist 20% des Aufwands. Die Menschen mitzunehmen sind die anderen 80%.
 
-Haeufige Widerstaende und Strategien:
+Häufige Widerstände und Strategien:
 
 | Widerstand | Strategie |
 |-----------|-----------|
 | "KI ersetzt mich" | Aufzeigen: KI erweitert, ersetzt nicht |
-| "Ich vertraue dem nicht" | Transparenz ueber Grenzen, Piloten zeigen |
+| "Ich vertraue dem nicht" | Transparenz über Grenzen, Piloten zeigen |
 | "Zu kompliziert" | Niedrigschwelliger Einstieg, Buddies |
-| "Datenschutz-Bedenken" | Governance vorab klaeren, kommunizieren |
+| "Datenschutz-Bedenken" | Governance vorab klären, kommunizieren |
 
 ---
 
@@ -879,7 +879,7 @@ flowchart LR
     subgraph DO[Do - Empfohlen]
         D1[KI als Entwurfs-Helfer]
         D2[Immer validieren]
-        D3[Schrittweise einfuehren]
+        D3[Schrittweise einführen]
         D4[Team schulen]
         D5[Governance etablieren]
     end
@@ -887,7 +887,7 @@ flowchart LR
     subgraph DONT[Dont - Vermeiden]
         N1[Blind vertrauen]
         N2[Sensitive Daten eingeben]
-        N3[Big-Bang-Einfuehrung]
+        N3[Big-Bang-Einführung]
         N4[Ohne Strategie starten]
         N5[KI als Ersatz sehen]
     end
@@ -896,19 +896,19 @@ flowchart LR
     style DONT fill:#fee2e2
 \`\`\`
 `,
-        keywords: ['Einfuehrung', 'Toolauswahl', 'Datenschutz', 'Change Management', 'Pilot', 'Governance', 'Strategie'],
+        keywords: ['Einführung', 'Toolauswahl', 'Datenschutz', 'Change Management', 'Pilot', 'Governance', 'Strategie'],
         difficulty: 'intermediate' as const,
     },
     {
         id: 'terminology',
         title: 'Glossar und Begriffe',
-        description: 'Alle pruefungsrelevanten Fachbegriffe mit Definitionen und Abgrenzungen.',
+        description: 'Alle prüfungsrelevanten Fachbegriffe mit Definitionen und Abgrenzungen.',
         domain: 'Terminology',
         summary: `## Wichtige Erkenntnisse
 
-- Praezise Begriffskenntnisse sind fuer K1-Fragen entscheidend.
+- Präzise Begriffskenntnisse sind für K1-Fragen entscheidend.
 - Verwechslungsgefahr besteht besonders bei: RAG vs. Fine-Tuning, Prompt vs. System-Prompt, Halluzination vs. Bias.
-- Der offizielle Syllabus definiert die Begriffe - eigene Interpretationen zaehlen nicht.
+- Der offizielle Syllabus definiert die Begriffe - eigene Interpretationen zählen nicht.
 `,
         content: `# Glossar und Begriffe
 
@@ -920,22 +920,22 @@ flowchart TB
         LLM[LLM<br/>Large Language Model]
         FT[Fine-Tuning<br/>Modell nachtrainieren]
         TK[Token<br/>Kleinste Verarbeitungseinheit]
-        KF[Kontextfenster<br/>Max. Eingabelaenge]
+        KF[Kontextfenster<br/>Max. Eingabelänge]
     end
     
     subgraph Retrieval[Wissensanbindung]
         RAG[RAG<br/>Retrieval Augmented Generation]
-        EMB[Embedding<br/>Vektor-Repraesentation]
+        EMB[Embedding<br/>Vektor-Repräsentation]
         VDB[Vektordatenbank<br/>Semantische Suche]
     end
     
     subgraph Interaktion[Interaktion]
         PR[Prompt<br/>Benutzer-Eingabe]
         SP[System-Prompt<br/>Unsichtbare Anweisung]
-        TP[Temperatur<br/>Kreativitaets-Regler]
+        TP[Temperatur<br/>Kreativitäts-Regler]
     end
     
-    subgraph Qualitaet[Qualitaet & Risiko]
+    subgraph Qualität[Qualität & Risiko]
         HA[Halluzination<br/>Plausible Falschaussage]
         BI[Bias<br/>Systematische Verzerrung]
         GR[Guardrails<br/>Sicherheitsschranken]
@@ -944,28 +944,28 @@ flowchart TB
     style Modell fill:#dbeafe
     style Retrieval fill:#d1fae5
     style Interaktion fill:#fef3c7
-    style Qualitaet fill:#fee2e2
+    style Qualität fill:#fee2e2
 \`\`\`
 
 ---
 
 ## Begriffsdefinitionen (alphabetisch)
 
-| Begriff | Definition | Pruefungsrelevanz |
+| Begriff | Definition | Prüfungsrelevanz |
 |---------|-----------|-------------------|
 | **Bias** | Systematische Verzerrung in Daten oder Modell-Output | K1 - Definition kennen |
-| **Chain-of-Thought** | Prompting-Technik: Modell soll Schritt-fuer-Schritt denken | K2 - Anwenden erklaeren |
-| **Embedding** | Numerische Vektor-Darstellung von Text fuer semantische Suche | K1 - Wissen was es ist |
+| **Chain-of-Thought** | Prompting-Technik: Modell soll Schritt-für-Schritt denken | K2 - Anwenden erklären |
+| **Embedding** | Numerische Vektor-Darstellung von Text für semantische Suche | K1 - Wissen was es ist |
 | **Few-Shot** | Prompting mit 2-3 Beispielen im Prompt | K2 - Unterschied zu Zero-Shot |
 | **Fine-Tuning** | Nachtraining eines Modells mit eigenen Daten | K2 - Vergleich mit RAG |
-| **Guardrails** | Technische Sicherheitsschranken gegen unerwuenschte Outputs | K1 - Begriff kennen |
-| **Halluzination** | Statistisch plausible aber faktisch falsche Modell-Ausgabe | K2 - Ursachen erklaeren |
+| **Guardrails** | Technische Sicherheitsschranken gegen unerwünschte Outputs | K1 - Begriff kennen |
+| **Halluzination** | Statistisch plausible aber faktisch falsche Modell-Ausgabe | K2 - Ursachen erklären |
 | **Kontextfenster** | Maximale Token-Anzahl die ein Modell gleichzeitig verarbeiten kann | K1 - Definition |
 | **LLM** | Large Language Model - grosses Sprachmodell | K1 - Definition |
 | **Prompt** | Die Eingabe/Anweisung an ein KI-Modell | K1 - Definition |
-| **RAG** | Retrieval Augmented Generation - externe Dokumente in Prompt einbinden | K2 - Erklaeren und vergleichen |
+| **RAG** | Retrieval Augmented Generation - externe Dokumente in Prompt einbinden | K2 - Erklären und vergleichen |
 | **RTF** | Rolle-Task-Format - Prompting-Pattern | K2 - Anwenden |
-| **System-Prompt** | Vorangestellte, fuer Benutzer unsichtbare Anweisung | K1 - Unterschied zu Prompt |
+| **System-Prompt** | Vorangestellte, für Benutzer unsichtbare Anweisung | K1 - Unterschied zu Prompt |
 | **Temperatur** | Parameter: 0=deterministisch, 1=kreativ | K1 - Auswirkung kennen |
 | **Token** | Kleinste Verarbeitungseinheit (ca. 3/4 Wort) | K1 - Definition |
 | **Zero-Shot** | Prompting ohne Beispiele | K2 - Unterschied zu Few-Shot |
@@ -981,11 +981,11 @@ flowchart LR
     end
     
     subgraph Paar2[Prompt vs. System-Prompt]
-        P2[Prompt<br/>Vom Benutzer<br/>Sichtbar] ---|vs| SP2[System-Prompt<br/>Vom Entwickler<br/>Unsichtbar fuer User]
+        P2[Prompt<br/>Vom Benutzer<br/>Sichtbar] ---|vs| SP2[System-Prompt<br/>Vom Entwickler<br/>Unsichtbar für User]
     end
     
     subgraph Paar3[Halluzination vs. Bias]
-        H2[Halluzination<br/>Zufaellig falsch<br/>Einzelne Ausgabe] ---|vs| B2[Bias<br/>Systematisch verzerrt<br/>Wiederkehrendes Muster]
+        H2[Halluzination<br/>Zufällig falsch<br/>Einzelne Ausgabe] ---|vs| B2[Bias<br/>Systematisch verzerrt<br/>Wiederkehrendes Muster]
     end
     
     style Paar1 fill:#e0e7ff
@@ -997,7 +997,7 @@ flowchart LR
 
 - **RAG** = "Restaurant mit Speisekarte" (externe Quellen werden nachgeschlagen)
 - **Fine-Tuning** = "Koch hat Rezepte auswendig gelernt" (Wissen im Modell)
-- **Halluzination** = "Jemand der ueberzeugend luegt ohne es zu wissen"
+- **Halluzination** = "Jemand der überzeugend lügt ohne es zu wissen"
 - **Bias** = "Schiefe Waage - misst immer in eine Richtung falsch"
 `,
         keywords: ['Glossar', 'RAG', 'Fine-Tuning', 'Halluzination', 'Bias', 'Token', 'LLM', 'Prompt', 'Embedding'],
@@ -1005,8 +1005,8 @@ flowchart LR
     },
     {
         id: 'exam-rules',
-        title: 'Pruefungsregeln und Taktik',
-        description: 'Detaillierte Pruefungsregeln, Punktevergabe und taktische Tipps fuer den Pruefungstag.',
+        title: 'Prüfungsregeln und Taktik',
+        description: 'Detaillierte Prüfungsregeln, Punktevergabe und taktische Tipps für den Prüfungstag.',
         domain: 'Exam Preparation',
         summary: `## Wichtige Erkenntnisse
 
@@ -1015,17 +1015,17 @@ flowchart LR
 - K-Fragen (Kreuzworttabelle): Punkte pro korrekte Zelle in der Matrix.
 - Zeitmanagement ist kritisch: ca. 80 Sekunden pro Frage.
 `,
-        content: `# Pruefungsregeln und Taktik
+        content: `# Prüfungsregeln und Taktik
 
 ## Formale Rahmenbedingungen
 
 | Aspekt | Regel |
 |--------|-------|
-| Fragenanzahl | 22 (zufaellig aus groesserem Pool) |
+| Fragenanzahl | 22 (zufällig aus größerem Pool) |
 | Zeitlimit | 30 Minuten |
 | Bestehensgrenze | 80% der erreichbaren Punkte |
 | Hilfsmittel | Open Book (eigene Unterlagen erlaubt) |
-| NICHT erlaubt | KI-Tools, Internet-Recherche waehrend Pruefung |
+| NICHT erlaubt | KI-Tools, Internet-Recherche während Prüfung |
 | Sprache | Deutsch oder Englisch (je nach Buchung) |
 
 ## Punktevergabe nach Fragetyp
@@ -1039,7 +1039,7 @@ flowchart TB
     
     A --> A1[1 Punkt<br/>Richtig oder Falsch<br/>Kein Teilpunkt]
     P --> P1[+1 pro richtige Auswahl<br/>-1 pro falsche Auswahl<br/>Minimum: 0 Punkte]
-    K --> K1[+1 pro korrekte Zelle<br/>Keine Negativpunkte<br/>Teilpunkte moeglich]
+    K --> K1[+1 pro korrekte Zelle<br/>Keine Negativpunkte<br/>Teilpunkte möglich]
     
     style FT fill:#4f46e5,color:#fff
     style A fill:#d1fae5
@@ -1063,9 +1063,9 @@ flowchart TB
 \`\`\`mermaid
 flowchart LR
     TRAP[Typische Fallen]
-    TRAP --> T1[Absolute Aussagen<br/>immer/nie/vollstaendig<br/>Meist FALSCH]
+    TRAP --> T1[Absolute Aussagen<br/>immer/nie/vollständig<br/>Meist FALSCH]
     TRAP --> T2[Ohne Validierung<br/>KI allein entscheidet<br/>Immer FALSCH]
-    TRAP --> T3[Technologie-Hype<br/>KI kann alles loesen<br/>Immer FALSCH]
+    TRAP --> T3[Technologie-Hype<br/>KI kann alles lösen<br/>Immer FALSCH]
     TRAP --> T4[Veraltete Begriffe<br/>Achtung bei Synonymen<br/>Syllabus-Definition gilt]
     
     style TRAP fill:#dc2626,color:#fff
@@ -1077,7 +1077,7 @@ flowchart LR
 
 ### P-Fragen-Strategie (WICHTIG!)
 
-> **Negativpunkte beachten!** Bei P-Fragen gibt es Abzuege fuer falsche Auswahlen.
+> **Negativpunkte beachten!** Bei P-Fragen gibt es Abzüge für falsche Auswahlen.
 
 | Situation | Empfehlung |
 |-----------|------------|
@@ -1086,15 +1086,17 @@ flowchart LR
 | Sicher falsch | Auf keinen Fall ankreuzen |
 | 50/50 | Eher weglassen (Risiko = -1 Punkt) |
 
-### Die goldenen Pruefungsregeln
+### Die goldenen Prüfungsregeln
 
-1. **Menschliche Verantwortung** - Immer die Antwort waehlen, die menschliches Review betont
-2. **KI als Werkzeug** - KI unterstuetzt, ersetzt nie den RE
-3. **Validierung ist Pflicht** - KI-Output muss IMMER geprueft werden
-4. **Kontext ist Koenig** - Besserer Input = Besserer Output
-5. **Keine Perfektion** - Halluzinationen sind nie vollstaendig vermeidbar
+1. **Menschliche Verantwortung** - Immer die Antwort wählen, die menschliches Review betont
+2. **KI als Werkzeug** - KI unterstützt, ersetzt nie den RE
+3. **Validierung ist Pflicht** - KI-Output muss IMMER geprüft werden
+4. **Kontext ist König** - Besserer Input = Besserer Output
+5. **Keine Perfektion** - Halluzinationen sind nie vollständig vermeidbar
 `,
-        keywords: ['Pruefung', 'Punktevergabe', 'Zeitmanagement', 'Taktik', 'P-Frage', 'K-Frage', 'A-Frage', 'Negativpunkte'],
+        keywords: ['Prüfung', 'Punktevergabe', 'Zeitmanagement', 'Taktik', 'P-Frage', 'K-Frage', 'A-Frage', 'Negativpunkte'],
         difficulty: 'beginner' as const,
     },
 ]
+
+
