@@ -1,0 +1,28 @@
+{
+    "name": "cpre-learning",
+    "version": "1.0.0",
+    "private": true,
+    "description": "CPRE AI4RE Lern-Anwendung mit statischen Lernmodulen, Lernplan und Prüfungssimulation",
+    "scripts": {
+        "dev": "concurrently \"npm run dev:api\" \"npm run dev:web\"",
+        "dev:api": "npm run dev --workspace=apps/api",
+        "dev:web": "npm run dev --workspace=apps/web",
+        "build:data": "npx tsx scripts/build-static.mjs",
+        "build": "npm run build:data && npm run build --workspace=apps/web",
+        "build:api": "npm run build --workspace=apps/api",
+        "build:web": "npm run build:data && npm run build --workspace=apps/web",
+        "type-check": "npm run type-check --workspaces"
+    },
+    "workspaces": [
+        "apps/*",
+        "packages/*"
+    ],
+    "devDependencies": {
+        "concurrently": "^8.2.2",
+        "tsx": "^4.22.4"
+    },
+    "engines": {
+        "node": ">=20.0.0",
+        "npm": ">=10.0.0"
+    }
+}

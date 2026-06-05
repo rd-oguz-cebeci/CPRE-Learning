@@ -1,0 +1,49 @@
+AI4RE
+Level 1
+Foundation
+L e v e l  2
+M o d e l i n g
+P r a c t i t i o n e r
+M a n a g e m e n t
+P r a c t i t i o n e r
+E l i c i t a t i o n
+P r a c t i t i o n e r
+R E @ A g i l e
+P r a c t i t i o n e r
+L e v e l  3
+M o d e l i n g
+S p e c i a l i s t
+M a n a g e m e n t
+S p e c i a l i s t
+E l i c i t a t i o n
+S p e c i a l i s t
+R E @ A g i l e
+S p e c i a l i s t
+L e v e l  4
+E x p e r t
+Zertifikate Micro-Credential
+
+Die optimale Nutzung von KI für RE 
+F a c t s h e e t
+Micro-Credential
+AI4RE
+Systematisches Verständnis der KI-Landschaft
+Kompetenz im Umgang mit KI-Methoden
+Praktische Anwendungskompetenz im RE
+Bewusstsein für Qualitätssicherung und Governance
+Risikobewusstsein und und kritische Reflexion bei KI-Einsatz
+Das Micro-Credential AI4RE liefert:
+Keine
+Voraussetzungen
+Zielgruppe
+Alle, die an Requirements Engineering-Aktivitäten beteiligt sind, z. B.
+Requirements Engineers, Business Analysts, Product Owner und Product
+Manager und wissen wollen, wie man AI am besten in die RE-Aktivitäten
+einbindet.
+30-minütiger Multiple-Choice-Test mit ca. 22 Fragen
+Prüfung
+Sprachen
+DE, EN  -  weitere folgen
+Nachweis
+Digital Badge - 3 Jahre gültig
+Kommen Sie in minimaler Zeit maximal auf Speed! 

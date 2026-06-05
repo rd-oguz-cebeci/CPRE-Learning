@@ -1,0 +1,81 @@
+// Prisma Schema für zukünftige Datenbankpersistenz
+// Aktuell nutzt die App In-Memory-Daten, dieses Schema ist für spätere Erweiterungen vorbereitet
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// Lernmodule
+model Module {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  domain      String
+  content     String   // Markdown-Content
+  summary     String?  // KI-generierte Zusammenfassung
+  keywords    String   // JSON array as string
+  difficulty  String   // 'beginner' | 'intermediate' | 'advanced'
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// Prüfungsfragen
+model Question {
+  id              String   @id @default(uuid())
+  text            String
+  options         String   // JSON array as string
+  correctAnswer   Int
+  domain          String
+  difficulty      String   // 'easy' | 'medium' | 'hard'
+  explanation     String?
+  createdAt       DateTime @default(now())
+  
+  // Relations
+  examQuestions   ExamQuestion[]
+}
+
+// Prüfungssitzungen (optional, für zukünftige Persistenz)
+model ExamSession {
+  id              String   @id @default(uuid())
+  startTime       DateTime @default(now())
+  endTime         DateTime?
+  timeLimit       Int      // in Minuten
+  isActive        Boolean  @default(true)
+  score           Int?
+  
+  // Relations
+  questions       ExamQuestion[]
+  answers         Answer[]
+}
+
+// Zuordnung Fragen zu Prüfungssitzungen
+model ExamQuestion {
+  id              String   @id @default(uuid())
+  sessionId       String
+  questionId      String
+  orderIndex      Int
+  
+  session         ExamSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  question        Question    @relation(fields: [questionId], references: [id])
+  
+  @@unique([sessionId, questionId])
+}
+
+// Antworten des Benutzers
+model Answer {
+  id              String   @id @default(uuid())
+  sessionId       String
+  questionId      String
+  userAnswer      Int
+  isCorrect       Boolean
+  timeSpent       Int?     // in Sekunden
+  
+  session         ExamSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  
+  @@unique([sessionId, questionId])
+}
