@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useExamStore } from '../store/examStore'
+import { isQuestionAnswered, selectSimulationQuestions, type QuestionAnswer } from '@cpre-learning/shared'
 import { ClipboardCheck, Clock, AlertCircle, ChevronLeft, ChevronRight, CheckCircle2, Circle } from 'lucide-react'
 
 export default function ExamSimulation() {
@@ -15,7 +16,7 @@ export default function ExamSimulation() {
     useEffect(() => {
         if (!currentSession?.isActive) return
 
-        const interval = setInterval(() => {
+        const updateTimer = () => {
             const elapsedSeconds = Math.floor((Date.now() - currentSession.startTime.getTime()) / 1000)
             const remainingSeconds = currentSession.timeLimit * 60 - elapsedSeconds
 
@@ -25,7 +26,10 @@ export default function ExamSimulation() {
             } else {
                 setTimeRemaining(remainingSeconds)
             }
-        }, 1000)
+        }
+
+        updateTimer()
+        const interval = setInterval(updateTimer, 1000)
 
         return () => clearInterval(interval)
     }, [currentSession, submitExam, navigate])
@@ -39,8 +43,7 @@ export default function ExamSimulation() {
                     return res.json()
                 })
                 .then((allQuestions) => {
-                    const shuffled = [...allQuestions].sort(() => Math.random() - 0.5)
-                    const selected = shuffled.slice(0, 22)
+                    const selected = selectSimulationQuestions(allQuestions, 22)
                     startExam(selected, 30)
                 })
                 .catch(() => setLoadError(true))
@@ -78,12 +81,35 @@ export default function ExamSimulation() {
     }
 
     const currentQuestion = currentSession.questions[currentQuestionIndex]
-    const answeredCount = Object.keys(currentSession.answers).length
+    const answeredCount = currentSession.questions.filter((question) =>
+        isQuestionAnswered(question, currentSession.answers[question.id])
+    ).length
     const progress = (answeredCount / currentSession.questions.length) * 100
 
     const handleSubmit = () => {
         submitExam()
         navigate('/ergebnisse')
+    }
+
+    const toggleMultipleChoiceAnswer = (optionIndex: number) => {
+        const currentAnswer = currentSession.answers[currentQuestion.id]
+        const selectedOptions = Array.isArray(currentAnswer)
+            ? currentAnswer.filter((answer): answer is number => typeof answer === 'number')
+            : []
+        const nextAnswer = selectedOptions.includes(optionIndex)
+            ? selectedOptions.filter((answer) => answer !== optionIndex)
+            : [...selectedOptions, optionIndex]
+
+        answerQuestion(currentQuestion.id, nextAnswer)
+    }
+
+    const setTrueFalseAnswer = (statementIndex: number, value: boolean) => {
+        const currentAnswer = currentSession.answers[currentQuestion.id]
+        const nextAnswer: boolean[] = Array.isArray(currentAnswer)
+            ? currentAnswer.map((answer) => Boolean(answer))
+            : []
+        nextAnswer[statementIndex] = value
+        answerQuestion(currentQuestion.id, nextAnswer as QuestionAnswer)
     }
 
     return (
@@ -125,6 +151,9 @@ export default function ExamSimulation() {
             {/* Question Card */}
             <div className="glass-card rounded-2xl p-8 border border-white">
                 <div className="flex flex-wrap items-center gap-3 mb-6">
+                    <span className="px-4 py-1.5 bg-slate-100 text-slate-700 text-sm font-semibold rounded-full border border-slate-200 shadow-sm">
+                        {currentQuestion.type}-Frage · {currentQuestion.points} {currentQuestion.points === 1 ? 'Punkt' : 'Punkte'}
+                    </span>
                     <span className="px-4 py-1.5 bg-indigo-50 text-indigo-700 text-sm font-semibold rounded-full border border-indigo-100 shadow-sm">
                         {currentQuestion.domain}
                     </span>
@@ -143,32 +172,77 @@ export default function ExamSimulation() {
                 <h2 className="text-2xl font-bold text-slate-800 mb-8 leading-snug">{currentQuestion.text}</h2>
 
                 {/* Answer Options */}
-                <div className="space-y-4">
-                    {currentQuestion.options.map((option, index) => {
-                        const isSelected = currentSession.answers[currentQuestion.id] === index;
-                        return (
-                            <button
-                                key={index}
-                                onClick={() => answerQuestion(currentQuestion.id, index)}
-                                className={`w-full text-left p-5 rounded-xl border-2 transition-all duration-200 hover-lift flex items-start group ${isSelected
-                                    ? 'border-indigo-500 bg-indigo-50/70 shadow-md shadow-indigo-100'
-                                    : 'border-white bg-white/60 hover:border-indigo-300 hover:bg-white'
-                                    }`}
-                            >
-                                <div className="flex-shrink-0 mt-0.5 mr-4">
-                                    {isSelected ? (
-                                        <CheckCircle2 className="w-6 h-6 text-indigo-600" />
-                                    ) : (
-                                        <Circle className="w-6 h-6 text-slate-300 group-hover:text-indigo-400 transition-colors" />
-                                    )}
+                {currentQuestion.type === 'A' && (
+                    <div className="space-y-4">
+                        {currentQuestion.options.map((option, index) => {
+                            const isSelected = currentSession.answers[currentQuestion.id] === index
+                            return (
+                                <button
+                                    key={index}
+                                    onClick={() => answerQuestion(currentQuestion.id, index)}
+                                    className={`w-full text-left p-5 rounded-xl border-2 transition-all duration-200 hover-lift flex items-start group ${isSelected
+                                        ? 'border-indigo-500 bg-indigo-50/70 shadow-md shadow-indigo-100'
+                                        : 'border-white bg-white/60 hover:border-indigo-300 hover:bg-white'
+                                        }`}
+                                >
+                                    <div className="flex-shrink-0 mt-0.5 mr-4">
+                                        {isSelected ? <CheckCircle2 className="w-6 h-6 text-indigo-600" /> : <Circle className="w-6 h-6 text-slate-300 group-hover:text-indigo-400 transition-colors" />}
+                                    </div>
+                                    <span className={`flex-1 text-lg ${isSelected ? 'text-indigo-900 font-medium' : 'text-slate-700'}`}>{option}</span>
+                                </button>
+                            )
+                        })}
+                    </div>
+                )}
+
+                {currentQuestion.type === 'P' && (
+                    <div className="space-y-4">
+                        {(() => {
+                            const answer = currentSession.answers[currentQuestion.id]
+                            const selectedCount = Array.isArray(answer)
+                                ? answer.filter((selection) => typeof selection === 'number').length
+                                : 0
+                            const isOverSelected = selectedCount > currentQuestion.correctAnswers.length
+
+                            return (
+                                <div className={`rounded-lg border p-3 text-sm ${isOverSelected ? 'border-red-300 bg-red-50 text-red-800' : 'border-slate-200 bg-slate-50 text-slate-700'}`} role={isOverSelected ? 'alert' : undefined}>
+                                    Erwartet sind <strong>{currentQuestion.correctAnswers.length} Antworten</strong>. Weniger Auswahlen können Teilpunkte ergeben; mehr Auswahlen ergeben null Punkte für die Frage.
+                                    <span className="block mt-1 font-semibold">Aktuell ausgewählt: {selectedCount}</span>
                                 </div>
-                                <span className={`flex-1 text-lg ${isSelected ? 'text-indigo-900 font-medium' : 'text-slate-700'}`}>
-                                    {option}
-                                </span>
-                            </button>
-                        )
-                    })}
-                </div>
+                            )
+                        })()}
+                        {currentQuestion.options.map((option, index) => {
+                            const answer = currentSession.answers[currentQuestion.id]
+                            const selectedOptions = Array.isArray(answer)
+                                ? answer.filter((selection): selection is number => typeof selection === 'number')
+                                : []
+                            const isSelected = selectedOptions.includes(index)
+                            return (
+                                <button key={index} onClick={() => toggleMultipleChoiceAnswer(index)} className={`w-full text-left p-5 rounded-xl border-2 transition-all flex items-start ${isSelected ? 'border-indigo-500 bg-indigo-50/70' : 'border-white bg-white/60 hover:border-indigo-300'}`}>
+                                    <div className={`w-6 h-6 mt-0.5 mr-4 border-2 rounded ${isSelected ? 'bg-indigo-600 border-indigo-600' : 'border-slate-300'}`} aria-hidden="true" />
+                                    <span className={`flex-1 text-lg ${isSelected ? 'text-indigo-900 font-medium' : 'text-slate-700'}`}>{option}</span>
+                                </button>
+                            )
+                        })}
+                    </div>
+                )}
+
+                {currentQuestion.type === 'K' && (
+                    <div className="space-y-4">
+                        {currentQuestion.statements.map((statement, index) => {
+                            const answer = currentSession.answers[currentQuestion.id]
+                            const selectedAnswer = Array.isArray(answer) && typeof answer[index] === 'boolean' ? answer[index] : undefined
+                            return (
+                                <div key={statement.text} className="p-5 rounded-xl border border-slate-200 bg-white/60">
+                                    <p className="text-lg text-slate-700 mb-4">{statement.text}</p>
+                                    <div className="flex gap-3">
+                                        {[true, false].map((value) => <button key={String(value)} onClick={() => setTrueFalseAnswer(index, value)} className={`px-4 py-2 rounded-lg border font-semibold ${selectedAnswer === value ? 'border-indigo-500 bg-indigo-50 text-indigo-800' : 'border-slate-200 text-slate-700 hover:border-indigo-300'}`}>{value ? 'Richtig' : 'Falsch'}</button>)}
+                                    </div>
+                                </div>
+                            )
+                        })}
+                    </div>
+                )}
             </div>
 
             {/* Navigation footer */}
@@ -185,7 +259,8 @@ export default function ExamSimulation() {
                 <div className="hidden md:flex gap-1.5 flex-wrap justify-center max-w-lg">
                     {currentSession.questions.map((_, index) => {
                         const isCurrent = index === currentQuestionIndex;
-                        const isAnswered = currentSession.answers[currentSession.questions[index].id] !== undefined;
+                        const question = currentSession.questions[index]
+                        const isAnswered = isQuestionAnswered(question, currentSession.answers[question.id]);
 
                         return (
                             <button

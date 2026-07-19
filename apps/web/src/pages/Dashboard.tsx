@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { BookOpen, ClipboardCheck, TrendingUp, Brain, Sparkles, ChevronRight } from 'lucide-react'
+import { BookMarked, BookOpen, ClipboardCheck, TrendingUp, Brain, Sparkles, ChevronRight } from 'lucide-react'
 
 export default function Dashboard() {
     return (
@@ -18,7 +18,7 @@ export default function Dashboard() {
             </div>
 
             {/* Quick Actions */}
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
                 <Link
                     to="/lernen"
                     className="group glass-card rounded-2xl p-6 hover-lift flex flex-col justify-between"
@@ -43,6 +43,26 @@ export default function Dashboard() {
                 </Link>
 
                 <Link
+                    to="/open-book"
+                    className="group glass-card rounded-2xl p-6 hover-lift flex flex-col justify-between"
+                >
+                    <div>
+                        <div className="flex items-center justify-center h-14 w-14 rounded-xl bg-gradient-to-br from-teal-500 to-emerald-700 text-white shadow-lg shadow-emerald-200 mb-4">
+                            <BookMarked className="h-7 w-7" />
+                        </div>
+                        <h3 className="text-xl font-bold text-slate-800 group-hover:text-emerald-700 transition-colors">
+                            Open-Book-Referenz
+                        </h3>
+                        <p className="mt-2 text-slate-500 text-sm leading-relaxed">
+                            Alle Lernziele kompakt zusammengefasst und lokal in Sekunden durchsuchbar.
+                        </p>
+                    </div>
+                    <div className="mt-6 flex items-center text-emerald-700 text-sm font-semibold opacity-0 group-hover:opacity-100 transition-all transform translate-x-[-10px] group-hover:translate-x-0">
+                        Referenz öffnen <ChevronRight className="w-4 h-4 ml-1" />
+                    </div>
+                </Link>
+
+                <Link
                     to="/pruefung"
                     className="group glass-card rounded-2xl p-6 hover-lift flex flex-col justify-between"
                 >
@@ -56,7 +76,7 @@ export default function Dashboard() {
                             Prüfungssimulation
                         </h3>
                         <p className="mt-2 text-slate-500 text-sm leading-relaxed">
-                            Teste dein Wissen unter Realbedingungen: 22 Fragen in 30 Minuten, zufällig aus 120 Fragen.
+                            Teste dein Wissen unter Prüfungsbedingungen: 22 Fragen in 30 Minuten aus einem kuratierten Pool mit A-, P- und K-Fragen.
                         </p>
                     </div>
                     <div className="mt-6 flex items-center text-emerald-600 text-sm font-semibold opacity-0 group-hover:opacity-100 transition-all transform translate-x-[-10px] group-hover:translate-x-0">
@@ -137,7 +157,7 @@ export default function Dashboard() {
                                 </li>
                                 <li className="flex items-center">
                                     <div className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mr-3 text-xs font-bold">✓</div>
-                                    120 randomisierte Fragen mit detaillierten Erklärungen
+                                    144 redaktionelle Übungsfragen mit detaillierten Erklärungen
                                 </li>
                             </ul>
                         </div>

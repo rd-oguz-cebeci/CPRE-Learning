@@ -15,20 +15,34 @@ const markdownComponents: Components = {
     },
 }
 
+interface SourceCatalog {
+    officialSources: {
+        reviewedAt: string
+        syllabus: { version: string; publishedAt: string; url: string }
+        examinationRegulations: { version: string; publishedAt: string; url: string }
+    }
+}
+
 export default function AI4RELearning() {
     const { modules, selectedModule, setModules, selectModule } =
         useLearningStore()
     const [searchTerm, setSearchTerm] = useState('')
     const [loadError, setLoadError] = useState(false)
+    const [sourceCatalog, setSourceCatalog] = useState<SourceCatalog | null>(null)
 
     useEffect(() => {
         fetch(import.meta.env.BASE_URL + 'data/modules.json')
-            .then((res) => {
-                if (!res.ok) throw new Error('HTTP ' + res.status)
-                return res.json()
+            .then((response) => {
+                if (!response.ok) throw new Error('Lernmodule konnten nicht geladen werden.')
+                return response.json()
             })
-            .then((data) => setModules(data))
+            .then(setModules)
             .catch(() => setLoadError(true))
+
+        fetch(import.meta.env.BASE_URL + 'data/catalog.json')
+            .then((response) => response.ok ? response.json() : null)
+            .then(setSourceCatalog)
+            .catch(() => setSourceCatalog(null))
     }, [setModules])
 
     const filteredModules = modules.filter(
@@ -65,6 +79,22 @@ export default function AI4RELearning() {
                         <BookOpen className="w-5 h-5 mr-2 text-primary-600" />
                         AI4RE Lernmodule
                     </h2>
+
+                    {sourceCatalog && (
+                        <div className="mb-4 rounded-md border border-primary-200 bg-primary-50 p-3 text-xs leading-relaxed text-slate-700">
+                            <div className="font-semibold text-primary-800">Offizieller Quellenstand</div>
+                            <div>Syllabus v{sourceCatalog.officialSources.syllabus.version} · Prüfungsordnung v{sourceCatalog.officialSources.examinationRegulations.version}</div>
+                            <div>Zuletzt abgeglichen: {new Intl.DateTimeFormat('de-DE').format(new Date(sourceCatalog.officialSources.reviewedAt))}</div>
+                            <a
+                                href={sourceCatalog.officialSources.syllabus.url}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="mt-1 inline-block font-semibold text-primary-700 hover:underline"
+                            >
+                                IREB Download Center
+                            </a>
+                        </div>
+                    )}
 
                     {/* Search */}
                     <div className="mb-4 relative">

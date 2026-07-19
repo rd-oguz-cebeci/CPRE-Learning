@@ -2,7 +2,7 @@
 
 ## Aktueller Stand
 
-Die CPRE AI4RE Lern-Anwendung ist auf einen rein statischen Lernbetrieb umgestellt. Lernplan, Zusammenfassungen und Prüfungsfragen werden direkt aus dem Backend geliefert; eine KI-Anbindung ist nicht mehr Teil des Systems.
+Die CPRE AI4RE Lern-Anwendung ist auf einen rein statischen Lernbetrieb umgestellt. Lernplan, Zusammenfassungen und Prüfungsfragen werden beim Build aus den TypeScript-Datenquellen als JSON erzeugt; eine KI-Anbindung ist nicht Teil des Lernflusses.
 
 ## Umgesetzte Bereiche
 
@@ -16,12 +16,12 @@ Die CPRE AI4RE Lern-Anwendung ist auf einen rein statischen Lernbetrieb umgestel
 - `GET /api/modules` für alle Lernmodule
 - `GET /api/modules/:id` für einzelne Module
 - `GET /api/exam/questions?count=20` für randomisierte Prüfungsfragen
-- Fragenpool mit 100 Fragen und Erklärungen
+- Quellengebundener Fragenpool mit 144 Fragen und Erklärungen
 
 ### Inhalte
 - 1 Modul für Lernplan und Prüfungsstrategie
-- 5 thematische AI4RE-Lernmodule
-- 100 Prüfungsfragen mit gemischten Schwierigkeitsgraden
+- 11 Lern- und Vertiefungsmodule
+- 144 Übungsfragen mit gemischten Schwierigkeitsgraden sowie A-, P- und K-Training für jedes offizielle Lernziel
 
 ## Wichtige Dateien
 

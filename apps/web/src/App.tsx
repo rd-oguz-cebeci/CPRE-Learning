@@ -1,9 +1,10 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
-import { BookOpen, ClipboardCheck, Home } from 'lucide-react'
+import { BookMarked, BookOpen, ClipboardCheck, Home } from 'lucide-react'
 import Dashboard from './pages/Dashboard'
 import AI4RELearning from './pages/AI4RELearning'
 import ExamSimulation from './pages/ExamSimulation'
 import ExamResults from './pages/ExamResults'
+import OpenBookReference from './pages/OpenBookReference'
 
 function App() {
     return (
@@ -14,32 +15,43 @@ function App() {
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div className="flex justify-between h-16">
                             <div className="flex">
-                                <Link to="/" className="flex items-center px-2 text-gray-900 font-semibold text-lg">
-                                    <BookOpen className="w-6 h-6 mr-2 text-primary-600" />
-                                    CPRE AI4RE Lernen
+                                <Link to="/" className="flex items-center px-1 text-gray-900 font-semibold text-lg sm:px-2">
+                                    <BookOpen className="w-6 h-6 text-primary-600 lg:mr-2" />
+                                    <span className="hidden lg:inline">CPRE AI4RE Lernen</span>
                                 </Link>
                             </div>
-                            <div className="flex space-x-4">
+                            <div className="flex items-center gap-1 sm:gap-2 lg:gap-4">
                                 <Link
                                     to="/"
-                                    className="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-md"
+                                    title="Dashboard"
+                                    className="inline-flex items-center p-2 text-sm font-medium text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-md lg:px-3"
                                 >
-                                    <Home className="w-4 h-4 mr-2" />
-                                    Dashboard
+                                    <Home className="w-5 h-5 lg:w-4 lg:h-4 lg:mr-2" />
+                                    <span className="hidden lg:inline">Dashboard</span>
                                 </Link>
                                 <Link
                                     to="/lernen"
-                                    className="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-md"
+                                    title="Lernmaterial"
+                                    className="inline-flex items-center p-2 text-sm font-medium text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-md lg:px-3"
                                 >
-                                    <BookOpen className="w-4 h-4 mr-2" />
-                                    Lernmaterial
+                                    <BookOpen className="w-5 h-5 lg:w-4 lg:h-4 lg:mr-2" />
+                                    <span className="hidden lg:inline">Lernmaterial</span>
                                 </Link>
                                 <Link
                                     to="/pruefung"
-                                    className="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-md"
+                                    title="Prüfung"
+                                    className="inline-flex items-center p-2 text-sm font-medium text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-md lg:px-3"
                                 >
-                                    <ClipboardCheck className="w-4 h-4 mr-2" />
-                                    Prüfung
+                                    <ClipboardCheck className="w-5 h-5 lg:w-4 lg:h-4 lg:mr-2" />
+                                    <span className="hidden lg:inline">Prüfung</span>
+                                </Link>
+                                <Link
+                                    to="/open-book"
+                                    title="Open-Book-Referenz"
+                                    className="inline-flex items-center p-2 text-sm font-medium text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-md lg:px-3"
+                                >
+                                    <BookMarked className="w-5 h-5 lg:w-4 lg:h-4 lg:mr-2" />
+                                    <span className="hidden lg:inline">Open Book</span>
                                 </Link>
                             </div>
                         </div>
@@ -53,6 +65,7 @@ function App() {
                         <Route path="/lernen" element={<AI4RELearning />} />
                         <Route path="/pruefung" element={<ExamSimulation />} />
                         <Route path="/ergebnisse" element={<ExamResults />} />
+                        <Route path="/open-book" element={<OpenBookReference />} />
                     </Routes>
                 </main>
             </div>

@@ -13,6 +13,12 @@
         "moduleResolution": "bundler",
         "allowImportingTsExtensions": true,
         "resolveJsonModule": true,
+        "baseUrl": ".",
+        "paths": {
+            "@cpre-learning/shared": [
+                "../../packages/shared/src/index.ts"
+            ]
+        },
         "isolatedModules": true,
         "noEmit": true,
         "jsx": "react-jsx",

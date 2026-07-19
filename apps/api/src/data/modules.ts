@@ -6,19 +6,20 @@ export const learningModules = [
         domain: 'Overview',
         summary: `## Überblick
 
-Der AI4RE-Lehrplan umfasst **5 Kapitel** mit insgesamt **6 Stunden** Lernzeit. Die Prüfung besteht aus **22 zufällig ausgewählten Fragen**, die in **30 Minuten** bearbeitet werden müssen. Zum Bestehen sind **80 %** der Punkte erforderlich. Open-Book, aber keine KI-Hilfsmittel erlaubt.`,
+Der offizielle AI4RE-Lehrplan umfasst **5 Kapitel** mit rund **5 Stunden** Lernzeit sowie ein Terminologie-Kapitel. Die Simulation besteht aus **22 kuratiert gemischten Fragen**, die in **30 Minuten** bearbeitet werden. Zum Bestehen sind **80 %** der Punkte erforderlich. Die reale Prüfung ist Open Book, aber ohne KI-Hilfsmittel.`,
         content: `# Lernplan und Prüfungsstrategie
 
 ## Syllabus-Überblick
 
-Der AI4RE Advanced-Level-Lehrplan ist in **5 Kapitel** gegliedert:
+Der offizielle AI4RE Micro-Credential-Lehrplan umfasst **5 Kapitel** plus ein Terminologie-Kapitel:
 
 \`\`\`mermaid
 graph LR
-    K1[Kapitel 1<br/>KI-Grundlagen<br/>0,5h] --> K2[Kapitel 2<br/>Ausgabequalität<br/>1h]
-    K2 --> K3[Kapitel 3<br/>Risiken & Ethik<br/>1h]
-    K3 --> K4[Kapitel 4<br/>RE-Aktivitäten<br/>2,5h]
-    K4 --> K5[Kapitel 5<br/>Praktische Nutzung<br/>1h]
+    K1[Kapitel 1<br/>KI-Grundlagen<br/>0,5h] --> K2[Kapitel 2<br/>Large Language Models<br/>0,5h]
+    K2 --> K3[Kapitel 3<br/>Prompt Engineering<br/>0,5h]
+    K3 --> K4[Kapitel 4<br/>Risiken & Verantwortlichkeiten<br/>1h]
+    K4 --> K5[Kapitel 5<br/>AI-Anwendungsfälle im RE<br/>2,5h]
+    K5 --> K6[Terminologie<br/>Referenz]
     style K1 fill:#e0f2fe
     style K2 fill:#dbeafe
     style K3 fill:#c7d2fe
@@ -34,7 +35,7 @@ graph LR
 | Zeit | 30 Minuten |
 | Bestehensgrenze | 80 % |
 | Hilfsmittel | Open-Book (kein KI-Tool erlaubt) |
-| Fragetypen | A (Auswahl), P (Zuordnung/Picking), K (Kreuzworttabelle) |
+| Fragetypen | A (Einfachauswahl), P (Mehrfachauswahl), K (Richtig/Falsch) |
 
 ## Fragentypen im Detail
 
@@ -42,11 +43,11 @@ graph LR
 flowchart TB
     A[Fragetypen]
     A --> T1[A - Auswahlfrage]
-    A --> T2[P - Picking/Zuordnung]
-    A --> T3[K - Kreuzworttabelle]
+    A --> T2[P - Mehrfachauswahl]
+    A --> T3[K - Richtig/Falsch]
     T1 --> D1[Genau 1 richtige Antwort<br/>aus mehreren Optionen]
-    T2 --> D2[Mehrere richtige Antworten<br/>Punkte pro richtige Wahl<br/>Abzug pro falsche Wahl]
-    T3 --> D3[Matrix mit Begriffen<br/>Zeile-Spalte-Zuordnungen<br/>Punkte pro korrekte Zelle]
+    T2 --> D2[Mehrere richtige Antworten<br/>Punkte pro richtiger Wahl<br/>Zu viele Auswahlen: 0 Punkte]
+    T3 --> D3[Mehrere Aussagen<br/>Je Aussage richtig oder falsch<br/>Teilpunkte pro korrekter Wahl]
     style A fill:#4f46e5,color:#fff
     style T1 fill:#e0e7ff
     style T2 fill:#e0e7ff
@@ -70,10 +71,10 @@ flowchart LR
 ## Prüfungstaktik
 
 1. **Zeitmanagement**: 30 Min / 22 Fragen = ca. 80 Sek. pro Frage
-2. Absolute Aussagen ("immer", "nie", "vollautomatisch") hinterfragen
-3. Antworten mit "ohne Review/Validierung" sind fast immer falsch
-4. Bei Unsicherheit: Welche Antwort betont menschliche Verantwortung?
-5. P-Fragen: Lieber eine richtige weglassen als eine falsche markieren
+2. Schlüsselbegriffe in Frage und Antwortoptionen mit der Syllabus-Definition abgleichen
+3. Bei Szenarien zwischen KI-Unterstützung und menschlicher Verantwortung unterscheiden
+4. Negative Fragestellungen und die geforderte Anzahl an Antworten genau lesen
+5. P-Fragen: Nur die geforderte Anzahl auswählen. Zu viele Auswahlen ergeben 0 Punkte; weniger richtige Auswahlen können Teilpunkte ergeben.
 `,
         keywords: ['Lernplan', 'Syllabus', '22 Fragen', '30 Minuten', '80 Prozent', 'Prüfungstaktik'],
         difficulty: 'beginner' as const,
@@ -83,6 +84,9 @@ flowchart LR
         title: 'Kapitel 1: KI-Grundlagen',
         description: 'KI-Schlüsseltechnologien, Chatbot-Pipeline und RAG versus Fine-Tuning (K2, 0,5 Stunden).',
         domain: 'AI Fundamentals',
+        officialSyllabus: true,
+        learningObjectives: ['LZ 1.1', 'LZ 1.2'],
+        sourceSections: ['1.1', '1.2'],
         summary: `## Wichtige Erkenntnisse (offizielle Zusammenfassung)
 
 - KI hat viel mehr zu bieten als Chatbots. Für manche Aufgaben sind LLMs nicht das richtige Werkzeug.
@@ -174,9 +178,9 @@ flowchart TD
 
 - **Token** – die kleinste Einheit, die ein Sprachmodell verarbeitet. Ein Token entspricht ungefähr drei Vierteln eines Wortes. Kurze Wörter wie "und" oder "die" sind je ein Token; längere Fachbegriffe können aus mehreren Token bestehen. Die Kosten und Kapazitäten von LLMs werden in Token gemessen.
 
-- **Kontextfenster** – die maximale Menge an Text (in Token), die das Modell gleichzeitig "sehen" und verarbeiten kann. Neuere Modelle wie GPT-4 erlauben bis zu 128.000 Token. Wird das Kontextfenster überschritten, verliert das Modell ältere Gesprächsteile.
+- **Kontextfenster** – die maximale Menge an Text (in Token), die ein Modell in einer Interaktion verarbeiten kann. Größe und Verhalten sind modellabhängig. Wird die Kapazität überschritten, können frühere Informationen fehlen oder nicht mehr zuverlässig berücksichtigt werden.
 
-- **Temperatur** – ein Parameter, der die Kreativität bzw. Zufälligkeit der Ausgabe steuert. Bei Temperatur 0 antwortet das Modell deterministisch und reproduzierbar – sinnvoll für Faktenabfragen und konsistente RE-Artefakte. Bei hohen Werten (nahe 1) wird die Ausgabe variabler und kreativer – nützlich für Brainstorming.
+- **Temperatur** – ein Parameter, der die Auswahl aus wahrscheinlichen Token und damit die Variabilität der Ausgabe beeinflusst. Niedrigere Werte fördern meist konsistentere, höhere Werte meist variablere Ausgaben. Die genaue Wirkung und Reproduzierbarkeit hängen vom jeweiligen Modell und Anbieter ab.
 
 - **System-Prompt** – eine versteckte Vorab-Anweisung, die vom Entwickler gesetzt wird und die Grundausrichtung des Modells bestimmt. Benutzer sehen diesen Prompt normalerweise nicht. Im RE-Kontext kann ein System-Prompt z. B. die Rolle als RE-Assistent oder spezifische Qualitätsregeln vordefinieren.
 
@@ -226,7 +230,7 @@ flowchart LR
 \`\`\`
 
 **RAG (Retrieval Augmented Generation)**
-- *Aktualität*: Immer aktuell, da externe Dokumente zur Laufzeit eingebunden werden.
+- *Aktualität*: Neue, korrekt indexierte Inhalte können ohne erneutes Modelltraining verfügbar werden. Die tatsächliche Aktualität hängt von Wissensbasis, Index und Retrieval-Qualität ab.
 - *Nachvollziehbarkeit*: Hoch – das Modell kann Quellen zitieren und Antworten sind prüfbar.
 - *Aufwand*: Mittelhoch – eine Retrieval-Pipeline (Indexierung, Vektordatenbank, Suche) muss aufgebaut werden.
 - *Kosten pro Anfrage*: Höher, da relevante Dokumente bei jeder Anfrage im Prompt mitgesendet werden (mehr Token).
@@ -251,10 +255,59 @@ flowchart LR
         difficulty: 'intermediate' as const,
     },
     {
-        id: 'chapter2',
-        title: 'Kapitel 2: Ausgabequalität steuern',
-        description: 'Wie man LLM-Ergebnisse durch Prompting und Kontext optimiert (K2, 1 Stunde).',
+        id: 'chapter2-llm',
+        title: 'Kapitel 2: Large Language Models',
+        description: 'Probabilistische Textvorhersage, Fähigkeiten, Grenzen und verantwortungsvolle Nutzung von LLMs (K1/K2, 0,5 Stunden).',
+        domain: 'Generative AI',
+        officialSyllabus: true,
+        learningObjectives: ['LZ 2.1', 'LZ 2.2'],
+        sourceSections: ['2.1', '2.2'],
+        summary: `## Wichtige Erkenntnisse
+
+    - LLMs erzeugen Text durch probabilistische Vorhersage des nächsten Tokens, nicht durch menschliches Verstehen.
+    - Sprachliche Flüssigkeit ist kein Nachweis für fachliche Richtigkeit.
+    - Kontext, Quellen und menschliche Validierung sind für belastbare RE-Ergebnisse unverzichtbar.`,
+        content: `# Kapitel 2: Large Language Models (K1/K2)
+
+    ## Lernziele
+
+    - **LZ 2.1** (K1): Das Grundkonzept eines LLM kennen.
+    - **LZ 2.2** (K2): Probabilistische Vorhersage von menschlichem Schlussfolgern oder Verstehen unterscheiden.
+
+    ## Wie LLMs Text erzeugen
+
+    Ein LLM verarbeitet Eingaben als Token und sagt auf Basis des bisherigen Kontexts jeweils wahrscheinliche nächste Token voraus. Das Ergebnis kann kohärent, hilfreich und sprachlich überzeugend wirken. Daraus folgt jedoch kein eigenes Weltwissen, keine Absicht und keine Garantie für korrekte Fakten.
+
+    | Fähigkeit | Grenze im RE | Konsequenz |
+    |---|---|---|
+    | Texte strukturieren, zusammenfassen und umformulieren | Kann Fachwissen, Quellen oder Randbedingungen falsch interpretieren | Output als Entwurf behandeln |
+    | Muster und ähnliche Formulierungen erkennen | Kann plausible Halluzinationen erzeugen | Fakten und Quellen prüfen |
+    | Beispiele und Vorlagen nachbilden | Übernimmt auch unklare oder voreingenommene Eingaben | Kontext und Qualitätskriterien präzisieren |
+
+    ## Verantwortungsvolle Interaktion
+
+    1. Projekt-, Domänen- und Stakeholderkontext gezielt bereitstellen.
+    2. Ergebnisse gegen verlässliche Quellen und Qualitätskriterien prüfen.
+    3. Sensible Informationen nur unter geeigneten Datenschutz- und Governance-Regeln verwenden.
+    4. Bei deterministischen Aufgaben geeignete Fachwerkzeuge oder überprüfbare Quellen einsetzen.
+
+    > **Prüfungsanker:** Ein LLM ist ein leistungsfähiger Entwurfsassistent. Es ersetzt weder Domänenwissen noch die Validierung durch Requirements Engineers und Stakeholder.
+
+    ### Quelle
+
+    Paraphrasiert nach IREB, *AI4RE Micro-Credential Syllabus und Studienleitfaden*, Version 1.0.0, Kapitel 2.
+    `,
+        keywords: ['LLM', 'Token', 'probabilistische Vorhersage', 'Halluzination', 'Kontext', 'Validierung'],
+        difficulty: 'intermediate' as const,
+        },
+        {
+        id: 'chapter3-prompt-engineering',
+        title: 'Kapitel 3: Prompt Engineering',
+        description: 'Kontext, Prompt-Pattern und Prompt-Techniken für belastbarere RE-Ergebnisse (K2, 0,5 Stunden).',
         domain: 'Output Quality',
+        officialSyllabus: true,
+        learningObjectives: ['LZ 3.1', 'LZ 3.2'],
+        sourceSections: ['3.1', '3.2'],
         summary: `## Wichtige Erkenntnisse
 
 - Die Qualität der KI-Ausgabe hängt primär von der Qualität des Inputs ab (Prompt + Kontext).
@@ -262,13 +315,12 @@ flowchart LR
 - Drei Hebel zur Qualitätssteigerung: besserer Kontext, präzisere Prompts, systematische Validierung.
 - Das RTF-Pattern (Rolle-Task-Format) ist eine bewährte Prompting-Strategie.
 `,
-        content: `# Kapitel 2: Ausgabequalität steuern (K2)
+        content: `# Kapitel 3: Prompt Engineering (K2)
 
 ## Lernziele
 
-- **LZ 2.1** (K1): Grunde kennen, warum KI-Ausgaben fehlerhaft sein können (Halluzinationen, Bias, veraltetes Wissen).
-- **LZ 2.2** (K2): Erklären, wie Kontext und Prompt-Design die Ausgabequalität beeinflussen.
-- **LZ 2.3** (K2): Techniken zur Qualitätssteigerung beschreiben (Few-Shot, Chain-of-Thought, RTF).
+- **LZ 3.1** (K2): Die Bedeutung des Kontexts für akkurate KI-Ergebnisse erläutern.
+- **LZ 3.2** (K1): Zweck von Prompt-Pattern benennen und sie von Prompt-Techniken unterscheiden.
 
 ---
 
@@ -386,59 +438,63 @@ flowchart TB
 
 ### Prüfungsrelevanz
 
-- RTF ist die Mindeststruktur für einen guten Prompt
-- Few-Shot-Beispiele verbessern Konsistenz erheblich
-- Chain-of-Thought reduziert logische Fehler
+- RTF ist ein gängiges wiederverwendbares Prompt-Pattern
+- Few-Shot-Beispiele können Format und erwartete Art der Ausgabe verdeutlichen
+- Chain-of-Thought fordert eine schrittweise Begründung an; das Ergebnis muss weiterhin validiert werden
 - **Kein Prompting ersetzt menschliche Validierung!**
 `,
         keywords: ['Halluzination', 'Prompt-Engineering', 'RTF', 'Few-Shot', 'Chain-of-Thought', 'Kontext', 'Qualität'],
         difficulty: 'intermediate' as const,
     },
     {
-        id: 'chapter3',
-        title: 'Kapitel 3: Risiken und Ethik',
-        description: 'Risiken beim KI-Einsatz im RE, ethische Aspekte und EU AI Act (K2, 1 Stunde).',
+        id: 'chapter4-risks',
+        title: 'Kapitel 4: Risiken und Verantwortlichkeiten',
+        description: 'Risiken, Datenschutz und die erweiterte Verantwortung des Requirements Engineers in AI4RE (K2, 1 Stunde).',
         domain: 'Risks & Ethics',
+        officialSyllabus: true,
+        learningObjectives: ['LZ 4.1'],
+        sourceSections: ['4.1'],
         summary: `## Wichtige Erkenntnisse
 
-- Es gibt **10 zentrale Risiken** beim KI-Einsatz im RE (prüfungsrelevant!).
+- Der Syllabus beschreibt **12 typische Risikobereiche** beim KI-Einsatz im RE.
 - Der EU AI Act klassifiziert KI-Systeme nach Risikostufen.
 - Menschliche Verantwortung bleibt IMMER bestehen - KI ist Werkzeug, nicht Entscheider.
 - Bias in Trainingsdaten führt zu Bias in Ergebnissen - Requirements Engineers müssen dies erkennen.
 `,
-        content: `# Kapitel 3: Risiken und Ethik (K2)
+        content: `# Kapitel 4: Risiken und Verantwortlichkeiten (K2)
 
 ## Lernziele
 
-- **LZ 3.1** (K1): Die wichtigsten Risiken beim Einsatz von KI im RE kennen.
-- **LZ 3.2** (K2): Ethische Implikationen und regulatorische Rahmenbedingungen erklären.
-- **LZ 3.3** (K2): Strategien zur Risikominimierung beschreiben.
+- **LZ 4.1** (K1): Typische Risiken beim Einsatz von KI im RE nennen.
+- **LZ 4.2** (K2): Die erweiterte Rolle des Requirements Engineers in KI-gestützten Prozessen erläutern.
 
 ---
 
-## 3.1 Die 10 zentralen Risiken
+## 4.1 Die 12 Risikobereiche des Syllabus
 
 \`\`\`mermaid
 flowchart TB
-    R[10 Risiken beim KI-Einsatz im RE]
+    R[12 Risiken beim KI-Einsatz im RE]
     R --> R1[1. Halluzinationen<br/>Falsche aber plausible Fakten]
-    R --> R2[2. Bias & Diskriminierung<br/>Verzerrte Trainingsdaten]
-    R --> R3[3. Datenschutz<br/>Sensitive Daten im Prompt]
-    R --> R4[4. IP / Urheberrecht<br/>Wem gehört der Output?]
-    R --> R5[5. Overreliance<br/>Blindes Vertrauen in KI]
-    R --> R6[6. Deskilling<br/>Fähigkeitsverlust bei Menschen]
-    R --> R7[7. Intransparenz<br/>Black-Box-Entscheidungen]
-    R --> R8[8. Vendor Lock-in<br/>Abhängigkeit von Anbieter]
-    R --> R9[9. Sicherheit<br/>Prompt Injection, Manipulation]
-    R --> R10[10. Verantwortungsdiffusion<br/>Wer haftet bei Fehlern?]
+    R --> R2[2. Falsche Präzision<br/>Formal korrekt, semantisch schwach]
+    R --> R3[3. Verstärkung von Bias<br/>Systematisch verzerrte Ergebnisse]
+    R --> R4[4. Datenverlust<br/>Offenlegung sensibler Daten]
+    R --> R5[5. Urheberrechtsverstöße<br/>Geschütztes Material im Output]
+    R --> R6[6. Veraltetes Wissen<br/>Fehlende aktuelle Vorgaben]
+    R --> R7[7. Modell-Drift<br/>Qualitätsverlust im Betrieb]
+    R --> R8[8. Context-Window-Überlauf<br/>Wichtige Eingaben fallen heraus]
+    R --> R9[9. Fehlausrichtung des Umfangs<br/>Vorschläge außerhalb des Scopes]
+    R --> R10[10. Übermäßiges Vertrauen<br/>Fehlende menschliche Validierung]
+    R --> R11[11. Intransparenz<br/>Schwer nachvollziehbare Ergebnisse]
+    R --> R12[12. Transparenzpflichten<br/>Fehlende Kennzeichnung oder Kontrolle]
     
     style R fill:#dc2626,color:#fff
     style R1 fill:#fee2e2
     style R2 fill:#fee2e2
     style R3 fill:#fee2e2
-    style R5 fill:#fef3c7
-    style R6 fill:#fef3c7
     style R10 fill:#fef3c7
+    style R11 fill:#fef3c7
+    style R12 fill:#fef3c7
 \`\`\`
 
 ### Detailbetrachtung der Top-Risiken
@@ -451,7 +507,7 @@ flowchart TB
 - *Auswirkung im RE*: Bestimmte Nutzergruppen (z. B. ältere Menschen, nicht-westliche Kulturen, Menschen mit Behinderungen) werden in KI-generierten Anforderungen systematisch berücksichtigt oder ausgeschlossen, weil die Trainingsdaten nicht repräsentativ sind.
 - *Gegenmaßnahmen*: Breites Spektrum diverser Stakeholder aktiv einbeziehen, regelmäßige Bias-Audits der KI-Ausgaben durchführen, bei kritischen Systemen spezialisierte Fairness-Prüfungen einplanen.
 
-**3. Datenschutz**
+**3. Datenverlust und Datenschutz**
 - *Auswirkung im RE*: Wenn Anforderungs-Workshops oder Kundendokumente direkt in Cloud-LLMs eingespeist werden, können sensible Informationen (Personendaten, Geschäftsgeheimnisse) beim Anbieter landen und für Trainings genutzt werden.
 - *Gegenmaßnahmen*: Nur anonymisierte oder synthetische Daten in Cloud-Tools eingeben; bei sensiblen Daten auf On-Premise-Modelle oder air-gapped Systeme ausweichen; Data Processing Agreements (DPA) mit Anbietern abschließen.
 
@@ -459,9 +515,9 @@ flowchart TB
 - *Auswirkung im RE*: Requirements Engineers verlassen sich zunehmend unkritisch auf KI-Vorschläge und hinterfragen Ergebnisse nicht mehr ausreichend. Kritisches Denken und fachliches Urteilsvermögen nehmen ab.
 - *Gegenmaßnahmen*: Pflicht-Reviews für alle KI-generierten Artefakte institutionalisieren; Checklisten einführen, die aktives Nachdenken erzwingen; KI-Unterstützung transparent kommunizieren.
 
-**5. Verantwortungsdiffusion**
-- *Auswirkung im RE*: Wenn KI ein Requirement generiert und drei Personen es „geprüft“ haben, fühlt sich am Ende niemand wirklich zuständig für Fehler. Verantwortung löst sich auf.
-- *Gegenmaßnahmen*: Klare Rollenzuweisung dokumentieren (wer trägt die fachliche Verantwortung?); RACI-Matrix für KI-unterstützte Prozesse definieren; Governance-Framework etablieren, das menschliche Accountability sicherstellt.
+**5. Transparenz und Transparenzpflichten**
+- *Auswirkung im RE*: Schwer erklärbare Priorisierungsvorschläge erschweren Validierung und Vertrauen. Bei bestimmten veröffentlichten KI-Inhalten können zusätzlich gesetzliche Kennzeichnungs- oder Kontrollpflichten gelten.
+- *Gegenmaßnahmen*: KI-Einsatz und Grenzen dokumentieren, Quellen und Entscheidungskriterien nachvollziehbar machen und den konkreten rechtlichen sowie organisatorischen Kontext prüfen. Interne RE-Artefakte sind nicht pauschal kennzeichnungspflichtig.
 
 ---
 
@@ -541,10 +597,83 @@ flowchart LR
         difficulty: 'intermediate' as const,
     },
     {
-        id: 'chapter4',
-        title: 'Kapitel 4: RE-Aktivitäten mit KI',
+        id: 'chapter4-responsibilities',
+        title: 'Kapitel 4 Vertiefung: Zuständigkeiten in AI4RE',
+        description: 'Die erweiterte Rolle des Requirements Engineers in KI-gestützten Prozessen (LZ 4.2, K2).',
+        domain: 'Risks & Ethics',
+        officialSyllabus: true,
+        learningObjectives: ['LZ 4.2'],
+        sourceSections: ['4.2'],
+        summary: `## Wichtige Erkenntnisse
+
+    - KI erweitert die RE-Rolle, ersetzt sie nicht.
+    - Verantwortung für Kontext, Validierung, Compliance und Stakeholder-Kommunikation bleibt menschlich.
+    - Die fünf Verantwortungsdimensionen sind ein Prüfungsanker für K2-Fragen.`,
+        content: `# Kapitel 4: Zuständigkeiten in AI4RE (K2)
+
+    ## Lernziel
+
+    - **LZ 4.2**: Die sich entwickelnde Rolle des Requirements Engineers in KI-gestützten Prozessen erläutern.
+
+    ## Fünf Verantwortungsdimensionen
+
+    | Perspektive | Aufgaben des Requirements Engineers | Typische Prüfentscheidung |
+    |---|---|---|
+    | KI-Prozessdesigner, Integrator und technischer Kooperationspartner | Geeignete Werkzeuge für eine konkrete RE-Aufgabe bewerten, ihre Einbindung in Repository und Arbeitsablauf mit technischen Teams gestalten sowie Ein-/Ausgabeformate und Review-Regeln festlegen. | Ein LLM zur Dublettenerkennung darf Vorschläge markieren; Kriterien, Kennzeichnung und Freigabeprozess werden vor dem Einsatz definiert. |
+    | Prompt-Designer und Qualitätsprüfer | Kontext, Aufgabe, Qualitätskriterien und Ausgabeformat präzisieren, Prompts iterativ verbessern und Ergebnisse gegen Domänenwissen, Stakeholder-Bedürfnisse sowie Qualitätskriterien prüfen. | Akzeptanzkriterien werden nur übernommen, wenn sie testbar sind und zur ursprünglichen Stakeholder-Aussage zurückverfolgt werden können. |
+    | Risiko- und Compliance-Manager | Datenschutz, Datenminimierung, Bias, Modell-Drift sowie gesetzliche und vertragliche Vorgaben erkennen; passende Verarbeitung und Kontrollen festlegen. | Stakeholder-Feedback wird vor externer Verarbeitung pseudonymisiert; die fortdauernde Regelkonformität des Werkzeugs wird überprüft. |
+    | Verantwortlicher für Umweltauswirkungen | Nutzen und Ressourcenverbrauch abwägen und unnötig intensive KI-Nutzung vermeiden. | Eine periodische Stapelverarbeitung ist einer dauerhaft laufenden Neuklassifizierung vorzuziehen, wenn beide denselben fachlichen Nutzen liefern. |
+    | Kommunikator und Vertrauensbildner | KI-Einsatz, Nutzen, Grenzen und eingeschränkte Erklärbarkeit transparent darstellen; Diskussion, Lernen, Verhandlung und Konsensbildung ermöglichen. | Stakeholder erfahren, welche Workshop-Schritte KI-gestützt sind, dürfen Vorschläge hinterfragen und entscheiden weiterhin über fachliche Zielkonflikte. |
+
+    ## Verantwortung entlang des KI-gestützten Ablaufs
+
+    1. **Vor dem Einsatz:** Zweck und konkrete RE-Aufgabe klären, Daten klassifizieren, Werkzeug und Betriebsform bewerten sowie messbare Qualitäts- und Abbruchkriterien definieren.
+    2. **Bei der Konfiguration:** Kontext, Prompts, Eingabe- und Ausgabeformate, Kennzeichnung sowie Rollen für Prüfung und Freigabe festlegen.
+    3. **Während der Nutzung:** Ergebnisse auf Relevanz, Korrektheit, Vollständigkeit, Bias und Regelkonformität prüfen. Auffälligkeiten und Änderungen des Modellverhaltens beobachten.
+    4. **Vor der Übernahme:** Quellenbezug und Stakeholder-Absicht validieren, Entscheidungen nachvollziehbar dokumentieren und nur kuratierte Ergebnisse in die Anforderungsbasis übernehmen.
+    5. **Im Betrieb:** Nutzen, Risiken, Modell-Drift und Ressourcenverbrauch erneut bewerten und den Prozess bei veränderten Bedingungen anpassen.
+
+    ## Was nicht an KI delegiert werden kann
+
+    - Fachliche Verantwortung und Freigabe von Anforderungen
+    - Bewertung, ob ein Ergebnis den tatsächlichen Bedürfnissen der Stakeholder entspricht
+    - Aushandlung von Konflikten und legitimen Interessen
+    - Entscheidung über vertretbare rechtliche, ethische und betriebliche Risiken
+    - Aufbau von gemeinsamem Verständnis und Vertrauen
+
+    ## K2-Fallbeispiel
+
+    Ein Tool schlägt aufgrund historischer Daten Prioritäten vor. Der Requirements Engineer darf die Rangfolge nicht ungeprüft übernehmen. Er prüft Datenbasis und Verzerrungen, erklärt die Vorschläge, stimmt Zielkonflikte mit Stakeholdern ab und dokumentiert die begründete Entscheidung.
+
+    **Warum?** Priorität hängt nicht nur von Mustern in vorhandenen Daten ab. Geschäftswert, Dringlichkeit, Aufwand, Abhängigkeiten und aktuelle Stakeholder-Interessen können sich ändern. KI strukturiert die Analyse; die verantwortliche Entscheidung bleibt bei den Menschen.
+
+    ## K2-Selbstcheck
+
+    Ein externes LLM soll vertrauliche Interviewprotokolle zusammenfassen. Welche Reaktion entspricht LZ 4.2?
+
+    - Nicht allein die sprachliche Qualität testen.
+    - Zuerst Zweck, Datenklassifikation, zulässige Verarbeitung und Anbieterbedingungen prüfen.
+    - Daten minimieren oder pseudonymisieren und gegebenenfalls eine lokale Verarbeitung wählen.
+    - Zusammenfassungen durch den Requirements Engineer gegen das Protokoll und die Stakeholder-Absicht validieren.
+    - Einsatz, Grenzen und Freigabe nachvollziehbar dokumentieren.
+
+    > **Merksatz:** KI liefert Vorschläge. Menschen beurteilen Bedeutung, Risiken und Konsequenzen und tragen die Verantwortung für die Freigabe.
+
+    ### Quelle
+
+    Paraphrasiert nach IREB, *AI4RE Micro-Credential Syllabus und Studienleitfaden*, Version 1.0.0, Abschnitt 4.2.
+    `,
+        keywords: ['Verantwortung', 'Human-in-the-loop', 'Compliance', 'Governance', 'Umweltauswirkungen', 'Vertrauen'],
+        difficulty: 'intermediate' as const,
+        },
+        {
+        id: 'chapter5-overview',
+        title: 'Kapitel 5: KI-Anwendungsfälle im RE',
         description: 'KI-Unterstützung in den vier RE-Kernaktivitäten: Ermittlung, Dokumentation, Validierung, Verwaltung (K2, 2,5 Stunden).',
         domain: 'RE Activities',
+        officialSyllabus: true,
+        learningObjectives: ['LZ 5.1', 'LZ 5.2'],
+        sourceSections: ['5.1', '5.2', '5.3', '5.4'],
         summary: `## Wichtige Erkenntnisse
 
 - KI kann alle **4 RE-Kernaktivitäten** unterstützen, aber nie ersetzen.
@@ -552,13 +681,12 @@ flowchart LR
 - Besonders wertvoll: Konsistenzprüfung, Stakeholder-Analyse, Template-Generierung.
 - Die Rolle des RE erweitert sich um "KI-Kompetenz" als Querschnittsfähigkeit.
 `,
-        content: `# Kapitel 4: RE-Aktivitäten mit KI (K2)
+        content: `# Kapitel 5: KI-Anwendungsfälle im RE (K2)
 
 ## Lernziele
 
-- **LZ 4.1** (K1): Die vier RE-Kernaktivitäten und ihre KI-Unterstützungsmöglichkeiten kennen.
-- **LZ 4.2** (K2): Für jede Aktivität erklären, wie KI konkret unterstützen kann.
-- **LZ 4.3** (K2): Die erweiterte Rolle des RE im KI-Kontext beschreiben.
+- **LZ 5.1** (K1): Typische KI-Anwendungsfälle für Ermittlung, Dokumentation, Validierung und Management nennen.
+- **LZ 5.2** (K2): Menschliche Kuration und die Rolle des RE zur Sicherstellung valider Ergebnisse erläutern.
 
 ---
 
@@ -784,9 +912,121 @@ flowchart TB
         difficulty: 'advanced' as const,
     },
     {
-        id: 'chapter5',
-        title: 'Kapitel 5: Praktische Nutzung',
-        description: 'Einführungsstrategien, Toolauswahl und organisatorische Aspekte (K2, 1 Stunde).',
+        id: 'chapter5-use-cases',
+        title: 'Kapitel 5 Vertiefung: Use Cases im Detail',
+        description: 'Offizielle Unterfälle für Ermittlung, Dokumentation, Validierung und Management (LZ 5.1 und 5.2, K1/K2).',
+        domain: 'RE Activities',
+        officialSyllabus: true,
+        learningObjectives: ['LZ 5.1', 'LZ 5.2'],
+        sourceSections: ['5.1', '5.2', '5.3', '5.4'],
+        summary: `## Wichtige Erkenntnisse
+
+    - KI unterstützt Erkundung, Transkription und Extraktion in der Ermittlung.
+    - Sie kann Anforderungen formulieren und in andere Darstellungen transformieren.
+    - Auch bei Validierung und Management ist menschliche Kuration Voraussetzung.`,
+        content: `# Kapitel 5: Use Cases im Detail (K1/K2)
+
+    ## Lernziele
+
+    - **LZ 5.1** (K1): Typische Anwendungsfälle für KI in Ermittlung, Dokumentation, Validierung und Management nennen.
+    - **LZ 5.2** (K2): Die Bedeutung menschlicher Kuration und die Rolle des RE bei validen Ergebnissen erläutern.
+
+    ## 5.1 Ermittlung
+
+    ### Erkundung neuer Domänen
+
+    KI kann interne Unterlagen und öffentliche Quellen zusammenfassen, Terminologie und Randbedingungen herausarbeiten, mögliche Stakeholder nennen sowie Interview- und Workshop-Leitfäden vorbereiten. Diese Vorschläge sind Ausgangspunkte, keine bestätigten Fakten.
+
+    Für den **Systemkontext** kann KI Informationen nach fünf Aspekten strukturieren:
+
+    1. Stakeholder
+    2. Dokumente
+    3. Systeme
+    4. Prozesse
+    5. Ereignisse
+
+    Sie kann Beziehungen und mögliche Lücken markieren. Der Requirements Engineer prüft Kontext- und Systemgrenzen mit den Stakeholdern. Für ein **gemeinsames Verständnis** kann KI Begriffe, Synonyme, Homonyme und inkonsistente Verwendung in einem Glossar vorschlagen; verbindliche Definitionen werden gemeinsam abgestimmt.
+
+    ### Kommunikation transkribieren
+
+    KI kann Audioaufnahmen, Interviews, Workshops, Whiteboards und Skizzen in strukturierte, durchsuchbare Arbeitsartefakte überführen. Sie kann Sprecher unterscheiden, Zeitstempel ergänzen, Diskussionspunkte zusammenfassen und mögliche Anforderungen oder Folgefragen markieren.
+
+    **Grenzen und Kuration:** Ein Transkript kann Aussagen auslassen, Sprecher verwechseln oder Absichten verfälschen. Datenschutz, Einwilligung, fachliche Genauigkeit, Vollständigkeit und Übereinstimmung mit der Stakeholder-Absicht müssen menschlich geprüft werden.
+
+    ### Anforderungen extrahieren
+
+    KI kann aus E-Mails, Chats, Protokollen, Altspezifikationen und regulatorischen Dokumenten funktionale Anforderungen, Qualitätsanforderungen und Randbedingungen vorschlagen. Sie kann Konflikte, implizite Annahmen, Abhängigkeiten und mögliche Lücken markieren.
+
+    Der Requirements Engineer stellt durch Quellenbezug und Stakeholder-Validierung sicher, dass ein Vorschlag eine echte Anforderung und keine plausible Modellannahme ist.
+
+    ## 5.2 Dokumentation
+
+    ### Formulierung
+
+    KI kann Rohinformationen anhand vorgegebener Satzschablonen oder Standards strukturieren, User Stories und Akzeptanzkriterien vorschlagen, Glossar- und Synonymtabellen vorbereiten sowie große Anforderungen zerlegen. Dabei kann sie sprachliche Fallstricke wie Passiv, unklare Universalquantoren oder fehlende messbare Kriterien markieren.
+
+    Der Requirements Engineer prüft fachliche Richtigkeit, angemessene Zerlegung, Testbarkeit und Wertbezug. Eine syntaktisch perfekte Anforderung kann fachlich trotzdem falsch sein.
+
+    ### Transformation
+
+    Mögliche Transformationen sind:
+
+    - natürliche Sprache in UML- oder BPMN-Modelle und zurück,
+    - technische Inhalte in zielgruppengerechte einfache Sprache,
+    - Anforderungen in Wireframes, Mock-ups oder explorative Prototypen,
+    - Stakeholder-Input in Personas,
+    - Anforderungen in Testfälle,
+    - Legacy-Code in Vorschläge für implizite Anforderungen,
+    - Vergleich von Spezifikation und Implementierung.
+
+    Jede Darstellung muss semantisch mit ihrer Quelle übereinstimmen. Modelle und Prototypen dürfen nicht unbemerkt Designentscheidungen als Stakeholder-Anforderungen ausgeben.
+
+    ## 5.3 Validierung
+
+    KI kann Mehrdeutigkeiten, Widersprüche, Dubletten, terminologische Inkonsistenzen und fehlende Qualitätskriterien markieren. Sie kann Anforderungen gegen Glossare vergleichen, Abhängigkeiten untersuchen und Testfälle vorschlagen. Die abschließende Validierung verlangt jedoch Kontext- und Werturteil.
+
+    | Validierungsmaßstab | Leitfrage des Requirements Engineers |
+    |---|---|
+    | Konsistenz | Ist der markierte Unterschied ein echter Widerspruch oder eine zulässige Variation? |
+    | Stakeholder-Bedürfnis | Entspricht die Anforderung tatsächlich den Wünschen und Bedürfnissen ihrer Quelle? |
+    | Wertorientierung | Trägt die Anforderung erkennbar zu einem relevanten Ziel oder Nutzen bei? |
+    | Angemessenheit und Notwendigkeit | Ist sie erforderlich oder hat die KI unnötigen Umfang ergänzt? |
+    | Abstraktionsebene | Passt ihr Detaillierungsgrad zur aktuellen Projektphase und zum Zweck des Arbeitsprodukts? |
+    | Qualitätskriterien | Ist sie unter anderem eindeutig, verständlich, vollständig genug und überprüfbar? |
+
+    > **Prüfungsanker:** Mustererkennung kann die Validierung vorbereiten. Ob eine Anforderung wertvoll, notwendig und fachlich richtig ist, entscheidet sich durch Quellen, Systemkontext und Stakeholder.
+
+    ## 5.4 Management
+
+    ### Attribute zuweisen
+
+    KI kann Inhalt und ähnliche Anforderungen analysieren und Werte für Attribute wie **Priorität, Komplexität, Quelle oder verantwortliche Person** vorschlagen. Sie kann fehlende Attribute und inkonsistente Zuordnungen in großen Beständen markieren.
+
+    Vorschläge müssen gegen projektspezifische Kriterien und verlässliche Quellen geprüft werden. Historische Muster können veraltet oder verzerrt sein; ein automatisch vorgeschlagener Verantwortlicher oder Prioritätswert wird nicht ungeprüft verbindlich.
+
+    ### Anforderungen priorisieren
+
+    KI kann Geschäftswert, Dringlichkeit, Aufwand, Abhängigkeiten und weitere vereinbarte Kriterien gleichzeitig auswerten. Sie kann Rangfolgen, Konflikte, Abhängigkeiten und alternative Perspektiven für geänderte Randbedingungen vorschlagen.
+
+    Priorisierung bleibt eine Stakeholder-Entscheidung: Strategie, legitime Interessen und aktueller Projektkontext lassen sich nicht vollständig aus Daten ableiten. Vorschläge werden erklärt, verhandelt, validiert und bei Änderungen neu bewertet.
+
+    ## Menschliche Kuration als durchgängiges Prinzip
+
+    KI-Ergebnisse sind Hypothesen oder Entwürfe. Der Requirements Engineer prüft fachliche Bedeutung, Quellbezug, semantische Genauigkeit, Stakeholder-Absicht, Datenschutz und Projektkontext. Nur validierte Ergebnisse gehören in die Anforderungsbasis.
+
+    **K2-Muster:** KI-Vorschlag → Quelle und Kontext prüfen → Qualitäts- und Risikokriterien anwenden → Stakeholder einbeziehen → begründet entscheiden → Entscheidung und KI-Einsatz dokumentieren.
+
+    ### Quelle
+
+    Paraphrasiert nach IREB, *AI4RE Micro-Credential Syllabus und Studienleitfaden*, Version 1.0.0, Kapitel 5.
+    `,
+        keywords: ['Erkundung', 'Transkription', 'Extraktion', 'Transformation', 'Validierung', 'Management', 'Kuration'],
+        difficulty: 'advanced' as const,
+        },
+        {
+        id: 'practice-ai-adoption',
+        title: 'Praxis-Vertiefung: KI im RE einführen',
+        description: 'Zusatzwissen zu Einführungsstrategien, Toolauswahl und organisatorischen Aspekten; kein eigenes AI4RE-Syllabus-Kapitel.',
         domain: 'Practical Use',
         summary: `## Wichtige Erkenntnisse
 
@@ -795,13 +1035,17 @@ flowchart TB
 - Change Management und Schulung sind erfolgskritisch.
 - Toolauswahl: Datenschutz, Integration, Kosten und Vendor-Lock-in beachten.
 `,
-        content: `# Kapitel 5: Praktische Nutzung (K2)
+        content: `# Praxis-Vertiefung: KI im RE einführen
 
-## Lernziele
+    > **Einordnung:** Dieses Modul ergänzt den offiziellen AI4RE-Lehrplan. Für die Prüfung sind die Kapitel 1 bis 5 und die Terminologie maßgeblich.
 
-- **LZ 5.1** (K1): Schritte zur Einführung von KI-Werkzeugen im RE kennen.
-- **LZ 5.2** (K2): Kriterien für die Toolauswahl und Einführungsstrategie erklären.
-- **LZ 5.3** (K2): Organisatorische Voraussetzungen und Change Management beschreiben.
+## Ziele dieser freiwilligen Vertiefung
+
+- Schritte zur Einführung von KI-Werkzeugen im RE kennen.
+- Kriterien für Toolauswahl und Einführungsstrategie erklären.
+- Organisatorische Voraussetzungen und Change Management beschreiben.
+
+> Diese Ziele sind redaktionelle Lernhilfen und keine offiziellen AI4RE-Lernziele.
 
 ---
 
@@ -948,6 +1192,9 @@ flowchart LR
         title: 'Glossar und Begriffe',
         description: 'Alle prüfungsrelevanten Fachbegriffe mit Definitionen und Abgrenzungen.',
         domain: 'Terminology',
+        officialSyllabus: true,
+        learningObjectives: ['LZ 6.1'],
+        sourceSections: ['6'],
         summary: `## Wichtige Erkenntnisse
 
 - Präzise Begriffskenntnisse sind für K1-Fragen entscheidend.
@@ -997,11 +1244,11 @@ flowchart TB
 
 - **Bias** – Systematische Verzerrung in den Trainingsdaten oder im Modell-Output, die dazu führt, dass bestimmte Gruppen oder Perspektiven bevorzugt oder benachteiligt werden. Anders als zufällige Fehler tritt Bias konsistent und vorhersehbar auf. *(Prüfungsrelevanz: K1 – Definition kennen)*
 
-- **Chain-of-Thought** – Eine Prompting-Technik, bei der das Modell aufgefordert wird, seinen Lösungsweg Schritt für Schritt zu erläutern, bevor es zur Antwort kommt. Dies reduziert logische Fehler, da das Modell gezwungen wird, strukturiert zu denken. *(Prüfungsrelevanz: K2 – Anwendung erklären)*
+- **Chain-of-Thought** – Eine Prompting-Technik, bei der das Modell aufgefordert wird, seine Überlegungen schrittweise darzustellen. Sie strukturiert die angeforderte Begründung, garantiert aber weder logische noch fachliche Korrektheit. *(Prüfungsrelevanz: K2 – Anwendung erklären)*
 
 - **Embedding** – Eine numerische Vektordarstellung von Text, die semantische Ähnlichkeiten erfasst. Zwei ähnliche Sätze haben ähnliche Vektoren. Embeddings sind die Grundlage für die semantische Suche in RAG-Systemen. *(Prüfungsrelevanz: K1 – Wissen was es ist)*
 
-- **Few-Shot** – Eine Prompting-Strategie, bei der 2–3 konkrete Beispiele für die gewünschte Ausgabe direkt in den Prompt integriert werden. Dies verbessert die Konsistenz und Qualität der Ausgabe erheblich im Vergleich zu Zero-Shot. *(Prüfungsrelevanz: K2 – Unterschied zu Zero-Shot)*
+- **Few-Shot** – Eine Prompting-Strategie, bei der einige Beispiele für die gewünschte Ausgabe direkt in den Prompt integriert werden. Beispiele können Aufgabe und Format verdeutlichen; ihre Wirkung hängt von Aufgabe, Modell, Kontext und Beispielqualität ab. *(Prüfungsrelevanz: K2 – Unterschied zu Zero-Shot)*
 
 - **Fine-Tuning** – Das Nachtraining eines vortrainierten Sprachmodells mit domänenspezifischen Daten, um es auf einen bestimmten Stil, eine bestimmte Sprache oder ein Fachgebiet zu spezialisieren. Das Wissen wird dauerhaft ins Modell eingebettet. *(Prüfungsrelevanz: K2 – Vergleich mit RAG)*
 
@@ -1021,7 +1268,7 @@ flowchart TB
 
 - **System-Prompt** – Eine vorangestellte, für Endbenutzer unsichtbare Anweisung, die vom Entwickler gesetzt wird und die Grundausrichtung des Modells festlegt. Er hat die höchste Priorität im Kontextfenster und übersteuert Benutzeranweisungen. *(Prüfungsrelevanz: K1 – Unterschied zu Prompt)*
 
-- **Temperatur** – Ein Modell-Parameter der die Zufälligkeit der Ausgabe steuert. Bei 0 ist die Ausgabe deterministisch und reproduzierbar (gut für Faktenabfragen). Bei höheren Werten (nahe 1) wird sie variabler und kreativer (gut für Brainstorming). *(Prüfungsrelevanz: K1 – Auswirkung kennen)*
+- **Temperatur** – Ein Modellparameter, der die Zufälligkeit der Token-Auswahl beeinflusst. Niedrigere Werte führen häufig zu konsistenteren, höhere Werte zu variableren Ausgaben. Einstellbarkeit und genaue Wirkung sind modell- und anbieterabhängig; auch Temperatur 0 garantiert nicht überall identische Antworten. *(Prüfungsrelevanz: K1 – Auswirkung kennen)*
 
 - **Token** – Die kleinste Verarbeitungseinheit eines Sprachmodells. Ein Token entspricht ungefähr drei Vierteln eines Wortes. Kosten, Kapazitäten und Limits von LLMs werden in Token gemessen. *(Prüfungsrelevanz: K1 – Definition)*
 
@@ -1068,8 +1315,8 @@ flowchart LR
         summary: `## Wichtige Erkenntnisse
 
 - 22 Fragen, 30 Minuten, 80% Bestehensgrenze - Open Book, kein KI-Tool.
-- P-Fragen (Picking): Punkte pro richtige Auswahl, ABZUG pro falsche Auswahl.
-- K-Fragen (Kreuzworttabelle): Punkte pro korrekte Zelle in der Matrix.
+- P-Fragen (Mehrfachauswahl): Punkte pro richtiger Auswahl; bei zu vielen Auswahlen 0 Punkte für die gesamte Frage.
+- K-Fragen (Richtig/Falsch): Punkte pro korrekt bewerteter Aussage.
 - Zeitmanagement ist kritisch: ca. 80 Sekunden pro Frage.
 `,
         content: `# Prüfungsregeln und Taktik
@@ -1091,12 +1338,12 @@ flowchart LR
 flowchart TB
     FT[Fragetypen & Punktevergabe]
     FT --> A[A-Frage<br/>Auswahl]
-    FT --> P[P-Frage<br/>Picking]
-    FT --> K[K-Frage<br/>Kreuzworttabelle]
+    FT --> P[P-Frage<br/>Mehrfachauswahl]
+    FT --> K[K-Frage<br/>Richtig/Falsch]
     
     A --> A1[1 Punkt<br/>Richtig oder Falsch<br/>Kein Teilpunkt]
-    P --> P1[+1 pro richtige Auswahl<br/>-1 pro falsche Auswahl<br/>Minimum: 0 Punkte]
-    K --> K1[+1 pro korrekte Zelle<br/>Keine Negativpunkte<br/>Teilpunkte möglich]
+    P --> P1[Fragepunkte geteilt durch<br/>korrekte Auswahlen<br/>Zu viele Auswahlen: 0 Punkte]
+    K --> K1[Fragepunkte geteilt durch<br/>Anzahl Aussagen<br/>Teilpunkte möglich]
     
     style FT fill:#4f46e5,color:#fff
     style A fill:#d1fae5
@@ -1120,9 +1367,9 @@ flowchart TB
 \`\`\`mermaid
 flowchart LR
     TRAP[Typische Fallen]
-    TRAP --> T1[Absolute Aussagen<br/>immer/nie/vollständig<br/>Meist FALSCH]
-    TRAP --> T2[Ohne Validierung<br/>KI allein entscheidet<br/>Immer FALSCH]
-    TRAP --> T3[Technologie-Hype<br/>KI kann alles lösen<br/>Immer FALSCH]
+    TRAP --> T1[Fragelogik<br/>Negationen und Anzahl<br/>genau lesen]
+    TRAP --> T2[Rollenverteilung<br/>Unterstützung nicht mit<br/>Verantwortung verwechseln]
+    TRAP --> T3[Plausibilität<br/>Option gegen Syllabus-Begriff<br/>und Kontext prüfen]
     TRAP --> T4[Veraltete Begriffe<br/>Achtung bei Synonymen<br/>Syllabus-Definition gilt]
     
     style TRAP fill:#dc2626,color:#fff
@@ -1134,14 +1381,14 @@ flowchart LR
 
 ### P-Fragen-Strategie (WICHTIG!)
 
-> **Negativpunkte beachten!** Bei P-Fragen gibt es Abzüge für falsche Auswahlen.
+> **Die Anzahl beachten!** Bei P-Fragen führt eine Auswahl von mehr Antworten als gefordert zu 0 Punkten für die gesamte Frage.
 
 | Situation | Empfehlung |
 |-----------|------------|
 | Sicher richtig | Ankreuzen |
-| Unsicher | Lieber weglassen (kein Abzug) |
+| Unsicher | Nicht auswählen; es gibt keinen Punkt für eine falsche Auswahl |
 | Sicher falsch | Auf keinen Fall ankreuzen |
-| 50/50 | Eher weglassen (Risiko = -1 Punkt) |
+| 50/50 | Nur auswählen, wenn die Antwort fachlich begründbar ist |
 
 ### Die goldenen Prüfungsregeln
 
@@ -1151,7 +1398,7 @@ flowchart LR
 4. **Kontext ist König** - Besserer Input = Besserer Output
 5. **Keine Perfektion** - Halluzinationen sind nie vollständig vermeidbar
 `,
-        keywords: ['Prüfung', 'Punktevergabe', 'Zeitmanagement', 'Taktik', 'P-Frage', 'K-Frage', 'A-Frage', 'Negativpunkte'],
+        keywords: ['Prüfung', 'Punktevergabe', 'Zeitmanagement', 'Taktik', 'P-Frage', 'K-Frage', 'A-Frage'],
         difficulty: 'beginner' as const,
     },
 ]

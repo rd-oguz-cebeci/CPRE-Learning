@@ -1,14 +1,14 @@
 # CPRE AI4RE Lern-App
 
-Statische Web-Anwendung zur Vorbereitung auf die **CPRE AI4RE** Prüfung (IREB Advanced Level Badge).
+Statische Web-Anwendung zur Vorbereitung auf die **CPRE AI4RE Micro-Credential** Prüfung von IREB.
 
 🌐 **Live**: [rd-oguz-cebeci.github.io/CPRE-Learning](https://rd-oguz-cebeci.github.io/CPRE-Learning/)
 
 ## Features
 
-- 📚 8 redaktionell gepflegte Lernmodule mit Mermaid-Diagrammen
-- 🎯 120 Prüfungsfragen aus 6 Themenbereichen
-- ⏱️ Realistische Prüfungssimulation (22 Fragen, 30 Min, 80% Bestehensgrenze)
+- 📚 11 redaktionell gepflegte Lernmodule entlang des IREB-Studienleitfadens, mit Mermaid-Diagrammen
+- 🎯 144 redaktionelle Übungsfragen; jedes offizielle Lernziel mit A-, P- und K-Training
+- ⏱️ Kuratierte Prüfungssimulation (22 Fragen, 30 Min, 80% Bestehensgrenze; A-, P- und K-Fragen)
 - 📊 Detaillierte Auswertung nach Themenbereich mit Lernempfehlungen
 - 🚀 Rein statisch — kein Backend nötig, gehostet via GitHub Pages
 
@@ -64,9 +64,19 @@ CPRE-Learning/
 
 | Merkmal | Detail |
 |---------|--------|
-| Fragen | 22 (zufällig aus Pool) |
+| Fragen | 22 (kuratiert aus dem Übungsfragenpool) |
 | Zeit | 30 Minuten |
 | Bestehen | 80% |
-| Fragetypen | A (Auswahl), P (Picking), K (Kreuzworttabelle) |
+| Fragetypen | A (Einfachauswahl), P (Mehrfachauswahl), K (Richtig/Falsch) |
 | Hilfsmittel | Open-Book (kein KI-Tool) |
 | Gültigkeit | 3 Jahre |
+
+## Quellen und Abgrenzung
+
+Die Lerninhalte und die Prüfungslogik sind redaktionell aus den offiziellen IREB-Quellen abgeleitet:
+
+- [AI4RE Micro-Credential Syllabus und Studienleitfaden](https://cpre.ireb.org/en/downloads-and-resources/downloads)
+- [CPRE Micro-Credential Prüfungsordnung](https://cpre.ireb.org/en/downloads-and-resources/downloads)
+- Lokale Referenzkopien in [docs/_extracted](docs/_extracted)
+
+Die Fragen sind selbst erstellte Übungsfragen. Sie sind keine veröffentlichten oder rekonstruierten IREB-Originalprüfungsfragen. IREB veröffentlicht keine verbindliche Verteilung der Fragetypen; die Simulation garantiert deshalb Übung mit allen drei Formaten, ohne eine geheime Prüfungsform zu behaupten.
