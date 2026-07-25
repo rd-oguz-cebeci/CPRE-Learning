@@ -266,6 +266,8 @@ flowchart LR
 
     - LLMs erzeugen Text durch probabilistische Vorhersage des nächsten Tokens, nicht durch menschliches Verstehen.
     - Sprachliche Flüssigkeit ist kein Nachweis für fachliche Richtigkeit.
+    - Die Transformer-Architektur mit Self-Attention erklärt das Kontextbewusstsein; Embeddings/Vektoren erfassen semantische Ähnlichkeit.
+    - Trenne Oberflächen-Ebene (Sprachqualität, meist stark) von Fakten-Ebene (Daten/Namen, fehleranfällig).
     - Kontext, Quellen und menschliche Validierung sind für belastbare RE-Ergebnisse unverzichtbar.`,
         content: `# Kapitel 2: Large Language Models (K1/K2)
 
@@ -284,6 +286,27 @@ flowchart LR
     | Muster und ähnliche Formulierungen erkennen | Kann plausible Halluzinationen erzeugen | Fakten und Quellen prüfen |
     | Beispiele und Vorlagen nachbilden | Übernimmt auch unklare oder voreingenommene Eingaben | Kontext und Qualitätskriterien präzisieren |
 
+    ## Transformer und Self-Attention
+
+    Moderne LLMs beruhen auf der **Transformer**-Architektur. Ihr zentraler Baustein, die **Self-Attention**, bewertet, welche Teile der Eingabe für das nächste Token am wichtigsten sind – unabhängig von deren Position im Text. So kann das Modell ein Pronomen dem richtigen Namen zuordnen oder ein Thema verfolgen, das viele Sätze zuvor eingeführt wurde. Das erklärt das hohe Kontextbewusstsein, ersetzt aber kein Verständnis: Der Mechanismus bleibt statistische Vorhersage.
+
+    ## Oberflächen-Ebene und Fakten-Ebene
+
+    Beim Lesen einer Modellausgabe hilft die Trennung zweier Ebenen:
+
+    | Ebene | Umfasst | Zuverlässigkeit |
+    |---|---|---|
+    | **Oberflächen-Ebene** | Sprachgewandtheit, Tonfall, Struktur | meist sehr stark – diese Muster sind häufig und leicht reproduzierbar |
+    | **Fakten-Ebene** | Daten, Mengen, Namen, Randfälle | fehleranfällig – bei dünnen oder inkonsistenten Trainingsdaten weicht die wahrscheinlichste Fortführung von der Wahrheit ab |
+
+    Die Anbindung an Suchmaschinen, Datenbanken oder Werkzeuge (z. B. RAG, Funktionsaufrufe) stärkt die Fakten-Ebene, weil die nächste Vorhersage auf frischen oder berechneten Informationen beruht.
+
+    ## Embeddings und Vektoren
+
+    Das Modell stellt Token als **Vektoren** dar – lange Zahlenlisten. Token, die in ähnlichen Kontexten vorkommen, erhalten ähnliche Vektoren; so entsteht eine Geometrie, die sich mit Bedeutung deckt. Klassisches Beispiel: Der Unterschied zwischen den Vektoren für *König* und *Königin* ähnelt dem zwischen *Mann* und *Frau*. Diese numerischen Repräsentationen heißen **Embeddings**. In der Praxis liegt der Vektor für „Benutzeranforderung" näher an „Stakeholder-Bedarf" als an „Datenbankschema" – so erkennt ein LLM ähnliche Anforderungen oder Abhängigkeiten selbst bei abweichender Terminologie.
+
+    > **Nicht-deterministisch:** Dieselbe Frage kann zwei verschiedene, jeweils gültige Antworten liefern, weil die Token-Auswahl auf Wahrscheinlichkeiten beruht (gesteuert u. a. über die Temperatur).
+
     ## Verantwortungsvolle Interaktion
 
     1. Projekt-, Domänen- und Stakeholderkontext gezielt bereitstellen.
@@ -297,7 +320,7 @@ flowchart LR
 
     Paraphrasiert nach IREB, *AI4RE Micro-Credential Syllabus und Studienleitfaden*, Version 1.0.0, Kapitel 2.
     `,
-        keywords: ['LLM', 'Token', 'probabilistische Vorhersage', 'Halluzination', 'Kontext', 'Validierung'],
+        keywords: ['LLM', 'Token', 'probabilistische Vorhersage', 'Transformer', 'Self-Attention', 'Embedding', 'Vektor', 'Halluzination', 'Kontext', 'Validierung'],
         difficulty: 'intermediate' as const,
         },
         {
@@ -310,10 +333,10 @@ flowchart LR
         sourceSections: ['3.1', '3.2'],
         summary: `## Wichtige Erkenntnisse
 
-- Die Qualität der KI-Ausgabe hängt primär von der Qualität des Inputs ab (Prompt + Kontext).
-- Halluzinationen sind systembedingt und können nie vollständig eliminiert werden.
-- Drei Hebel zur Qualitätssteigerung: besserer Kontext, präzisere Prompts, systematische Validierung.
-- Das RTF-Pattern (Rolle-Task-Format) ist eine bewährte Prompting-Strategie.
+- Zwei Kontextebenen bestimmen die Ergebnisqualität: **Systemkontext** (fix pro Sitzung) und **Benutzerkontext** (dynamisch).
+- **Prompt-Pattern** sind wiederverwendbare Strukturen: RTF, Chain-of-Thought, CRISPE.
+- **Prompt-Techniken** sind situationsabhängige Formulierungen: Zero-Shot, Few-Shot, Vorlagenbasiert.
+- Pattern liefern Struktur, Techniken verfeinern Interpretation - kein Prompting ersetzt die menschliche Validierung.
 `,
         content: `# Kapitel 3: Prompt Engineering (K2)
 
@@ -324,7 +347,56 @@ flowchart LR
 
 ---
 
-## 2.1 Warum KI-Ausgaben fehlerhaft sein können
+## 3.1 Die Bedeutung des Kontexts
+
+LLMs erzeugen Text, indem sie das wahrscheinlichste nächste Token vorhersagen - ohne echtes „Verstehen". Ein klar definierter Kontext grenzt den Lösungsraum ein und lenkt das Modell zu Domänenwissen, was zu präziseren, umsetzbaren Ergebnissen führt. Fehlt der Kontext, stützt sich das Modell allein auf Trainingsdaten und liefert plausibel klingende, aber oft domänenfremde und wertlose Antworten.
+
+Der Syllabus unterscheidet **zwei Kontextebenen**:
+
+| Ebene | Wesen | Beispiele |
+|---|---|---|
+| **Systemkontext** | pro Sitzung festgelegt, i. d. R. nicht veränderbar (nur ergänzbar) | System-/Hersteller-Prompt, Trainingsdaten, integrierte Einstellungen wie Temperatur, Standardsprache, Wissens-Stichtag; begrenzt durch das **Kontextfenster** |
+| **Benutzerkontext** | dynamisch, ändert sich mit jeder Konversation/Nachricht | Projekt-/Produktdetails (z. B. Medizingerät nach ISO 13485, PSD2-Bankensystem), Stakeholder-Perspektive, Normen (IEC 62304, GDPR, FDA 21 CFR Part 11), Rolle der KI, Zweck der Abfrage, Vorlagen/Beispiele |
+
+> **Prüfungsanker (LZ 3.1):** Es gibt genau **zwei Kontextebenen** - **Systemkontext** (fix pro Sitzung) und **Benutzerkontext** (dynamisch). Das **Kontextfenster** begrenzt, wie viel Kontext insgesamt (Eingabe + Ausgabe in Token) berücksichtigt werden kann.
+
+---
+
+## 3.2 Prompt-Pattern und Prompt-Techniken
+
+Die Ausgabequalität hängt nicht nur davon ab, *was* das Modell wissen soll (Kontext), sondern auch *wie* die Anweisung formuliert ist. Der Syllabus trennt dafür zwei Konzepte:
+
+### Prompt-Pattern - wiederverwendbare Strukturen
+
+**Prompt-Pattern** sind wiederverwendbare Strukturen, die helfen, Prompts konsistent und effektiv zu formulieren. Wichtige Pattern:
+
+- **RTF (Role-Task-Format)** - **R**olle (wer soll die KI sein?), **T**ask (welche Aufgabe?), **F**ormat (wie soll die Ausgabe aussehen?). Führt von allgemeinen zu präzisen, umsetzbaren Antworten.
+- **Chain-of-Thought** - fordert die KI auf, ihre Überlegungen Schritt für Schritt darzulegen, bevor sie das Endergebnis nennt.
+- **CRISPE** - detailliertes Pattern mit **C**ontext (Kontext), **R**ole (Rolle), **I**nstructions (Anweisungen), **S**teps (Schritte), **P**arameters (Parameter) und **E**xamples (Beispiele).
+
+### Vorteile von Prompt-Pattern
+
+| Kategorie | Nutzen |
+|---|---|
+| **Praktische Vorteile** | Klare Vorab-Anweisungen erhöhen die Verwendbarkeit, ein festes Format reduziert Nachbearbeitung, weniger Iterationen bis zum brauchbaren Ergebnis. |
+| **Kognitive Vorteile** | Erzwingen präzises Durchdenken der Bedürfnisse; Rolle/Aufgabe/Format explizit zu machen minimiert Mehrdeutigkeit und macht Gedanken transparent und reproduzierbar. |
+| **Methodische Vorteile** | Wiederverwendbar über verschiedene Aufgaben, schaffen einen Team-Standard, senken die Lernkurve; kombiniert mit Techniken: stabile Struktur + situative Flexibilität. |
+
+### Prompt-Techniken - situationsabhängige Formulierungen
+
+**Prompt-Techniken** schreiben keine Struktur vor, sondern beeinflussen, *wie* das Modell eine Anfrage interpretiert:
+
+- **Zero-Shot** - eine Anfrage ohne Beispiele.
+- **Few-Shot** - einige Beispiele voranstellen, dann die eigentliche Anfrage; verdeutlicht Aufgabe und Format.
+- **Vorlagenbasiert** - eine feste Struktur vorgeben, die die KI für ihre Ausgabe verwenden soll (z. B. nummerierte Abschnitte).
+
+> **Prüfungsanker (LZ 3.2):** **Pattern = wiederverwendbare Struktur** (RTF, Chain-of-Thought, CRISPE). **Technik = situationsabhängige Formulierung** (Zero-Shot, Few-Shot, Vorlagenbasiert). Pattern liefern Struktur, Techniken verfeinern Interpretation und Stil - gemeinsam führen sie zu konsistenten, kontextbezogenen Ergebnissen.
+
+> **Hinweis:** Begriffe wie *Self-Consistency* oder *Role-Playing* kursieren in der Praxis, gehören aber **nicht** zur offiziellen Syllabus-Taxonomie von Kapitel 3.2.
+
+---
+
+## Ergänzung: Warum KI-Ausgaben fehlerhaft sein können
 
 ### Halluzinationen
 
@@ -359,7 +431,9 @@ flowchart LR
 
 ---
 
-## 2.2 Die drei Qualitätsebenen
+## Ergänzung: Qualitätsebenen und Kontext-Hierarchie
+
+> Die folgende Priorisierung ist eine praxisnahe Vertiefung der App und **nicht** Teil der offiziellen Syllabus-Taxonomie (dort gelten die zwei Ebenen Systemkontext/Benutzerkontext aus 3.1).
 
 \`\`\`mermaid
 flowchart TB
@@ -399,7 +473,7 @@ Das Modell gewichtet verschiedene Kontext-Arten unterschiedlich stark. Von höch
 
 ---
 
-## 2.3 Prompting-Techniken
+## Ergänzung: RTF-Beispiel und weitere Prompting-Strategien
 
 ### Das RTF-Pattern (Rolle - Task - Format)
 
@@ -443,7 +517,7 @@ flowchart TB
 - Chain-of-Thought fordert eine schrittweise Begründung an; das Ergebnis muss weiterhin validiert werden
 - **Kein Prompting ersetzt menschliche Validierung!**
 `,
-        keywords: ['Halluzination', 'Prompt-Engineering', 'RTF', 'Few-Shot', 'Chain-of-Thought', 'Kontext', 'Qualität'],
+        keywords: ['Prompt-Pattern', 'Prompt-Technik', 'RTF', 'CRISPE', 'Chain-of-Thought', 'Zero-Shot', 'Few-Shot', 'Vorlagenbasiert', 'Systemkontext', 'Benutzerkontext'],
         difficulty: 'intermediate' as const,
     },
     {
@@ -521,7 +595,9 @@ flowchart TB
 
 ---
 
-## 3.2 Der EU AI Act (Überblick)
+## 4.2 Der EU AI Act (ergänzender Überblick)
+
+> **Hinweis:** Der Syllabus nennt den EU AI Act vor allem im Zusammenhang mit **Transparenzverpflichtungen**. Die folgende 4-stufige Risikopyramide ist eine hilfreiche Ergänzung zur Einordnung, aber nicht als Detailtiefe des Syllabus prüfungsrelevant.
 
 \`\`\`mermaid
 flowchart TB
@@ -550,7 +626,7 @@ flowchart TB
 
 ---
 
-## 3.3 Ethische Prinzipien
+## 4.3 Ethische Prinzipien
 
 - **Transparenz** – Alle beteiligten Stakeholder müssen wissen, dass und wie KI im Projekt eingesetzt wird. KI-generierte Artefakte müssen als solche kenntlich gemacht werden – sowohl intern als auch, wo erforderlich, gegenüber Kunden und Auftraggebern.
 
@@ -570,7 +646,7 @@ flowchart TB
 
 ---
 
-## 3.4 Risikominimierung in der Praxis
+## 4.4 Risikominimierung in der Praxis
 
 \`\`\`mermaid
 flowchart LR
@@ -1246,7 +1322,15 @@ flowchart TB
 
 - **Chain-of-Thought** – Eine Prompting-Technik, bei der das Modell aufgefordert wird, seine Überlegungen schrittweise darzustellen. Sie strukturiert die angeforderte Begründung, garantiert aber weder logische noch fachliche Korrektheit. *(Prüfungsrelevanz: K2 – Anwendung erklären)*
 
+- **Chatbot** – Ein KI-System, das menschliche Unterhaltungen per Text oder Sprache simuliert. LLM-basierte Chatbots verstehen Kontext, halten den Dialogverlauf aufrecht und geben kohärente, kontextbewusste Antworten. Im RE: Transkription von Stakeholder-Interviews, Informationsabruf aus Dokumenten, Unterstützung bei Dokumentationsaufgaben. *(Prüfungsrelevanz: K1 – Begriff kennen)*
+
+- **Computer Vision** – Verfahren, das rohe Pixel in strukturierte Fakten umwandelt: Objekterkennung, Texterkennung im Bild und Tiefenschätzung. Bekanntestes Beispiel ist die Gesichtserkennung zum Entsperren von Smartphones. *(Prüfungsrelevanz: K1 – Begriff kennen)*
+
+- **Deep Learning** – Teilbereich des maschinellen Lernens, der neuronale Netze (z. B. Transformer für Sprache, Convolutional Networks für Bilder) einsetzt, um komplexe Datentypen und Aufgaben zu bearbeiten, einschließlich verstärkendem Lernen. *(Prüfungsrelevanz: K1 – Begriff kennen)*
+
 - **Embedding** – Eine numerische Vektordarstellung von Text, die semantische Ähnlichkeiten erfasst. Zwei ähnliche Sätze haben ähnliche Vektoren. Embeddings sind die Grundlage für die semantische Suche in RAG-Systemen. *(Prüfungsrelevanz: K1 – Wissen was es ist)*
+
+- **Expertensysteme** – Erfassen menschliches Fachwissen in Form expliziter Regeln und Ontologien und liefern überprüfbare, deterministische Antworten. Werden dort bevorzugt, wo Transparenz über Wahrscheinlichkeit geht und kein Fehlerspielraum erlaubt ist (z. B. Steuerrecht, medizinische Triage). *(Prüfungsrelevanz: K1 – Abgrenzung zu LLMs)*
 
 - **Few-Shot** – Eine Prompting-Strategie, bei der einige Beispiele für die gewünschte Ausgabe direkt in den Prompt integriert werden. Beispiele können Aufgabe und Format verdeutlichen; ihre Wirkung hängt von Aufgabe, Modell, Kontext und Beispielqualität ab. *(Prüfungsrelevanz: K2 – Unterschied zu Zero-Shot)*
 
@@ -1260,9 +1344,17 @@ flowchart TB
 
 - **LLM (Large Language Model)** – Ein großes Sprachmodell, das auf enormen Textmengen vortrainiert wurde und natürlichsprachliche Texte verstehen und generieren kann. Beispiele: GPT-4, Claude, Gemini, Llama. *(Prüfungsrelevanz: K1 – Definition)*
 
+- **Maschinelles Lernen (ML)** – Algorithmen, die Muster direkt aus Daten lernen. Klassisches ML sagt Zahlen oder Kategorien voraus; Deep-Learning-Netze wie Transformer verarbeiten Sprache, Bilder und Strategien für Reinforcement Learning. Die Ergebnisqualität steigt mit Größe und Relevanz der Trainingsdaten. *(Prüfungsrelevanz: K1 – Definition)*
+
+- **Natural Language Processing (NLP)** – Umfasst alles, was Sprache oder Text in Bedeutung umwandelt und umgekehrt – von regelbasierten Parsern über heutige LLM-Chatbots bis zu Speech-to-Text- und Text-to-Speech-Modulen. *(Prüfungsrelevanz: K1 – Definition)*
+
 - **Prompt** – Die Texteingabe, die ein Benutzer an ein KI-Modell sendet. Qualität und Struktur des Prompts haben direkten Einfluss auf die Qualität der Ausgabe. *(Prüfungsrelevanz: K1 – Definition)*
 
+- **Prompt Engineering** – Die Praxis, Prompts zu entwerfen und zu verfeinern, um zuverlässig die gewünschten Ergebnisse von einem LLM zu erhalten. Vergleichbar mit der Ausarbeitung präziser Interviewfragen oder Vorlagenstrukturen im RE: Klarheit und Struktur verbessern die Qualität der gewonnenen Informationen. *(Prüfungsrelevanz: K2 – Praxis verstehen)*
+
 - **RAG (Retrieval Augmented Generation)** – Eine Architektur, bei der externe Dokumente zur Laufzeit gesucht und in den Prompt eingefügt werden, bevor das Modell antwortet. Ermöglicht aktuelles, nachvollziehbares Wissen ohne Nachtraining. *(Prüfungsrelevanz: K2 – Erklären und vergleichen)*
+
+- **Robotik** – Kombiniert Sensordatenfusion, Kartierung, Wegplanung und Rückkopplungssteuerung, damit Maschinen autonom navigieren und die physische Welt manipulieren können. Anwendungen reichen von Kommissionierern und autonomen Drohnen bis zu Saugrobotern. *(Prüfungsrelevanz: K1 – Begriff kennen)*
 
 - **RTF (Rolle-Task-Format)** – Ein bewährtes Prompting-Pattern: Zuerst die Rolle des Modells definieren, dann die Aufgabe beschreiben, schließlich das gewünschte Ausgabeformat vorgeben. Verbessert Konsistenz und Relevanz der Antworten. *(Prüfungsrelevanz: K2 – Anwenden)*
 
@@ -1271,6 +1363,10 @@ flowchart TB
 - **Temperatur** – Ein Modellparameter, der die Zufälligkeit der Token-Auswahl beeinflusst. Niedrigere Werte führen häufig zu konsistenteren, höhere Werte zu variableren Ausgaben. Einstellbarkeit und genaue Wirkung sind modell- und anbieterabhängig; auch Temperatur 0 garantiert nicht überall identische Antworten. *(Prüfungsrelevanz: K1 – Auswirkung kennen)*
 
 - **Token** – Die kleinste Verarbeitungseinheit eines Sprachmodells. Ein Token entspricht ungefähr drei Vierteln eines Wortes. Kosten, Kapazitäten und Limits von LLMs werden in Token gemessen. *(Prüfungsrelevanz: K1 – Definition)*
+
+- **Transformer** – Die neuronale Netzwerkarchitektur hinter den meisten modernen LLMs. Sie nutzt einen Aufmerksamkeitsmechanismus (Self-Attention), um die Bedeutung von Wörtern im Verhältnis zueinander zu bewerten – unabhängig von ihrer Position – und verarbeitet so lange Sequenzen und komplexe Sprachmuster effizient. *(Prüfungsrelevanz: K1 – Definition)*
+
+- **Vektor** – Eine mathematische Darstellung von Daten als geordnete Liste von Zahlen. Im Zusammenhang mit Embeddings platzieren Vektoren semantisch ähnliche Wörter, Sätze oder Anforderungen in einem mehrdimensionalen Raum nahe beieinander und ermöglichen Ähnlichkeitssuche, Clustering und Verknüpfung – selbst bei abweichender Formulierung. *(Prüfungsrelevanz: K1 – Definition)*
 
 - **Zero-Shot** – Prompting ohne jegliche Beispiele für die gewünschte Ausgabe. Das Modell muss allein aus der Aufgabenbeschreibung verstehen, was erwartet wird. Funktioniert bei klaren Aufgaben gut, bei komplexen besser Few-Shot verwenden. *(Prüfungsrelevanz: K2 – Unterschied zu Few-Shot)*
 
@@ -1304,7 +1400,7 @@ flowchart LR
 - **Halluzination** = "Jemand der überzeugend lügt ohne es zu wissen"
 - **Bias** = "Schiefe Waage - misst immer in eine Richtung falsch"
 `,
-        keywords: ['Glossar', 'RAG', 'Fine-Tuning', 'Halluzination', 'Bias', 'Token', 'LLM', 'Prompt', 'Embedding'],
+        keywords: ['Glossar', 'RAG', 'Fine-Tuning', 'Halluzination', 'Bias', 'Token', 'LLM', 'Prompt', 'Embedding', 'Transformer', 'Vektor', 'Deep Learning', 'NLP', 'Chatbot'],
         difficulty: 'beginner' as const,
     },
     {
