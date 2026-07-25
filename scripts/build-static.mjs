@@ -13,6 +13,31 @@ function assert(condition, message) {
     if (!condition) throw new Error(message)
 }
 
+/**
+ * Entfernt eine gemeinsame Einrückung aus Markdown-Texten, die in TypeScript-
+ * Template-Literalen aus Lesbarkeitsgründen eingerückt wurden. Ohne diese
+ * Normalisierung interpretiert Markdown 4-fach eingerückte Zeilen als Code-Block,
+ * wodurch roher Markdown-Text angezeigt wird. Die erste Zeile bleibt unberührt,
+ * da sie direkt hinter dem Backtick beginnt und keine Einrückung besitzt.
+ */
+function dedentMarkdown(value) {
+    if (typeof value !== 'string' || !value.includes('\n')) return value
+    const lines = value.split('\n')
+    const bodyLines = lines.slice(1).filter((line) => line.trim().length > 0)
+    if (bodyLines.length === 0) return value
+    const minIndent = Math.min(...bodyLines.map((line) => line.match(/^ */)[0].length))
+    if (minIndent === 0) return value
+    return [lines[0], ...lines.slice(1).map((line) => line.slice(minIndent))].join('\n')
+}
+
+function normalizeModule(module) {
+    return {
+        ...module,
+        summary: dedentMarkdown(module.summary),
+        content: dedentMarkdown(module.content),
+    }
+}
+
 function assertUniqueIds(items, label) {
     const ids = new Set()
     items.forEach((item) => {
@@ -124,7 +149,8 @@ async function main() {
     mkdirSync(outDir, { recursive: true })
 
     // JSON-Dateien schreiben
-    writeFileSync(join(outDir, 'modules.json'), JSON.stringify(learningModules, null, 2))
+    const normalizedModules = learningModules.map(normalizeModule)
+    writeFileSync(join(outDir, 'modules.json'), JSON.stringify(normalizedModules, null, 2))
     writeFileSync(join(outDir, 'questions.json'), JSON.stringify(examQuestions, null, 2))
     writeFileSync(join(outDir, 'catalog.json'), JSON.stringify(catalog, null, 2))
 
